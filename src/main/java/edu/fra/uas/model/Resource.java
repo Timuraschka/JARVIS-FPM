@@ -9,6 +9,8 @@ public class Resource {
 
 	private String name;
 	private String team;
+	private User supervisor;
+	private User projectMember;			// The actual resource
 	private List<Task> tasks;
 	private double hourlyRate = 0;
 	
@@ -46,6 +48,22 @@ public class Resource {
 
 	public void setHourlyRate(double hourlyRate) {
 		this.hourlyRate = hourlyRate;
+	}
+
+	public User getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(User supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public User getProjectMember() {
+		return projectMember;
+	}
+
+	public void setProjectMember(User projectMember) {
+		this.projectMember = projectMember;
 	}
 	
 }

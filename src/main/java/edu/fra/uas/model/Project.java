@@ -2,18 +2,20 @@ package edu.fra.uas.model;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
 
-@Component
+
+
+@Entity
 public class Project {
 
 	private String name;
-	private List<User> members;
 	
+	private User ProjectManager;		// who created the project 
 	private Settings settings;
-	
-	// Github Test
-	
+	private List<Long> taskLinePosition;	// holds task id's the index represents the lines 
+	private List<User> members;				// List of people who can view the Project
+	private List<Resource> resources;
 
 	
 	
@@ -44,6 +46,36 @@ public class Project {
 
 	public void setSettings(Settings settings) {
 		this.settings = settings;
+	}
+
+
+	public User getProjectManager() {
+		return ProjectManager;
+	}
+
+
+	public void setProjectManager(User projectManager) {
+		ProjectManager = projectManager;
+	}
+
+
+	public List<Long> getTaskLinePosition() {
+		return taskLinePosition;
+	}
+
+
+	public void setTaskLinePosition(List<Long> taskLinePosition) {
+		this.taskLinePosition = taskLinePosition;
+	}
+
+
+	public List<Resource> getResources() {
+		return resources;
+	}
+
+
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
 	}
 	
 	
