@@ -1,27 +1,49 @@
 package edu.fra.uas.model;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+import org.springframework.data.annotation.Id;
 
 
 
 @Entity
 public class Project {
+	
+	@Id
+	@GeneratedValue
+	private long id;
 
 	private String name;
 	
-	private User ProjectManager;		// who created the project 
+	private User ProjectManager;				// who created the project & admin
 	private Settings settings;
-	private List<Long> taskLinePosition;	// holds task id's the index represents the lines 
-	private List<User> members;				// List of people who can view the Project
+	private List<Long> lineAsIndexToTaskIDs;	// holds task id's the index represents the lines 
+	private List<User> members;					// List of people who can view the Project
 	private List<Resource> resources;
+	private List<String> teams;					
 
 	
 	
 	public Project () {
 		super();
+		
+		this.settings = new Settings();
+		this.lineAsIndexToTaskIDs = new ArrayList<Long>();
+		this.members = new ArrayList<User>();
+		this.resources = new ArrayList<Resource>();
+		this.teams = new ArrayList<String>();
+		
 	}
+	
+	
+	
+	
+	
 	
 	
 	public String getName() {
@@ -60,12 +82,12 @@ public class Project {
 
 
 	public List<Long> getTaskLinePosition() {
-		return taskLinePosition;
+		return lineAsIndexToTaskIDs;
 	}
 
 
 	public void setTaskLinePosition(List<Long> taskLinePosition) {
-		this.taskLinePosition = taskLinePosition;
+		this.lineAsIndexToTaskIDs = taskLinePosition;
 	}
 
 
@@ -76,6 +98,16 @@ public class Project {
 
 	public void setResources(List<Resource> resources) {
 		this.resources = resources;
+	}
+
+
+	public List<String> getTeams() {
+		return teams;
+	}
+
+
+	public void setTeams(List<String> teams) {
+		this.teams = teams;
 	}
 	
 	

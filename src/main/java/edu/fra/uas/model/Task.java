@@ -6,7 +6,10 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 
 import edu.fra.uas.JarvisFpmApplication;
 
@@ -25,7 +28,8 @@ public class Task {
 	
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
-	
+	@Id
+	@GeneratedValue
 	private long id;
 	private int line; 					// the user can identify the task which are dependencies to this task using the line
 

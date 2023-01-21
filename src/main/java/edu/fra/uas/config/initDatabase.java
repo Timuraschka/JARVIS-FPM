@@ -6,4 +6,5 @@ public class initDatabase {
 	
 	private String fuckyou = "bitch";
 	
+	
 }

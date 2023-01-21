@@ -22,6 +22,7 @@ import edu.fra.uas.JarvisFpmApplication;
 public class Timetracker {
 	
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
+	
 
 	private LocalDate startDate;
 	private LocalDate endDate;

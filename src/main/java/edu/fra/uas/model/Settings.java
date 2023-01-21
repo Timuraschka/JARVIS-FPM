@@ -2,13 +2,12 @@ package edu.fra.uas.model;
 
 /**
  * 
- * @author timur
+ * @author Timur
  * 
  * To set the Standard Settings for the project.
  */
 public class Settings {
 	
-	long id;
 	private Project project;
 	private Timetracker timetracker;
 	
@@ -51,9 +50,6 @@ public class Settings {
 	}
 	public void setAutomatic_shift(boolean automatic_shift) {
 		this.automatic_shift = automatic_shift;
-	}
-	public long getId() {
-		return id;
 	}
 	
 }
