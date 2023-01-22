@@ -2,9 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <div id="kanban-board">
+        <h1>Kanban Board</h1>
+        <div class="board-column" id="todo">
+            <h2>To-Do</h2>
+            <div class="board-card" id="card1">
+                <h3>Card Title</h3>
+                <p>Card Description</p>
+                <button class="move-right">Move Right</button>
+            </div>
+            <div class="board-card" id="card2">
+                <h3>Card Title</h3>
+                <p>Card Description</p>
+                <button class="move-right">Move Right</button>
+            </div>
+        </div>
+        <div class="board-column" id="in-progress">
+            <h2>In Progress</h2>
+            <div class="board-card" id="card3">
+                <h3>Card Title</h3>
+                <p>Card Description</p>
+                <button class="move-right">Move Right</button>
+                <button class="move-left">Move Left</button>
+            </div>
+        </div>
+         <div class="board-column" id="review">
+            <h2>Review</h2>
+            <div class="board-card" id="card3">
+                <h3>Card Title</h3>
+                <p>Card Description</p>
+                <button class="move-right">Move Right</button>
+                <button class="move-left">Move Left</button>
+            </div>
+        </div>
+        <div class="board-column" id="done">
+            <h2>Done</h2>
+            <div class="board-card" id="card4">
+                <h3>Card Title</h3>
+                <p>Card Description</p>
+                <button class="move-left">Move Left</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -22,17 +22,6 @@ public class User {
 	public User() {
 		super();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public String getFirst_name() {
 		return first_name;
