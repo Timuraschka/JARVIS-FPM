@@ -58,12 +58,25 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public boolean validatePassword(String password) {					//requirements have been set for creating a new password 
+	    String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+	    if (password.matches(pattern)) {
+	        return true;
+	    }
+	    return false;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password) {  				//password can be set after the validation has checked that the password matches the requirements
+	    if (validatePassword(password)) {
+	        this.password = password;
+	    } else {
+	        throw new IllegalArgumentException("Invalid password. Passwords must be at least 8 characters long "
+	        	+ "and contain at least one uppercase letter, one lowercase letter, one number and one special character");
+	    }
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
 	public String getEmail() {
@@ -74,5 +87,8 @@ public class User {
 		this.email = email;
 	}
 	
+	public String getFullName() {
+		return first_name + " " + last_name;
+	}
 	
 }
