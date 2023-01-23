@@ -1,7 +1,5 @@
 package edu.fra.uas.model;
 
-
-
 import javax.persistence.GeneratedValue;
 
 import org.springframework.data.annotation.Id;
@@ -22,7 +20,7 @@ public class User {
 	public User() {
 		super();
 	}
-
+	
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -79,5 +77,4 @@ public class User {
 	public String getFullName() {
 		return first_name + " " + last_name;
 	}
-	
 }
