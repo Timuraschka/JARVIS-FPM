@@ -54,12 +54,12 @@ public class Task {
 
 	// keep track of the task
 	private double progress; 			// percentage of completion
-	private boolean complete; 			// done?
+	private boolean done = false;		// done?
 	private String name;
 	private String description;
 	private List<String> keywords = new ArrayList<String>();
 	private boolean ready;
-	private boolean done = false;
+	
 
 
 	private boolean automatic_shift; // change the Setting for the task individually
@@ -200,14 +200,6 @@ public class Task {
 
 	public void setProgress(double progress) {
 		this.progress = progress;
-	}
-
-	public boolean isComplete() {
-		return complete;
-	}
-
-	public void setComplete(boolean complete) {
-		this.complete = complete;
 	}
 
 	public int getLine() {
