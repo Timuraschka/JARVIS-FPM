@@ -8,21 +8,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.fra.uas.JarvisFpmApplication;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.ArrayList;
 
 @Entity
+@Table(name="Resource")
 public class Resource {
+	
+	@Id
 	
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 	
+	@Column(name="NAME")
 	private String name;
 	
+	@Column(name="TEAM")
 	private String team;
 	
-	private User supervisor;			// usually the Project Manager or 
+	@Column(name="SUPERVISOR")
+	private User supervisor;			// usually the Project Manager or #
+	
+	@Column(name="PROJECT_MEMBER")
 	private User projectMember;			// The actual resource
 	private List<Task> tasks;
+	
+	@Column(name="HOURLY_RATE")
 	private double hourlyRate = 0;
 	
 	public Resource() {
