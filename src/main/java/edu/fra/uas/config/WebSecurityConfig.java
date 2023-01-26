@@ -1,4 +1,6 @@
-package edu.fra.uas.config;
+/* 
+ package edu.fra.uas.config;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,3 +34,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
         
 }
+*/
+//TODO: hä
