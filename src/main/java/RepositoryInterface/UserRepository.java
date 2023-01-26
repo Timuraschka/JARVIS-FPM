@@ -8,3 +8,4 @@ import edu.fra.uas.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 }
+//test
