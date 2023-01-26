@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryImplementati
 
 import edu.fra.uas.model.Project;
 
-public interface ProjectRepository extends JpaRepository<Project, id> {
+public interface ProjectRepository extends JpaRepository<Project, Project> {
 
 }
