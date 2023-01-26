@@ -9,7 +9,7 @@ package edu.fra.uas.model;
 public class Settings {
 	
 	private Project project;
-	private Timetracker timetracker;
+	private Timetracker timetracker;			// probably useless
 	
 	private int hours_a_day = 8;
 	private boolean automatic_shift = true;		// Whether the tasks should shift automatically

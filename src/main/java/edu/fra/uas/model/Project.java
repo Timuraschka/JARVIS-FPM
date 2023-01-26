@@ -25,8 +25,7 @@ public class Project {
 	private List<Long> lineAsIndexToTaskIDs;	// holds task id's the index represents the lines 
 	private List<User> members;					// List of people who can view the Project
 	private List<Resource> resources;
-	private List<String> teams;	
-	private List<Card> cards;
+	private List<String> teams;
 
 	
 	
