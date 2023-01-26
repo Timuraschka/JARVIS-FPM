@@ -12,64 +12,81 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 
 import edu.fra.uas.JarvisFpmApplication;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 
 /**
  * 
- * @author Timur 
+ * @author Timur
  * 
- * 		This class represents a task with a possible deadline.
+ *         This class represents a task with a possible deadline.
  * 
- *         Behaviors of a task: 
- *         1. When the duration gets changed: The End Date shifts depending on the change 
- *         2. One of the predecessor shifts: The task shifts after the predecessor ! If the Setting is not disabled
+ *         Behaviors of a task: 1. When the duration gets changed: The End Date
+ *         shifts depending on the change 2. One of the predecessor shifts: The
+ *         task shifts after the predecessor ! If the Setting is not disabled
  */
 @Entity
+@Table(name = "Task")
 public class Task {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID")
 	private long id;
-	private int line; 					// the user can identify the task which are dependencies to this task using the line
+	@Column(name = "LINE")
+	private int line; // the user can identify the task which are dependencies to this task using the
+						// line
 
 	// to create a WBS
+	@Column(name = "PROJECT")
 	private Project project;
-	
-	
-										// TODO: eine Kommentar Funktion wäre geil für die Member Sicht (Kanban Board)
-	
-	private Timetracker timetracker = new Timetracker();
-	private LocalDate deadline;
-	private double work_hours;			// this represents the amount of hours the task should need for completion
-										// it should change according to the amount of members working on the task
 
-	private List<Task> subtasks; 		// enables the use of tasks as packages TODO: the end of the last subtask should
-										// be the end of this task
+	// TODO: eine Kommentar Funktion wäre geil für die Member Sicht (Kanban Board)
+
+	private Timetracker timetracker = new Timetracker();
+
+	@Column(name = "DEADLINE")
+	private LocalDate deadline;
+
+	@Column(name = "WORK_HOURS")
+	private double work_hours; // this represents the amount of hours the task should need for completion
+								// it should change according to the amount of members working on the task
+
+	private List<Task> subtasks; // enables the use of tasks as packages TODO: the end of the last subtask should
+									// be the end of this task
 	private List<Resource> resources;
 	private List<Task> dependencies;
-	
-	private boolean critical; 			// part of the critical path?
-	private double cost; 				// total cost of this tasks (resources(sum of hourly rate) * hours of task)
+
+	@Column(name = "CRITICAL")
+	private boolean critical; // part of the critical path?
+
+	@Column(name = "COST")
+	private double cost; // total cost of this tasks (resources(sum of hourly rate) * hours of task)
 
 	// keep track of the task
-	private double progress; 			// percentage of completion
-	private boolean done = false;		// done?
+	@Column(name = "PROGRESS")
+	private double progress; // percentage of completion
+	@Column(name = "COMPLETE")
+	private boolean complete; // done?
+	@Column(name = "NAME")
 	private String name;
+	@Column(name = "DESCRIPTION")
 	private String description;
 	private List<String> keywords = new ArrayList<String>();
+	@Column(name = "READY")
 	private boolean ready;
-	
+	@Column(name = "DONE")
+	private boolean done = false;
 
-
+	@Column(name = "AUTOMATIC_SHIFT")
 	private boolean automatic_shift; // change the Setting for the task individually
 
-	
 	public Task() {
 		super();
 
 		this.automatic_shift = project.getSettings().isAutomatic_shift();
-		
 
 	}
 
@@ -93,71 +110,68 @@ public class Task {
 		this.ready = allDone;
 		return ready;
 	}
-	
+
 	/**
-	 * This method updates the duration of the task.
-	 * It should be called every time the work_hours or the amount of members changes
+	 * This method updates the duration of the task. It should be called every time
+	 * the work_hours or the amount of members changes
 	 * 
-	 * To clarify:
-	 * duration: the actual time it takes to finish the task with given resources
-	 * work_hours: the amount of hours the tasks needs without considering the resources.
+	 * To clarify: duration: the actual time it takes to finish the task with given
+	 * resources work_hours: the amount of hours the tasks needs without considering
+	 * the resources.
 	 * 
 	 * 16 work_hours with 2 members equals a duration of 8 hours
 	 * 
 	 */
 	public void updateWorkHours() {
-		
+
 		int amountMembers = resources.size();
 		if (resources.isEmpty()) {
 			log.debug(" >>> Task.java - calculateWorkHoursToDays >>> Resources empty -> work_hours divide by 1 ");
 			amountMembers = 1;
 		}
-		
-		this.timetracker.setDuration_in_hours(this.work_hours/amountMembers);
+
+		this.timetracker.setDuration_in_hours(this.work_hours / amountMembers);
 	}
-	
+
 	public double getCost() {
-		
+
 		double sumHourlyRate = 0;
-		
+
 		for (Resource res : resources) {
 			sumHourlyRate += res.getHourlyRate();
 		}
-		
+
 		cost = sumHourlyRate * work_hours;
-		
+
 		return cost;
 	}
-	
+
 	public void addKeyword(String keyword) {
 		keywords.add(keyword);
 	}
-	
+
 	public void deleteKeyword(String keyword) {
 		keywords.remove(keyword);
 	}
-	
+
 	public void removeAllKeywords() {
 		keywords = new ArrayList<String>();
 	}
-	
+
 	// TODO should this method exist??
 	public void setWork_hours(double work_hours) {
 		this.work_hours = work_hours;
 	}
-	
+
 	public double getWork_hours() {
-		work_hours = this.timetracker.getDuration_in_hours() * resources.size(); 
+		work_hours = this.timetracker.getDuration_in_hours() * resources.size();
 		return work_hours;
 	}
-
-	
 
 	public LocalDate getDeadline() {
 		return deadline;
 	}
-	
-	
+
 	public void setDeadline(LocalDate deadline) {
 		this.deadline = deadline;
 	}
@@ -200,6 +214,14 @@ public class Task {
 
 	public void setProgress(double progress) {
 		this.progress = progress;
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
 	}
 
 	public int getLine() {
@@ -261,7 +283,5 @@ public class Task {
 	public void setKeywords(List<String> keywords) {
 		this.keywords = keywords;
 	}
-	
-	
 
 }
