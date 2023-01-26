@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 
 public class User {
 	
+	
+	//test
 	@Id
 	@GeneratedValue
 	private long User_Id;
