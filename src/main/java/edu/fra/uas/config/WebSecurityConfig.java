@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
     	return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-        
+        //test
 }
 */
 //TODO: hä
