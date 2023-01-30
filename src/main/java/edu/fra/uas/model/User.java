@@ -1,10 +1,9 @@
 package edu.fra.uas.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 
@@ -12,10 +11,10 @@ import jakarta.persistence.Table;
 @Table(name = "User") // creates the table inside the database
 public class User {
 
-	@Id // used to identify the columns inside the table
+	@Id
 	@GeneratedValue
-	@Column(name = "USER_ID") // creates the column inside the table
-	private long User_Id;
+	@Column(name = "ID")
+	private long id;
 
 	@Column(name = "FIRST_NAME")
 	private String first_name;

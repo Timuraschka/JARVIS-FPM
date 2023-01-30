@@ -3,6 +3,8 @@ package edu.fra.uas.model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.GeneratedValue;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +28,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Timetracker") // creates the Table in the database
 public class Timetracker {
+	
 	@Id // used to identify the columns inside the table
-
+	@GeneratedValue
+	@Column(name = "ID")
+	private long id;
+	
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
 	@Column(name = "START_DATE") // creates the Column inside the table

@@ -2,6 +2,8 @@ package edu.fra.uas.model;
 
 import java.util.List;
 
+import javax.persistence.GeneratedValue;
+
 import jakarta.persistence.*;
 
 import org.slf4j.Logger;
@@ -19,6 +21,9 @@ import java.util.ArrayList;
 public class Resource {
 
 	@Id // used to identify the columns inside the table
+	@GeneratedValue
+	@Column(name = "ID") // creates the column inside the table
+	private long id;
 
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
