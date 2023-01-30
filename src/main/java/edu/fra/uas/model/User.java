@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.persistence.TableGenerator;
+
 
 @Entity // declares this class as an Entity for the database
 @Table(name = "User") // creates the table inside the database
