@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import jakarta.persistence.*;
 
 @Entity // declares this class as an Entity for the database
 @Table(name = "Project") // creates the table inside the database

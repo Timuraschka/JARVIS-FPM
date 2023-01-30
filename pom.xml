@@ -12,7 +12,7 @@
 	<groupId>edu.fra.uas</groupId>
 	<artifactId>Projektverwaltung01</artifactId>
 	<version>0.0.1</version>
-	<name>Projektverwaltung01</name>
+	<name>JARVIS-FPM</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>19</java.version>
@@ -88,6 +88,11 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
 		</dependency>
 	</dependencies>
 	<build>
