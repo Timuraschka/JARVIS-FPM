@@ -3,13 +3,11 @@ package edu.fra.uas.model;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity // declares this class as an Entity for the database
 @Table(name = "Project") // creates the table inside the database

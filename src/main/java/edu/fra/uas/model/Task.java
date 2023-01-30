@@ -8,8 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import jakarta.persistence.*;
 
 import edu.fra.uas.JarvisFpmApplication;
 import jakarta.persistence.Column;

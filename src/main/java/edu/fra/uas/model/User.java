@@ -1,6 +1,6 @@
 package edu.fra.uas.model;
 
-import javax.persistence.GeneratedValue;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
