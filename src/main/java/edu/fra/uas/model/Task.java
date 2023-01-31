@@ -34,6 +34,8 @@ public class Task {
 	@GeneratedValue
 	@Column(name = "ID")
 	private long id;
+	
+	
 	@Column(name = "LINE")
 	private int line; // the user can identify the task which are dependencies to this task using the
 						// line

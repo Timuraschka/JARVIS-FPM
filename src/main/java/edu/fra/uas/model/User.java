@@ -13,28 +13,37 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "ID")
+	@Column(name = "ID", columnDefinition = "VARCHAR(255)")
 	private long id;
 
-	@Column(name = "FIRST_NAME")
+	
+
+	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(255)")
 	private String first_name;
 
-	@Column(name = "LAST_NAME")
+	@Column(name = "LAST_NAME", columnDefinition = "VARCHAR(255)")
 	private String last_name;
 
-	@Column(name = "USERNAME")
+	@Column(name = "USERNAME", columnDefinition = "VARCHAR(255)")
 	private String username;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "PASSWORD", columnDefinition = "VARCHAR(255)")
 	private String password;
 
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", columnDefinition = "VARCHAR(255)")
 	private String email;
 
 	public User() {
 		super();
 	}
+	
+	public long getId() {
+		return id;
+	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getFirst_name() {
 		return first_name;
 	}
