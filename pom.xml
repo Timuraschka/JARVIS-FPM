@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.fra.uas</groupId>
-	<artifactId>Projektverwaltung01</artifactId>
+	<artifactId>JARVIS-FPM</artifactId>
 	<version>0.0.1</version>
 	<name>JARVIS-FPM</name>
 	<description>Demo project for Spring Boot</description>

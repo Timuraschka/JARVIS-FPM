@@ -2,14 +2,14 @@ package edu.fra.uas.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
-import jakarta.persistence.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.fra.uas.JarvisFpmApplication;
+import edu.fra.uas.model.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;

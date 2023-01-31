@@ -8,9 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 
+import edu.fra.uas.JarvisFpmApplication;
+
 import javax.persistence.*;
 
-import edu.fra.uas.JarvisFpmApplication;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 

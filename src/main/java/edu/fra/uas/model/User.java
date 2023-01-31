@@ -1,6 +1,10 @@
 package edu.fra.uas.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
@@ -12,16 +16,15 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "ID", columnDefinition = "VARCHAR(255)")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT")
 	private long id;
-
-	
 
 	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(255)")
 	private String first_name;
-
+	
 	@Column(name = "LAST_NAME", columnDefinition = "VARCHAR(255)")
+
 	private String last_name;
 
 	@Column(name = "USERNAME", columnDefinition = "VARCHAR(255)")
