@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,23 +32,33 @@ import jakarta.persistence.Table;
 public class Timetracker {
 	
 	@Id // used to identify the columns inside the table
-	@GeneratedValue
-	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
 	private long id;
 	
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
-	@Column(name = "START_DATE") // creates the Column inside the table
+	@Column(name = "START_DATE", columnDefinition = "DATE") // creates the Column inside the table
 	private LocalDate startDate;
-	@Column(name = "END_DATE")
+	
+	@Column(name = "END_DATE", columnDefinition = "DATE")
 	private LocalDate endDate;
-	@Column(name = "DURATION_IN_DAYS")
+	
+	@Column(name = "DURATION_IN_DAYS", columnDefinition = "INT")
 	private double duration_in_days;
-	@Column(name = "DURATION_IN_HOURS")
+	
+	@Column(name = "DURATION_IN_HOURS", columnDefinition = "INT")
 	private double duration_in_hours;
 
-	Object reference;
-
+	@JoinColumn(name = "TASK_REFERENCE")
+	private Task TaskReference;
+	
+	@JoinColumn(name = "RESOURCE_REFERENCE")
+	private Resource resourceReference;
+	
+	@JoinColumn(name = "PROJECT_REFERENCE")
+	private Project projectReference;
+	
 	@Column(name = "PROJECT")
 	private Project project;
 
@@ -148,12 +160,6 @@ public class Timetracker {
 		return duration_in_days;
 	}
 
-	public Object getReference() {
-		return reference;
-	}
-
-	public void setReference(Object object) {
-		this.reference = object;
-	}
+	
 
 }

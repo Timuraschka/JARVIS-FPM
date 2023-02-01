@@ -3,12 +3,16 @@ package edu.fra.uas.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Type;
+
+import java.util.List;
+import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 
 @Entity // declares this class as an Entity for the database
@@ -16,29 +20,34 @@ import jakarta.persistence.Table;
 public class User {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "ID", columnDefinition = "INT")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
 	private long id;
 
-	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(255)")
+	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(50)")
 	private String first_name;
 	
-	@Column(name = "LAST_NAME", columnDefinition = "VARCHAR(255)")
-
+	@Column(name = "LAST_NAME", columnDefinition = "VARCHAR(50)")
 	private String last_name;
 
-	@Column(name = "USERNAME", columnDefinition = "VARCHAR(255)")
+	@Column(name = "USERNAME", columnDefinition = "VARCHAR(50)")
 	private String username;
 
 	@Column(name = "PASSWORD", columnDefinition = "VARCHAR(255)")
 	private String password;
 
-	@Column(name = "EMAIL", columnDefinition = "VARCHAR(255)")
+	@Column(name = "EMAIL", columnDefinition = "VARCHAR(55)")
 	private String email;
+	
+	@OneToMany
+	@JoinColumn(name = "PROJECTS")
+	private List<Project> projects;
 
 	public User() {
 		super();
+		projects = new ArrayList<Project>();
 	}
+	
 	
 	public long getId() {
 		return id;

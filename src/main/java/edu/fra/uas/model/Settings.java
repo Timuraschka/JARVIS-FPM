@@ -1,9 +1,12 @@
 package edu.fra.uas.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 
@@ -14,19 +17,23 @@ import jakarta.persistence.Table;
 @Entity // declares this class as an Entity for the database
 @Table(name = "Settings") // creates the table inside the database
 public class Settings {
+
 	@Id // used to identify the columns inside the table
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
+	private long id;
 
-	@Column(name = "PROJECT") // creates the column inside the table
-	private Project project;
-
-	@Column(name = "TIMETRACKER")
-	private Timetracker timetracker;
-
-	@Column(name = "HOURS_A_DAY")
+	@Column(name = "HOURS_A_DAY", columnDefinition = "INT")
 	private int hours_a_day = 8;
 
-	@Column(name = "AUTOMATIC_SHIFT")
+	@Column(name = "AUTOMATIC_SHIFT", columnDefinition = "TINYINT")
 	private boolean automatic_shift = true; // Whether the tasks should shift automatically
+
+	@JoinColumn(name = "PROJECT") // creates the column inside the table
+	private Project project;
+
+	@JoinColumn(name = "TIMETRACKER")
+	private Timetracker timetracker;
 
 	public Settings() {
 		super();

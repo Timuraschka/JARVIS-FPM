@@ -32,33 +32,43 @@ public class Task {
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
 	@Id
-	@GeneratedValue
-	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
 	private long id;
-	
-	
-	@Column(name = "LINE")
+
+	@OneToMany
+	@JoinColumn(name = "SUB_TASKS", referencedColumnName = "ID")
+	private List<Task> subtasks; // enables the use of tasks as packages
+
+	@JoinColumn(name = "PARENT_TASK", referencedColumnName = "ID")
+	private Task parent;
+
+	@Column(name = "LINE", columnDefinition = "INT")
 	private int line; // the user can identify the task which are dependencies to this task using the
-						// line
+	// TODO: Bei der Abfrage der Line muss nach der Project ID
+	// abgefragt werden damit nicht eine Task aus einem anderen Projekt genommen
+	// wird
 
 	// to create a WBS
-	@Column(name = "PROJECT")
+	@JoinColumn(name = "PROJECT")
 	private Project project;
 
 	// TODO: eine Kommentar Funktion wäre geil für die Member Sicht (Kanban Board)
 
+	@JoinColumn(name = "TIME")
 	private Timetracker timetracker = new Timetracker();
 
-	@Column(name = "DEADLINE")
+	@Column(name = "DEADLINE", columnDefinition = "DATE")
 	private LocalDate deadline;
 
-	@Column(name = "WORK_HOURS")
+	@Column(name = "WORK_HOURS", columnDefinition = "INT")
 	private double work_hours; // this represents the amount of hours the task should need for completion
 								// it should change according to the amount of members working on the task
 
-	private List<Task> subtasks; // enables the use of tasks as packages TODO: the end of the last subtask should
-									// be the end of this task
+	@JoinColumn(name = "RESOURCES")
 	private List<Resource> resources;
+
+	@JoinColumn(name = "DEPENDENCIES", referencedColumnName = "LINE")
 	private List<Task> dependencies;
 
 	@Column(name = "CRITICAL")

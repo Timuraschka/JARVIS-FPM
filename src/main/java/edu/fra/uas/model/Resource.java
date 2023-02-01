@@ -4,15 +4,17 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.fra.uas.JarvisFpmApplication;
-import edu.fra.uas.model.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 import java.util.ArrayList;
 
@@ -21,29 +23,32 @@ import java.util.ArrayList;
 public class Resource {
 
 	@Id // used to identify the columns inside the table
-	@GeneratedValue
-	@Column(name = "ID") // creates the column inside the table
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY") // creates the column inside the table
 	private long id;
 
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
-	@Column(name = "NAME") // creates the column inside the table
+	@Column(name = "NAME", columnDefinition = "VARCHAR(50)") // creates the column inside the table
 	private String name;
 
-	@Column(name = "TEAM")
+	@Column(name = "TEAM", columnDefinition = "VARCHAR(50)")
 	private String team;
 
-	@Column(name = "SUPERVISOR")
+	@Column(name = "SUPERVISOR", columnDefinition = "VARCHAR(50)")
 	private User supervisor; // usually the Project Manager or #
 
-	@Column(name = "PROJECT_MEMBER")
+	@Column(name = "HOURLY_RATE", columnDefinition = "INT")
+	private double hourlyRate = 0;
+	
+	@JoinColumn(name = "PROJECT_MEMBER")
 	private User projectMember; // The actual resource
 
+	@OneToMany
+	@JoinColumn(name = "TASKS")
 	private List<Task> tasks;
-
-	@Column(name = "HOURLY_RATE")
-	private double hourlyRate = 0;
-
+	
+	
 	public Resource() {
 		super();
 		this.tasks = new ArrayList<Task>();

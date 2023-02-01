@@ -3,55 +3,56 @@ package edu.fra.uas.model;
 import java.util.List;
 import java.util.ArrayList;
 
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
-
-@Entity // declares this class as an Entity for the database
-@Table(name = "Project") // creates the table inside the database
+@Entity
+@Table(name = "Project")
 public class Project {
-
-	@Id // used to identify the columns inside the table
-	@GeneratedValue
-	@Column(name = "ID") // creates the column inside the table
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
 	private long id;
 
-	@Column(name = "NAME", columnDefinition = "VARCHAR(255)")
+	@Column(name = "NAME", columnDefinition = "VARCHAR(50) NOT NULL")
 	private String name;
 
-	@Column(name = "PROJECT_MANAGER", columnDefinition = "INT")
-	private long pm_ID;
-	
-	private User ProjectManager; // who created the project & admin
+	@Column(name = "DESCRPITION", columnDefinition = "VARCHAR(500)")
+	private String description;
 
-	@Column(name = "SETTINGS", columnDefinition = "INT")
-	private long settings_id;
-	
+	@ManyToOne
+	@JoinColumn(name = "PROJECT_MANAGER")
+	private User projectManager;
+
+	@ManyToOne
+	@JoinColumn(name = "SETTINGS")
 	private Settings settings;
-	
-	@OneToMany
-	@Column(name = "MEMBERS", columnDefinition = "INT")
-	private long member_id;
 
-//	private List<Long> lineAsIndexToTaskIDs; // holds task id's the index represents the lines
-//	private List<User> members; // List of people who can view the Project
-//	private List<Resource> resources;
-//	private List<String> teams;
+	@OneToMany(mappedBy = "project")
+	@JoinColumn(name = "RESOURCES")
+	private List<Resource> members;
+	
+	@JoinColumn(name="TIME")
+	private Timetracker time;
 
 	public Project() {
-		super();
-
 		this.settings = new Settings();
-//		this.lineAsIndexToTaskIDs = new ArrayList<Long>();
-//		this.members = new ArrayList<User>();
-//		this.resources = new ArrayList<Resource>();
-//		this.teams = new ArrayList<String>();
+		this.members = new ArrayList<>();
+	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getName() {
@@ -79,11 +80,11 @@ public class Project {
 	}
 
 	public User getProjectManager() {
-		return ProjectManager;
+		return projectManager;
 	}
 
 	public void setProjectManager(User projectManager) {
-		ProjectManager = projectManager;
+		this.projectManager = projectManager;
 	}
 
 //	public List<Long> getTaskLinePosition() {
