@@ -1,4 +1,4 @@
-package edu.fra.uas.model;
+package edu.fra.uas.timetracker.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.fra.uas.JarvisFpmApplication;
+import edu.fra.uas.project.model.Project;
+import edu.fra.uas.resource.model.Resource;
+import edu.fra.uas.task.model.Task;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

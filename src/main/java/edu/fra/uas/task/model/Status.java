@@ -1,4 +1,4 @@
-package edu.fra.uas.enums;
+package edu.fra.uas.task.model;
 
 public enum Status {
 

@@ -2,7 +2,7 @@ package edu.fra.uas.service;
 
 import java.util.List;
 
-import edu.fra.uas.model.Task;
+import edu.fra.uas.task.model.Task;
 
 public interface TaskService {
 

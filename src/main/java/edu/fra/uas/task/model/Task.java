@@ -1,4 +1,4 @@
-package edu.fra.uas.model;
+package edu.fra.uas.task.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 
 import edu.fra.uas.JarvisFpmApplication;
+import edu.fra.uas.project.model.Project;
+import edu.fra.uas.resource.model.Resource;
+import edu.fra.uas.timetracker.model.Timetracker;
 
 import javax.persistence.*;
 
@@ -78,17 +81,27 @@ public class Task {
 	private double cost; // total cost of this tasks (resources(sum of hourly rate) * hours of task)
 
 	// keep track of the task
-	@Column(name = "PROGRESS")
+	@Column(name = "PROGRESS", columnDefinition = "DECIMAL(10,2)")
 	private double progress; // percentage of completion
-	@Column(name = "COMPLETE")
+	
+	@Column(name = "COMPLETE", columnDefinition = "TINYINT")
 	private boolean complete; // done?
+	
+	
 	@Column(name = "NAME")
 	private String name;
+	
+	
 	@Column(name = "DESCRIPTION")
 	private String description;
+	
+	@OneToMany
 	private List<String> keywords = new ArrayList<String>();
+	
 	@Column(name = "READY")
 	private boolean ready;
+	
+	
 	@Column(name = "DONE")
 	private boolean done = false;
 

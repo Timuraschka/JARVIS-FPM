@@ -1,4 +1,4 @@
-package edu.fra.uas.model;
+package edu.fra.uas.resource.model;
 
 import java.util.List;
 
@@ -13,6 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.fra.uas.JarvisFpmApplication;
+import edu.fra.uas.task.model.Task;
+import edu.fra.uas.user.model.User;
+
 import javax.persistence.Column;
 import javax.persistence.Table;
 

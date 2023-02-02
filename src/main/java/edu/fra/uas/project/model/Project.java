@@ -1,4 +1,4 @@
-package edu.fra.uas.model;
+package edu.fra.uas.project.model;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,6 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import edu.fra.uas.resource.model.Resource;
+import edu.fra.uas.settings.model.Settings;
+import edu.fra.uas.timetracker.model.Timetracker;
+import edu.fra.uas.user.model.User;
+
 @Entity
 @Table(name = "Project")
 public class Project {
@@ -26,12 +31,16 @@ public class Project {
 
 	@Column(name = "DESCRPITION", columnDefinition = "VARCHAR(500)")
 	private String description;
+	
+	@OneToMany
+	@Column(name = "KEYWORDS", columnDefinition = "VARCHAR(50)")
+	private List<String> keywords = new ArrayList<String>();
+	
 
-	@ManyToOne
 	@JoinColumn(name = "PROJECT_MANAGER")
 	private User projectManager;
 
-	@ManyToOne
+	@OneToMany
 	@JoinColumn(name = "SETTINGS")
 	private Settings settings;
 

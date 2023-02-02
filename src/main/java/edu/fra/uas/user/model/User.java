@@ -1,4 +1,4 @@
-package edu.fra.uas.model;
+package edu.fra.uas.user.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
+
+import edu.fra.uas.project.model.Project;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -24,11 +26,8 @@ public class User {
 	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
 	private long id;
 
-	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(50)")
-	private String first_name;
-	
-	@Column(name = "LAST_NAME", columnDefinition = "VARCHAR(50)")
-	private String last_name;
+	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(100)")
+	private String name;
 
 	@Column(name = "USERNAME", columnDefinition = "VARCHAR(50)")
 	private String username;
@@ -56,20 +55,12 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getFirst_name() {
-		return first_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-
-	public String getLast_name() {
-		return last_name;
-	}
-
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {
@@ -108,9 +99,5 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getFullName() {
-		return first_name + " " + last_name;
 	}
 }

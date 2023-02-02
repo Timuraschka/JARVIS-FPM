@@ -1,4 +1,4 @@
-package edu.fra.uas.model;
+package edu.fra.uas.settings.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import edu.fra.uas.project.model.Project;
+import edu.fra.uas.timetracker.model.Timetracker;
+
 /**
  * 
- * @author Timur
  * 
  *         To set the Standard Settings for the project.
  */
