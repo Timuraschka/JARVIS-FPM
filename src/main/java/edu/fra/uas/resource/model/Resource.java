@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.slf4j.Logger;
@@ -27,27 +28,27 @@ public class Resource {
 
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY") // creates the column inside the table
+	@Column(name = "RESOURCE_ID") // creates the column inside the table
 	private long id;
 
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
-	@Column(name = "NAME", columnDefinition = "VARCHAR(50)") // creates the column inside the table
+	@Column(name = "NAME") // creates the column inside the table
 	private String name;
 
-	@Column(name = "TEAM", columnDefinition = "VARCHAR(50)")
+	@Column(name = "TEAM")
 	private String team;
 
-	@Column(name = "SUPERVISOR", columnDefinition = "VARCHAR(50)")
+	@JoinColumn(name = "SUPERVISOR")
 	private User supervisor; // usually the Project Manager or #
 
-	@Column(name = "HOURLY_RATE", columnDefinition = "INT")
+	@Column(name = "HOURLY_RATE")
 	private double hourlyRate = 0;
 	
 	@JoinColumn(name = "PROJECT_MEMBER")
 	private User projectMember; // The actual resource
 
-	@OneToMany
+	@ManyToMany(mappedBy = "resources")
 	@JoinColumn(name = "TASKS")
 	private List<Task> tasks;
 	

@@ -9,12 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.settings.model.Settings;
+import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
 import edu.fra.uas.user.model.User;
 
@@ -23,28 +25,31 @@ import edu.fra.uas.user.model.User;
 public class Project {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
+	@Column(name = "PROJECT_ID")
 	private long id;
 
-	@Column(name = "NAME", columnDefinition = "VARCHAR(50) NOT NULL")
+	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "DESCRPITION", columnDefinition = "VARCHAR(500)")
+	@Column(name = "DESCRPITION")
 	private String description;
 	
 	@OneToMany
-	@Column(name = "KEYWORDS", columnDefinition = "VARCHAR(50)")
+	@Column(name = "KEYWORDS")
 	private List<String> keywords = new ArrayList<String>();
 	
-
+	@OneToMany
+	@Column(name = "TASKS")
+	private List<Task> tasks;
+	
 	@JoinColumn(name = "PROJECT_MANAGER")
 	private User projectManager;
 
-	@OneToMany
+	@OneToMany(mappedBy = "project")
 	@JoinColumn(name = "SETTINGS")
 	private Settings settings;
 
-	@OneToMany(mappedBy = "project")
+	@ManyToMany(mappedBy = "project")
 	@JoinColumn(name = "RESOURCES")
 	private List<Resource> members;
 	
@@ -72,13 +77,13 @@ public class Project {
 		this.name = name;
 	}
 
-//	public List<User> getMembers() {
-//		return members;
-//	}
-//
-//	public void setMembers(List<User> members) {
-//		this.members = members;
-//	}
+	public List<Resource> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Resource> members) {
+		this.members = members;
+	}
 
 	public Settings getSettings() {
 		return settings;

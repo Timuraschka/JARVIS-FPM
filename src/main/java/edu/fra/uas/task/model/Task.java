@@ -6,17 +6,27 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.annotation.Id;
 
 import edu.fra.uas.JarvisFpmApplication;
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.timetracker.model.Timetracker;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+
 
 /**
  * 
@@ -36,77 +46,77 @@ public class Task {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
+	@Column(name = "TASK_ID")
 	private long id;
 
-	@OneToMany
-	@JoinColumn(name = "SUB_TASKS", referencedColumnName = "ID")
-	private List<Task> subtasks; // enables the use of tasks as packages
+	@OneToMany(mappedBy = "parent",cascade = CascadeType.MERGE)
+	@JoinColumn(name = "SUB_TASKS")
+	private List<Task> subtasks;
 
-	@JoinColumn(name = "PARENT_TASK", referencedColumnName = "ID")
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "PARENT_TASK")
 	private Task parent;
 
-	@Column(name = "LINE", columnDefinition = "INT")
-	private int line; // the user can identify the task which are dependencies to this task using the
-	// TODO: Bei der Abfrage der Line muss nach der Project ID
-	// abgefragt werden damit nicht eine Task aus einem anderen Projekt genommen
-	// wird
 
-	// to create a WBS
+	@OneToMany(mappedBy = "tasks", cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT")
 	private Project project;
 
-	// TODO: eine Kommentar Funktion wäre geil für die Member Sicht (Kanban Board)
-
+	@OneToOne
 	@JoinColumn(name = "TIME")
-	private Timetracker timetracker = new Timetracker();
-
-	@Column(name = "DEADLINE", columnDefinition = "DATE")
-	private LocalDate deadline;
-
-	@Column(name = "WORK_HOURS", columnDefinition = "INT")
-	private double work_hours; // this represents the amount of hours the task should need for completion
-								// it should change according to the amount of members working on the task
-
-	@JoinColumn(name = "RESOURCES")
+	private Timetracker timetracker;
+	
+	@ManyToMany
+	@JoinTable(name="RESOURCES_TASKS",joinColumns=@JoinColumn(name="TASK_ID"),
+	inverseJoinColumns=@JoinColumn(name="RESOUCE_ID"))
 	private List<Resource> resources;
 
-	@JoinColumn(name = "DEPENDENCIES", referencedColumnName = "LINE")
+	@OneToMany(mappedBy = "prerequisite_tasks")
+	@JoinColumn(name = "DEPENDENCIES")
 	private List<Task> dependencies;
+	
+	@	//TODO: 
+	
+	@Column(name = "DEADLINE")
+	private LocalDate deadline;
+	
+	
+	@Column(name = "WORK_HOURS")
+	private double work_hours;
+	
+	@Column(name = "LINE")
+	private int line;
 
 	@Column(name = "CRITICAL")
-	private boolean critical; // part of the critical path?
+	private boolean critical;
 
 	@Column(name = "COST")
-	private double cost; // total cost of this tasks (resources(sum of hourly rate) * hours of task)
+	private double cost;
 
-	// keep track of the task
-	@Column(name = "PROGRESS", columnDefinition = "DECIMAL(10,2)")
-	private double progress; // percentage of completion
-	
-	@Column(name = "COMPLETE", columnDefinition = "TINYINT")
-	private boolean complete; // done?
-	
-	
+	@Column(name = "PROGRESS")
+	private double progress;
+
+	@Column(name = "COMPLETE")
+	private boolean complete;
+
 	@Column(name = "NAME")
 	private String name;
-	
-	
+
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
+
 	@OneToMany
+	@Column(name = "KEYWORDS")
 	private List<String> keywords = new ArrayList<String>();
-	
+
 	@Column(name = "READY")
 	private boolean ready;
-	
-	
+
 	@Column(name = "DONE")
 	private boolean done = false;
 
 	@Column(name = "AUTOMATIC_SHIFT")
-	private boolean automatic_shift; // change the Setting for the task individually
+	private boolean automatic_shift;
 
 	public Task() {
 		super();

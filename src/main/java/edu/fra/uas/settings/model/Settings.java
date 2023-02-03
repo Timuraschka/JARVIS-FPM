@@ -3,13 +3,15 @@ package edu.fra.uas.settings.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import edu.fra.uas.project.model.Project;
-import edu.fra.uas.timetracker.model.Timetracker;
+
 
 /**
  * 
@@ -22,20 +24,18 @@ public class Settings {
 
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
+	@Column(name = "SETTING_ID")
 	private long id;
 
-	@Column(name = "HOURS_A_DAY", columnDefinition = "INT")
+	@Column(name = "HOURS_A_DAY")
 	private int hours_a_day = 8;
 
-	@Column(name = "AUTOMATIC_SHIFT", columnDefinition = "TINYINT")
+	@Column(name = "AUTOMATIC_SHIFT")
 	private boolean automatic_shift = true; // Whether the tasks should shift automatically
 
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT") // creates the column inside the table
 	private Project project;
-
-	@JoinColumn(name = "TIMETRACKER")
-	private Timetracker timetracker;
 
 	public Settings() {
 		super();
@@ -47,14 +47,6 @@ public class Settings {
 
 	public void setProject(Project project) {
 		this.project = project;
-	}
-
-	public Timetracker getTimetracker() {
-		return timetracker;
-	}
-
-	public void setTimetracker(Timetracker timetracker) {
-		this.timetracker = timetracker;
 	}
 
 	public int getHours_a_day() {

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
 
 import edu.fra.uas.project.model.Project;
+import edu.fra.uas.resource.model.Resource;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -23,24 +24,28 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "ID", columnDefinition = "INT PRIMARY KEY")
+	@Column(name = "USER_ID")
 	private long id;
 
-	@Column(name = "FIRST_NAME", columnDefinition = "VARCHAR(100)")
+	@Column(name = "FIRST_NAME")
 	private String name;
 
-	@Column(name = "USERNAME", columnDefinition = "VARCHAR(50)")
+	@Column(name = "USERNAME")
 	private String username;
 
-	@Column(name = "PASSWORD", columnDefinition = "VARCHAR(255)")
+	@Column(name = "PASSWORD")
 	private String password;
 
-	@Column(name = "EMAIL", columnDefinition = "VARCHAR(55)")
+	@Column(name = "EMAIL")
 	private String email;
 	
 	@OneToMany
 	@JoinColumn(name = "PROJECTS")
 	private List<Project> projects;
+	
+	@OneToMany
+	@JoinColumn(name = "RESOURCE")
+	private List<Resource> resourceIn;
 
 	public User() {
 		super();
