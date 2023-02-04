@@ -3,6 +3,7 @@ package edu.fra.uas.project.model;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import edu.fra.uas.resource.model.Resource;
@@ -38,14 +40,19 @@ public class Project {
 	@Column(name = "KEYWORDS")
 	private List<String> keywords = new ArrayList<String>();
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.MERGE)
 	@Column(name = "TASKS")
 	private List<Task> tasks;
 	
+	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "PROJECT_MANAGER")
-	private User projectManager;
+	private List <Resource> projectManager;
+	
+	@OneToOne
+	@JoinColumn(name="PROJECT_OWNER")
+	private Resource projectOwner;
 
-	@OneToMany(mappedBy = "project")
+	@OneToOne(mappedBy = "project")
 	@JoinColumn(name = "SETTINGS")
 	private Settings settings;
 
@@ -56,9 +63,16 @@ public class Project {
 	@JoinColumn(name="TIME")
 	private Timetracker time;
 
+	
+	
 	public Project() {
+		
+		
 		this.settings = new Settings();
 		this.members = new ArrayList<>();
+		this.projectManager = new ArrayList<>();
+		
+		
 	}
 
 	public String getDescription() {
@@ -93,11 +107,11 @@ public class Project {
 		this.settings = settings;
 	}
 
-	public User getProjectManager() {
+	public List<Resource> getProjectManager() {
 		return projectManager;
 	}
 
-	public void setProjectManager(User projectManager) {
+	public void setProjectManager( List<Resource> projectManager) {
 		this.projectManager = projectManager;
 	}
 

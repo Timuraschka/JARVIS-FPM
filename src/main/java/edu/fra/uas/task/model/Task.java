@@ -48,17 +48,18 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TASK_ID")
 	private long id;
+	
 
 	@OneToMany(mappedBy = "parent",cascade = CascadeType.MERGE)
 	@JoinColumn(name = "SUB_TASKS")
 	private List<Task> subtasks;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PARENT_TASK")
 	private Task parent;
 
 
-	@OneToMany(mappedBy = "tasks", cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT")
 	private Project project;
 
@@ -66,8 +67,8 @@ public class Task {
 	@JoinColumn(name = "TIME")
 	private Timetracker timetracker;
 	
-	@ManyToMany
-	@JoinTable(name="RESOURCES_TASKS",joinColumns=@JoinColumn(name="TASK_ID"),
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name="TASK_RESOURCES",joinColumns=@JoinColumn(name="TASK_ID"),
 	inverseJoinColumns=@JoinColumn(name="RESOUCE_ID"))
 	private List<Resource> resources;
 
@@ -75,11 +76,18 @@ public class Task {
 	@JoinColumn(name = "DEPENDENCIES")
 	private List<Task> dependencies;
 	
-	@	//TODO: 
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "PREQUISITOR_OF")
+	private List<Task> prequisitorsOf;
+	
+	
+	
+	
+	
+	
 	
 	@Column(name = "DEADLINE")
 	private LocalDate deadline;
-	
 	
 	@Column(name = "WORK_HOURS")
 	private double work_hours;

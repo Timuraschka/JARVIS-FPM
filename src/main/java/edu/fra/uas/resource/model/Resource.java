@@ -7,8 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import edu.fra.uas.JarvisFpmApplication;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.user.model.User;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 public class Resource {
 
 	@Id // used to identify the columns inside the table
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "RESOURCE_ID") // creates the column inside the table
 	private long id;
 
@@ -39,20 +43,20 @@ public class Resource {
 	@Column(name = "TEAM")
 	private String team;
 
-	@JoinColumn(name = "SUPERVISOR")
-	private User supervisor; // usually the Project Manager or #
-
 	@Column(name = "HOURLY_RATE")
 	private double hourlyRate = 0;
 	
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "SUPERVISOR")
+	private Resource supervisor; // usually the Project Manager
+
+	@OneToOne(mappedBy = "resourceIn")
 	@JoinColumn(name = "PROJECT_MEMBER")
 	private User projectMember; // The actual resource
 
-	@ManyToMany(mappedBy = "resources")
-	@JoinColumn(name = "TASKS")
+	@ManyToMany(mappedBy = "resources", cascade = CascadeType.PERSIST)
 	private List<Task> tasks;
-	
-	
+
 	public Resource() {
 		super();
 		this.tasks = new ArrayList<Task>();
@@ -102,11 +106,11 @@ public class Resource {
 		return hourlyRate;
 	}
 
-	public User getSupervisor() {
+	public Resource getSupervisor() {
 		return supervisor;
 	}
 
-	public void setSupervisor(User supervisor) {
+	public void setSupervisor(Resource supervisor) {
 		this.supervisor = supervisor;
 	}
 

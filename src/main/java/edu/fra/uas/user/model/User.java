@@ -14,6 +14,7 @@ import org.springframework.data.annotation.Id;
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
@@ -39,11 +40,12 @@ public class User {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PROJECTS")
 	private List<Project> projects;
 	
-	@OneToMany
+	
+	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "RESOURCE")
 	private List<Resource> resourceIn;
 
