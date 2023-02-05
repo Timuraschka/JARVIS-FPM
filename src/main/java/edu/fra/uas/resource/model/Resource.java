@@ -4,10 +4,12 @@ import java.util.Set;
 import java.util.HashSet;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -50,17 +52,22 @@ public class Resource {
 	
 	// Foreign Keys
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "SUPERVISOR")
 	private Resource supervisor; // usually the Project Manager
 
-	@OneToOne(mappedBy = "resourceIn")
-	@JoinColumn(name = "PROJECT_MEMBER")
-	private User projectMember; // The actual resource
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "USER")
+	private User user; // The actual resource
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "PROJECT_REFERENCE")
+	private Resource project; 
+	
 
 	// Foreign Keys Collection
 	
-	@ManyToMany(mappedBy = "resources", cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "resources", cascade = CascadeType.PERSIST)
 	private Set<Task> tasks;
 
 	
@@ -129,11 +136,11 @@ public class Resource {
 	}
 
 	public User getProjectMember() {
-		return projectMember;
+		return user;
 	}
 
 	public void setProjectMember(User projectMember) {
-		this.projectMember = projectMember;
+		this.user = projectMember;
 	}
 
 }

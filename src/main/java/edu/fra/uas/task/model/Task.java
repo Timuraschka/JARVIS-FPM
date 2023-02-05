@@ -22,6 +22,7 @@ import jakarta.persistence.SharedCacheMode;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -49,7 +50,7 @@ import jakarta.persistence.Table;
 		   region = "Task", 
 		   include = "non-lazy"
 		)
-@SharedCacheMode(ENABLE_SELECTIVE)
+
 @Entity
 @Table(name = "Task")
 public class Task {
@@ -65,36 +66,33 @@ public class Task {
 
 	// foreign Keys
 
-	@OneToMany(mappedBy = "parent", cascade = CascadeType.MERGE)
-	@JoinColumn(name = "SUB_TASKS")
-	private List<Task> subtasks;
-
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PARENT_TASK")
 	private Task parent;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "TIME")
 	private Timetracker timetracker;
 
 	// Collection of foreign Keys
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
 	private Set<Resource> resources;
 
-	@OneToMany(mappedBy = "prerequisite_tasks")
-	@JoinColumn(name = "DEPENDENCIES")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "prerequisite_tasks")
 	private Set<Task> dependencies;
 
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PREQUISITORS_OF")
-	private Set<Task> prequisitorsOf;
+	private Set<Task> prerequisite_tasks;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parent", cascade = CascadeType.MERGE)
+	private Set<Task> subtasks;
 	// Attributes
 
 	@Column(name = "DEADLINE")
@@ -124,9 +122,9 @@ public class Task {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@ElementCollection
-	@Column(name = "KEYWORDS")
-	private List<String> keywords = new ArrayList<String>();
+//	@ElementCollection
+//	@Column(name = "KEYWORDS")
+//	private List<String> keywords = new ArrayList<String>();
 
 	@Column(name = "READY")
 	private boolean ready;
@@ -141,7 +139,8 @@ public class Task {
 		super();
 		this.resources = new HashSet<>();
 		this.dependencies = new HashSet<>();
-		this.prequisitorsOf = new HashSet<>();
+		this.prerequisite_tasks = new HashSet<>();
+		this.subtasks = new HashSet<>();
 
 		this.automatic_shift = project.getSettings().isAutomatic_shift();
 
@@ -203,17 +202,17 @@ public class Task {
 		return cost;
 	}
 
-	public void addKeyword(String keyword) {
-		keywords.add(keyword);
-	}
-
-	public void deleteKeyword(String keyword) {
-		keywords.remove(keyword);
-	}
-
-	public void removeAllKeywords() {
-		keywords = new ArrayList<String>();
-	}
+//	public void addKeyword(String keyword) {
+//		keywords.add(keyword);
+//	}
+//
+//	public void deleteKeyword(String keyword) {
+//		keywords.remove(keyword);
+//	}
+//
+//	public void removeAllKeywords() {
+//		keywords = new ArrayList<String>();
+//	}
 
 	// TODO should this method exist??
 	public void setWork_hours(double work_hours) {
@@ -233,11 +232,11 @@ public class Task {
 		this.deadline = deadline;
 	}
 
-	public List<Task> getSubtasks() {
+	public Set<Task> getSubtasks() {
 		return subtasks;
 	}
 
-	public void setSubtasks(List<Task> subtasks) {
+	public void setSubtasks(Set<Task> subtasks) {
 		this.subtasks = subtasks;
 	}
 
@@ -333,12 +332,12 @@ public class Task {
 		this.description = description;
 	}
 
-	public List<String> getKeywords() {
-		return keywords;
-	}
-
-	public void setKeywords(List<String> keywords) {
-		this.keywords = keywords;
-	}
+//	public List<String> getKeywords() {
+//		return keywords;
+//	}
+//
+//	public void setKeywords(List<String> keywords) {
+//		this.keywords = keywords;
+//	}
 
 }

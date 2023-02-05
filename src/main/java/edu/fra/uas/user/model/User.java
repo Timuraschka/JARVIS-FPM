@@ -1,6 +1,7 @@
 package edu.fra.uas.user.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -47,11 +48,11 @@ public class User {
 	
 	// Foreign Keys Collection
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PROJECTS")
 	private Set<Project> projects;
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "RESOURCE")
 	private Set<Resource> resourceIn;
 

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,33 +45,31 @@ public class Project {
 	
 	// Collection of Foreign Keys
 	
-	@OneToMany
-	@Column(name = "KEYWORDS")
-	private List<String> keywords = new ArrayList<String>();
+//	@OneToMany(fetch = FetchType.EAGER)
+//	@Column(name = "KEYWORDS")
+//	private List<String> keywords = new ArrayList<String>();
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@Column(name = "TASKS")
 	private Set<Task> tasks;
 	
-	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "PROJECT_MANAGER")
 	private Set <Resource> projectManager;
 	
-	@ManyToMany(mappedBy = "project")
-	@JoinColumn(name = "RESOURCES")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Resource> members;
 	
 	// Foreign Keys
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="PROJECT_OWNER")
 	private Resource projectOwner;
 
-	@OneToOne(mappedBy = "project")
-	@JoinColumn(name = "SETTINGS")
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "project")
 	private Settings settings;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="TIME")
 	private Timetracker time;
 

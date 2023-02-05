@@ -30,41 +30,37 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Timetracker") // creates the Table in the database
 public class Timetracker {
-	
+
 	// ID
-	
+
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TIME_ID")
 	private long id;
-	
 
 	// Attributes
-	
+
 	@Column(name = "START_DATE") // creates the Column inside the table
 	private LocalDate startDate;
-	
+
 	@Column(name = "END_DATE")
 	private LocalDate endDate;
-	
+
 	@Column(name = "DURATION_IN_DAYS")
 	private double duration_in_days;
-	
+
 	@Column(name = "DURATION_IN_HOURS")
 	private double duration_in_hours;
-	
+
 	// Foreign Keys
 
 	@OneToOne(mappedBy = "timetracker", cascade = CascadeType.ALL)
-	@JoinColumn(name = "TASK_REFERENCE")
 	private Task TaskReference;
-	
-	@OneToOne(mappedBy = "time",  cascade = CascadeType.ALL)
-	@JoinColumn(name = "PROJECT_REFERENCE")
-	private Project projectReference;
-	
+
 	@OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
-	@JoinColumn(name = "PROJECT")
+	private Project projectReference;
+
+	@OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
 	private Project project;
 
 	public Timetracker() {
@@ -164,7 +160,5 @@ public class Timetracker {
 	public double getDuration_in_days() {
 		return duration_in_days;
 	}
-
-	
 
 }
