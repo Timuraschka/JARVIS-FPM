@@ -7,13 +7,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.fra.uas.JarvisFpmApplication;
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.timetracker.model.Timetracker;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,7 +42,7 @@ import javax.persistence.Table;
 @Table(name = "Task")
 public class Task {
 
-	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(Task.class);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +60,7 @@ public class Task {
 
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PROJECT")
+	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
 	@OneToOne
@@ -76,8 +76,8 @@ public class Task {
 	@JoinColumn(name = "DEPENDENCIES")
 	private List<Task> dependencies;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "PREQUISITOR_OF")
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "PREQUISITORS_OF")
 	private List<Task> prequisitorsOf;
 	
 	
@@ -92,7 +92,7 @@ public class Task {
 	@Column(name = "WORK_HOURS")
 	private double work_hours;
 	
-	@Column(name = "LINE")
+	@Column(name = "LINE_NUMBER")
 	private int line;
 
 	@Column(name = "CRITICAL")
@@ -113,7 +113,7 @@ public class Task {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@OneToMany
+	@ElementCollection
 	@Column(name = "KEYWORDS")
 	private List<String> keywords = new ArrayList<String>();
 

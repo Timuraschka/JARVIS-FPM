@@ -33,7 +33,7 @@ public class Project {
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "DESCRPITION")
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@OneToMany
