@@ -17,6 +17,8 @@ import jakarta.persistence.Cacheable;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.SharedCacheMode;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -47,6 +49,7 @@ import jakarta.persistence.Table;
 		   region = "Task", 
 		   include = "non-lazy"
 		)
+@SharedCacheMode(ENABLE_SELECTIVE)
 @Entity
 @Table(name = "Task")
 public class Task {
