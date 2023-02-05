@@ -13,31 +13,40 @@ import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.timetracker.model.Timetracker;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Cacheable;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 /**
  * 
  * 
  * 
- *         This class represents a task with a possible deadline.
+ * This class represents a task with a possible deadline.
  * 
- *         Behaviors of a task: 1. When the duration gets changed: The End Date
- *         shifts depending on the change 2. One of the predecessor shifts: The
- *         task shifts after the predecessor ! If the Setting is not disabled
+ * Behaviors of a task: 1. When the duration gets changed: The End Date shifts
+ * depending on the change 2. One of the predecessor shifts: The task shifts
+ * after the predecessor ! If the Setting is not disabled
  */
+@Cacheable
+@org.hibernate.annotations.Cache(
+		   usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, 
+		   region = "Task", 
+		   include = "non-lazy"
+		)
 @Entity
 @Table(name = "Task")
 public class Task {

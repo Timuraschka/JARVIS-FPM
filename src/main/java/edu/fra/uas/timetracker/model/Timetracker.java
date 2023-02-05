@@ -3,11 +3,11 @@ package edu.fra.uas.timetracker.model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import javax.persistence.CascadeType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.task.model.Task;
