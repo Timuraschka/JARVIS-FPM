@@ -3,6 +3,8 @@ package edu.fra.uas.task.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +28,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-
 /**
  * 
- * @author Timur
+ * 
  * 
  *         This class represents a task with a possible deadline.
  * 
@@ -44,20 +44,22 @@ public class Task {
 
 	private static final Logger log = LoggerFactory.getLogger(Task.class);
 
+	// ID
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TASK_ID")
 	private long id;
-	
 
-	@OneToMany(mappedBy = "parent",cascade = CascadeType.MERGE)
+	// foreign Keys
+
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.MERGE)
 	@JoinColumn(name = "SUB_TASKS")
 	private List<Task> subtasks;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PARENT_TASK")
 	private Task parent;
-
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_REFERENCE")
@@ -66,32 +68,29 @@ public class Task {
 	@OneToOne
 	@JoinColumn(name = "TIME")
 	private Timetracker timetracker;
-	
+
+	// Collection of foreign Keys
+
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name="TASK_RESOURCES",joinColumns=@JoinColumn(name="TASK_ID"),
-	inverseJoinColumns=@JoinColumn(name="RESOUCE_ID"))
-	private List<Resource> resources;
+	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
+	private Set<Resource> resources;
 
 	@OneToMany(mappedBy = "prerequisite_tasks")
 	@JoinColumn(name = "DEPENDENCIES")
-	private List<Task> dependencies;
-	
+	private Set<Task> dependencies;
+
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PREQUISITORS_OF")
-	private List<Task> prequisitorsOf;
-	
-	
-	
-	
-	
-	
-	
+	private Set<Task> prequisitorsOf;
+
+	// Attributes
+
 	@Column(name = "DEADLINE")
 	private LocalDate deadline;
-	
+
 	@Column(name = "WORK_HOURS")
 	private double work_hours;
-	
+
 	@Column(name = "LINE_NUMBER")
 	private int line;
 
@@ -128,6 +127,9 @@ public class Task {
 
 	public Task() {
 		super();
+		this.resources = new HashSet<>();
+		this.dependencies = new HashSet<>();
+		this.prequisitorsOf = new HashSet<>();
 
 		this.automatic_shift = project.getSettings().isAutomatic_shift();
 
@@ -287,19 +289,19 @@ public class Task {
 		this.timetracker = timetracker;
 	}
 
-	public List<Resource> getResources() {
+	public Set<Resource> getResources() {
 		return resources;
 	}
 
-	public void setResources(List<Resource> ressources) {
+	public void setResources(Set<Resource> ressources) {
 		this.resources = ressources;
 	}
 
-	public List<Task> getDependencies() {
+	public Set<Task> getDependencies() {
 		return dependencies;
 	}
 
-	public void setDependencies(List<Task> predecudor) {
+	public void setDependencies(Set<Task> predecudor) {
 		this.dependencies = predecudor;
 	}
 

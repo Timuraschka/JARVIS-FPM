@@ -1,16 +1,15 @@
 package edu.fra.uas.resource.model;
 
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.slf4j.Logger;
@@ -24,12 +23,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
-import java.util.ArrayList;
 
 @Entity // declares this class as an Entity for the database
 @Table(name = "Resource") // creates the table inside the database
 public class Resource {
 
+	// ID
+	
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "RESOURCE_ID") // creates the column inside the table
@@ -37,6 +37,8 @@ public class Resource {
 
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
+	// Attributes
+	
 	@Column(name = "NAME") // creates the column inside the table
 	private String name;
 
@@ -46,6 +48,8 @@ public class Resource {
 	@Column(name = "HOURLY_RATE")
 	private double hourlyRate = 0;
 	
+	// Foreign Keys
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "SUPERVISOR")
 	private Resource supervisor; // usually the Project Manager
@@ -54,12 +58,16 @@ public class Resource {
 	@JoinColumn(name = "PROJECT_MEMBER")
 	private User projectMember; // The actual resource
 
+	// Foreign Keys Collection
+	
 	@ManyToMany(mappedBy = "resources", cascade = CascadeType.PERSIST)
-	private List<Task> tasks;
+	private Set<Task> tasks;
 
+	
+	
 	public Resource() {
 		super();
-		this.tasks = new ArrayList<Task>();
+		this.tasks = new HashSet<>();
 
 	}
 
@@ -68,8 +76,14 @@ public class Resource {
 		log.debug("Task added to the resource " + this.name);
 	}
 
-	public void removeTaskFromRessource(Task task) {
-		tasks.remove(task.getLine());
+	public void removeTaskFromRessource(Task taskToRemove) {
+		
+		for (Task task : tasks) {
+			   if (task.getId() == taskToRemove.getId()) {
+			      tasks.remove(task);
+			      break;
+			   }
+			}
 		log.debug("Task removed from resource " + this.name);
 	}
 
@@ -94,11 +108,11 @@ public class Resource {
 		this.team = team;
 	}
 
-	public List<Task> getTasks() {
+	public Set<Task> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(List<Task> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
 

@@ -2,6 +2,8 @@ package edu.fra.uas.project.model;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,30 +13,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.settings.model.Settings;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
-import edu.fra.uas.user.model.User;
 
 @Entity
 @Table(name = "Project")
 public class Project {
+	
+	// ID
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "PROJECT_ID")
 	private long id;
 
+	// Attributes
+	
 	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
+	
+	// Collection of Foreign Keys
 	
 	@OneToMany
 	@Column(name = "KEYWORDS")
@@ -42,11 +50,17 @@ public class Project {
 	
 	@OneToMany(cascade = CascadeType.MERGE)
 	@Column(name = "TASKS")
-	private List<Task> tasks;
+	private Set<Task> tasks;
 	
 	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "PROJECT_MANAGER")
-	private List <Resource> projectManager;
+	private Set <Resource> projectManager;
+	
+	@ManyToMany(mappedBy = "project")
+	@JoinColumn(name = "RESOURCES")
+	private Set<Resource> members;
+	
+	// Foreign Keys
 	
 	@OneToOne
 	@JoinColumn(name="PROJECT_OWNER")
@@ -56,10 +70,6 @@ public class Project {
 	@JoinColumn(name = "SETTINGS")
 	private Settings settings;
 
-	@ManyToMany(mappedBy = "project")
-	@JoinColumn(name = "RESOURCES")
-	private List<Resource> members;
-	
 	@JoinColumn(name="TIME")
 	private Timetracker time;
 
@@ -69,8 +79,8 @@ public class Project {
 		
 		
 		this.settings = new Settings();
-		this.members = new ArrayList<>();
-		this.projectManager = new ArrayList<>();
+		this.members = new HashSet<>();
+		this.projectManager =new HashSet<>();
 		
 		
 	}
@@ -91,11 +101,11 @@ public class Project {
 		this.name = name;
 	}
 
-	public List<Resource> getMembers() {
+	public Set<Resource> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<Resource> members) {
+	public void setMembers(Set<Resource> members) {
 		this.members = members;
 	}
 
@@ -107,11 +117,11 @@ public class Project {
 		this.settings = settings;
 	}
 
-	public List<Resource> getProjectManager() {
+	public Set<Resource> getProjectManager() {
 		return projectManager;
 	}
 
-	public void setProjectManager( List<Resource> projectManager) {
+	public void setProjectManager( Set<Resource> projectManager) {
 		this.projectManager = projectManager;
 	}
 

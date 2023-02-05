@@ -7,15 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import edu.fra.uas.JarvisFpmApplication;
 import edu.fra.uas.project.model.Project;
-import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.task.model.Task;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,13 +31,16 @@ import jakarta.persistence.Table;
 @Table(name = "Timetracker") // creates the Table in the database
 public class Timetracker {
 	
+	// ID
+	
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TIME_ID")
 	private long id;
 	
-	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
+	// Attributes
+	
 	@Column(name = "START_DATE") // creates the Column inside the table
 	private LocalDate startDate;
 	
@@ -55,6 +52,8 @@ public class Timetracker {
 	
 	@Column(name = "DURATION_IN_HOURS")
 	private double duration_in_hours;
+	
+	// Foreign Keys
 
 	@OneToOne(mappedBy = "timetracker", cascade = CascadeType.ALL)
 	@JoinColumn(name = "TASK_REFERENCE")

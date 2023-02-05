@@ -3,13 +3,14 @@ package edu.fra.uas.user.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 
-import java.util.List;
-import java.util.ArrayList;
-import org.springframework.data.annotation.Id;
+import java.util.Set;
+import java.util.HashSet;
+
 
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
@@ -23,10 +24,14 @@ import javax.persistence.Table;
 @Table(name = "User") // creates the table inside the database
 public class User {
 
+	// ID
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
 	private long id;
+	
+	// Attributes
 
 	@Column(name = "FIRST_NAME")
 	private String name;
@@ -40,18 +45,19 @@ public class User {
 	@Column(name = "EMAIL")
 	private String email;
 	
+	// Foreign Keys Collection
+	
 	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PROJECTS")
-	private List<Project> projects;
-	
+	private Set<Project> projects;
 	
 	@OneToMany(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "RESOURCE")
-	private List<Resource> resourceIn;
+	private Set<Resource> resourceIn;
 
 	public User() {
 		super();
-		projects = new ArrayList<Project>();
+		projects = new HashSet<>();
 	}
 	
 	
