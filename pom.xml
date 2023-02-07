@@ -65,20 +65,11 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-				<configuration>
-					<forkMode>once</forkMode>
-					<argLine>
-                 -javaagent:"$/Users/timur/git/JARVIS-FPM/org/springframework/spring-instrument/${spring.framework.version}/spring-instrument-${spring.framework.version}.jar"
-        </argLine>
-					<useSystemClassloader>true</useSystemClassloader>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+  </plugins>
+</build>
 </project>

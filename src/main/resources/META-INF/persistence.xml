@@ -4,13 +4,12 @@
 	version="2.0">
 	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		
 		<class>edu.fra.uas.task.model.Task</class>
 		<class>edu.fra.uas.resource.model.Resource</class>
 		<class>edu.fra.uas.user.model.User</class>
 		<class>edu.fra.uas.project.model.Project</class>
 		<class>edu.fra.uas.timetracker.model.Timetracker</class>
-		
+		<class>edu.fra.uas.settings.model.Settings</class>
 		<properties>
 			<property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb" />
 			<property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
@@ -18,6 +17,8 @@
 			<property name="jakarta.persistence.jdbc.password" value="password" />
 			<property name="jakarta.persistence.schema-generation.database.action"
 				value="none" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 </persistence>
