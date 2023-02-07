@@ -1,7 +1,6 @@
 package edu.fra.uas.project.model;
 
-import java.util.List;
-import java.util.ArrayList;
+
 import java.util.Set;
 import java.util.HashSet;
 
@@ -13,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -124,29 +122,5 @@ public class Project {
 	public void setProjectManager( Set<Resource> projectManager) {
 		this.projectManager = projectManager;
 	}
-
-//	public List<Long> getTaskLinePosition() {
-//		return lineAsIndexToTaskIDs;
-//	}
-//
-//	public void setTaskLinePosition(List<Long> taskLinePosition) {
-//		this.lineAsIndexToTaskIDs = taskLinePosition;
-//	}
-//
-//	public List<Resource> getResources() {
-//		return resources;
-//	}
-//
-//	public void setResources(List<Resource> resources) {
-//		this.resources = resources;
-//	}
-//
-//	public List<String> getTeams() {
-//		return teams;
-//	}
-//
-//	public void setTeams(List<String> teams) {
-//		this.teams = teams;
-//	}
 
 }

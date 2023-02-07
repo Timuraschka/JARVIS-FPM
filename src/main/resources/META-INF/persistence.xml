@@ -1,0 +1,23 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		
+		<class>edu.fra.uas.task.model.Task</class>
+		<class>edu.fra.uas.resource.model.Resource</class>
+		<class>edu.fra.uas.user.model.User</class>
+		<class>edu.fra.uas.project.model.Project</class>
+		<class>edu.fra.uas.timetracker.model.Timetracker</class>
+		
+		<properties>
+			<property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb" />
+			<property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="jakarta.persistence.jdbc.user" value="root" />
+			<property name="jakarta.persistence.jdbc.password" value="password" />
+			<property name="jakarta.persistence.schema-generation.database.action"
+				value="none" />
+		</properties>
+	</persistence-unit>
+</persistence>

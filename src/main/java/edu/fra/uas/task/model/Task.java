@@ -1,8 +1,6 @@
 package edu.fra.uas.task.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -17,10 +15,10 @@ import jakarta.persistence.Cacheable;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.SharedCacheMode;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +31,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
+
+import java.io.Serializable;
 
 /**
  * 
@@ -58,7 +59,7 @@ public class Task {
 	private static final Logger log = LoggerFactory.getLogger(Task.class);
 
 	// ID
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TASK_ID")
@@ -84,6 +85,7 @@ public class Task {
 	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
 	private Set<Resource> resources;
 
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "prerequisite_tasks")
 	private Set<Task> dependencies;
 
@@ -93,6 +95,7 @@ public class Task {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parent", cascade = CascadeType.MERGE)
 	private Set<Task> subtasks;
+	
 	// Attributes
 
 	@Column(name = "DEADLINE")
@@ -136,14 +139,7 @@ public class Task {
 	private boolean automatic_shift;
 
 	public Task() {
-		super();
-		this.resources = new HashSet<>();
-		this.dependencies = new HashSet<>();
-		this.prerequisite_tasks = new HashSet<>();
-		this.subtasks = new HashSet<>();
-
-		this.automatic_shift = project.getSettings().isAutomatic_shift();
-
+		
 	}
 
 	/**
