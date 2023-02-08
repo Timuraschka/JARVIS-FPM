@@ -16,9 +16,10 @@
 			<property name="jakarta.persistence.jdbc.user" value="root" />
 			<property name="jakarta.persistence.jdbc.password" value="password" />
 			<property name="jakarta.persistence.schema-generation.database.action"
-				value="none" />
+				value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="load-time-weaver" value="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
 		</properties>
 	</persistence-unit>
 </persistence>

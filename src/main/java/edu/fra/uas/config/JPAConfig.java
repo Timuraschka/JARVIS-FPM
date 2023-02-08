@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableLoadTimeWeaving;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -22,6 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
+@EnableLoadTimeWeaving
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = { "edu.fra.uas.user.repository", "edu.fra.uas.resource.repository", "edu.fra.uas.project.repository", "edu.fra.uas.Task.repository", "edu.fra.uas.Timetracker.repository" })
 public class JPAConfig {
@@ -56,5 +58,7 @@ public class JPAConfig {
     properties.setProperty("hibernate.dialect", applicationContext.getEnvironment().getProperty("hibernate.dialect"));
     return properties;
   }
+  
+  
 
 }
