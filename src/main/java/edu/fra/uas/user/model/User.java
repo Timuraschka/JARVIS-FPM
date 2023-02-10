@@ -52,6 +52,8 @@ public class User {
 	@JoinColumn(name = "PROJECTS")
 	private Set<Project> projects;
 	
+	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "RESOURCE")
 	private Set<Resource> resourceIn;
@@ -59,6 +61,7 @@ public class User {
 	public User() {
 		super();
 		projects = new HashSet<>();
+		resourceIn = new HashSet<>();
 	}
 	
 	
@@ -113,5 +116,23 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Set<Project> getProjects() {
+		return projects;
+	}
+
+
+	public void setProjects(Set<Project> projects) {
+		this.projects = projects;
+	}
+
+
+	public Set<Resource> getResourceIn() {
+		return resourceIn;
+	}
+
+
+	public void setResourceIn(Set<Resource> resourceIn) {
+		this.resourceIn = resourceIn;
 	}
 }

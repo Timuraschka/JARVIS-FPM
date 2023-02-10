@@ -1,5 +1,9 @@
 package edu.fra.uas.resource.repository;
 
-public interface ResourceRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import edu.fra.uas.resource.model.Resource;
+
+public interface ResourceRepository extends JpaRepository<Resource, Long> {
 
 }
