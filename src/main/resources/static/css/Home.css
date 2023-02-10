@@ -1,12 +1,12 @@
 header {
-  z-index: 100;
   position: fixed;
   top: 0;
-  left: 100;
   width: 100%;
-  height: 70px;
+  height: 10px;
   display: flex;
   justify-content: left;
+  font-size: 10pt;
+  color: white;
 }
 
 /* quick & dirty reset css */
@@ -23,54 +23,33 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-
 }
 
-/* primary styles */
 .site-nav {
-  height: 40px;
+  height: 50px;
   position: fixed;
   top: 0%;
   width: 100%;
   background-color: #393838;
   opacity: 1;
-  
-
-
 }
-
 .site-nav__inner {
-  max-width: 1170px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
   justify-content: right;
 }
-
 .menu-primary {
   display: flex;
   list-style: none;
 }
-
 .menu-primary__item {
   color: #94a1af;
-  font-size: 1rem;
-  text-decoration: none;
   display: block;
   padding: 1.5rem 1.8rem;
-  transition: ease-in-out 350ms;
+  transition: ease-in-out 150ms;
 }
-
 .menu-primary__item:hover {
   color: white;
 }
-
-.logo {
-  color: #ebf3fa;
-  font-size: 1.45rem;
-}
-
 .icon-container {
   display: flex;
   flex-direction: row;
@@ -107,7 +86,7 @@ body {
   font-weight: bold;
   margin-top: 8px;
 }
-
+/*
 .new-project-form {
   display: space-between;
   flex-direction: row;
