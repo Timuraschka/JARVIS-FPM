@@ -4,15 +4,21 @@
   <head>
     <meta charset="UTF-8">
     <title>JARVIS</title>
-     <link rel="stylesheet" href="Home.css">   
-
-  </head>
-
-  <body>
     <header>
       <h1>Jarvis-FPM</h1>
     </header>
-    <div class="icon-container">
+    
+     <nav class="site-nav" role="navigation">
+      <div class="site-nav__inner">
+
+        <ul class="menu-primary">
+          <li><a class="menu-primary__item" href="/">Home</a></li>
+          <li><a class="menu-primary__item" href="#">About</a></li>
+          <li><a class="menu-primary__item" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+      <div class="icon-container">
 
       <div class="icon" onclick="window.location='search.html'">
         <i class="fas fa-search"></i>
@@ -25,14 +31,13 @@
       <div class="icon" onclick="window.location='explore.html'">
         <i class="fas fa-eye"></i>
         <div class="icon-title">Explore Projects</div>
-         
+
       </div>
-       <form class="new-project-form">
+   <!--
+      <form class="new-project-form">
         <input type="text" class="new-project-input" placeholder="Name of new the Project">
         <button class="new-project-button">add Project</button>
-        
+
       </form>
     </div>
-  </body>
-
-</html>
+    //-->

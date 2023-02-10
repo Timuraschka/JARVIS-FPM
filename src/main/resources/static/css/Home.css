@@ -6,18 +6,70 @@ header {
   width: 100%;
   height: 70px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
+/* quick & dirty reset css */
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+/* default styles */
 body {
   font-family: Arial, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  
+
 }
 
+/* primary styles */
+.site-nav {
+  height: 40px;
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  background-color: #393838;
+  opacity: 1;
+  
+
+
+}
+
+.site-nav__inner {
+  max-width: 1170px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: right;
+}
+
+.menu-primary {
+  display: flex;
+  list-style: none;
+}
+
+.menu-primary__item {
+  color: #94a1af;
+  font-size: 1rem;
+  text-decoration: none;
+  display: block;
+  padding: 1.5rem 1.8rem;
+  transition: ease-in-out 350ms;
+}
+
+.menu-primary__item:hover {
+  color: white;
+}
+
+.logo {
+  color: #ebf3fa;
+  font-size: 1.45rem;
+}
 
 .icon-container {
   display: flex;
@@ -64,12 +116,13 @@ body {
 }
 
 .new-project-input {
-  width: 300%;
+  width: 100%;
   padding: 8px;
   font-size: 16px;
   margin-bottom: 16px;
   border: 1px solid gray;
   border-radius: 4px;
+
 }
 
 .new-project-button {
