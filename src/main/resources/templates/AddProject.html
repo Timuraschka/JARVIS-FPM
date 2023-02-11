@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Project Page</title>
+    <style>
+    
+    </style>
+  </head>
+  <body>
+    <!-- Button zum Öffnen des Popup-Fensters -->
+    <button id="add-project-btn">+</button>
+    <!-- Tabelle aller gespeicherten Projekte -->
+    <table id="project-table">
+      <thead>
+        <tr>
+          <th>Name des Projektleiters</th>
+          <th>Aufgabe</th>
+          <th>Status</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="#">Max Mustermann</a></td>
+          <td>Entwicklung der Website</td>
+          <td>In Arbeit</td>
+          <td>2023-02-28</td>
+        </tr>
+        <tr>
+          <td><a href="#">Sabine Müller</a></td>
+          <td>Marketingkampagne</td>
+          <td>Abgeschlossen</td>
+          <td>2023-03-15</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Popup-Fenster zum Hinzufügen von Projekten -->
+    <div class="overlay" id="add-project-overlay">
+      <div class="popup">
+        <h2>Projekt hinzufügen</h2>
+        <form id="add-project-form">
+          <label for="project-leader">Name des Projektleiters:</label>
+          <input type="text" id="project-leader" name="project-leader" required><br><br>
+          <label for="task">Aufgabe:</label>
+          <input type="text" id="task" name="task" required><br><br>
+          <label for="status">Status:</label>
+          <input type="text" id="status" name="status" required><br><br>
+          <label for="deadline">Deadline:</label>
+          <input type="date" id="deadline" name="deadline" required><br><br>
+          <input type="submit" value="Speichern">
+        </form>
+        <span class="close-btn">&times;</span>
+      </div>
+    </div>
+ 
+   
+  </body>
+</html>
+
