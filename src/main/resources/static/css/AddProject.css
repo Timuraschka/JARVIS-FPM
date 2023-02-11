@@ -1,42 +1,159 @@
-/* Stile für das Popup-Fenster */
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-      }
-      .popup {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
-        background: white;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        text-align: center;
-      }
-      .close-btn {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        cursor: pointer;
-      }
-      /* Stile für die Projekttabelle */
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-      }
-      th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-      }
-      th {
-        background-color: #4CAF50;
-        color: white;
-      }
+/* CSS styles for header section */
+header {
+position: fixed;
+top: 0;
+width: 100%;
+height: 10px;
+display: flex;
+justify-content: left;
+font-size: 11pt;
+color: white;
+font-family: Calibri;
+}
+
+/* CSS styles to reset all HTML elements */
+/* quick & dirty reset css */
+*
+{
+padding: 0;
+margin: 0;
+outline: none;
+}
+/* CSS styles for site navigation */
+.site-nav {
+height: 50px;
+position: fixed;
+top: 0%;
+left: 0%;
+width: 100%;
+background-color: #82b74b;
+opacity: 1;
+}
+
+.site-nav__inner {
+display: flex;
+justify-content: right;
+}
+
+/* CSS styles for primary menu */
+.menu-primary {
+display: flex;
+list-style: none;
+}
+
+.menu-primary__item {
+color: White;
+display: block;
+padding: 1.5rem 1.8rem;
+transition: ease-in-out 150ms;
+text-decoration: none;
+}
+
+.menu-primary__item:hover {
+color: #94a1af;
+}
+
+/* CSS styles for "Add Project" button */
+#add-project-btn {
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin-top: 65px;
+cursor: pointer;
+}
+
+#add-project-btn:hover {
+background-color: #3e8e41;
+}
+
+#add-project-btn:active {
+background-color: #4CAF50;
+}
+
+#add-project-btn::before {
+content: "Add new Project";
+margin-right: 5px;
+}
+
+/* CSS styles for the overlay and popup window */
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+display: none;
+}
+
+.popup {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: white;
+padding: 30px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+text-align: left;
+border-radius:5px;
+}
+
+.close-btn {
+position: absolute;
+top: 5px;
+right: 10px;
+cursor: pointer;
+}
+
+/* CSS styles for the project table */
+table {
+border-collapse: collapse;
+width: 100%;
+margin-top: 20px;
+}
+
+th,
+td {
+padding: 8px;
+text-align: left;
+border-bottom: 1px solid #ddd;
+}
+
+th {
+background-color: #4CAF50;
+color: white;
+}
+
+.form-group {
+margin-bottom: 10px;
+}
+
+label {
+display: block;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+input[type="text"], input[type="date"] {
+width: 100%;
+padding: 5px;
+border-radius: 3px;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+input[type="submit"] {
+display: block;
+margin-top: 10px;
+padding: 5px;
+border-radius:3px;
+border: none;
+background-color: #4CAF50;
+color: white;
+cursor: pointer;
+}

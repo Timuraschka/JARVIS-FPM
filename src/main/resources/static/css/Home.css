@@ -10,7 +10,13 @@ header {
   font-family: Calibri;
   
 }
-
+h2{
+   position: fixed;
+   padding: 10px 190px;
+   text-align: center;
+    font-size: 11pt;
+    font-family: Calibri;
+   }
 
 /* quick & dirty reset css */
 * {
