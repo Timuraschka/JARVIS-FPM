@@ -21,7 +21,6 @@ import edu.fra.uas.user.repository.UserRepository;
 
 
 @Configuration
-@EnableLoadTimeWeaving
 public class JPAConfig {
 
 

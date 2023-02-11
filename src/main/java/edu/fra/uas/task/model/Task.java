@@ -58,6 +58,8 @@ public class Task {
 
 	private static final Logger log = LoggerFactory.getLogger(Task.class);
 
+	
+	
 	// ID
 	
 	@Id
@@ -82,11 +84,13 @@ public class Task {
 	// Collection of foreign Keys
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
+	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), 
+	inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
 	private Set<Resource> resources;
 
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "prerequisite_tasks")
+	@Column
 	private Set<Task> dependencies;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
