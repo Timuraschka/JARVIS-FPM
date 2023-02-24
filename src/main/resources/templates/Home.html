@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="UTF-8">
-    <title>JARVIS</title>
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Home.css">
-  </head>
-  <style>
+<head>
+  <meta charset="UTF-8">
+  <title>JARVIS</title>
+  <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Home.css">
+</head>
+<style>
 
-  </style>
+</style>
 
-  <nav class="site-nav" role="navigation">
-    <div class="site-nav__inner">
-      <header class="header">
-        <h1>JARVIS-FPM</h1>
-      </header>
+<nav class="site-nav" role="navigation">
+  <div class="site-nav__inner">
+    <header class="header">
+      <h1>JARVIS-FPM</h1>
+    </header>
 
-      <ul class="menu-primary">
-        <li><a class="menu-primary__item" href="/">Login/Register</a></li>
-      </ul>
+    <ul class="menu-primary">
+      <li><a class="menu-primary__item" href="/">Login/Register</a></li>
+    </ul>
+  </div>
+  <h2>Let's get started on some work...</h2>
+</nav>
+
+
+<body>
+
+  <div class="icon-container">
+    <div class="icon" onclick="window.location='search.html'">
+      <img src="https://img.icons8.com/plasticine/256/search-more.png">
+      <div class="icon-title">Search for Project</div>
     </div>
-    <h2>Let's get started on some work...</h2>
-  </nav>
+    <div class="icon" onclick="window.location='add.html'">
+      <img src="https://img.icons8.com/fluency/256/add.png">
 
-//teste
-  <body>
-
-    <div class="icon-container">
-      <div class="icon" onclick="window.location='search.html'">
-        <img src="https://img.icons8.com/plasticine/256/search-more.png">
-        <div class="icon-title">Search for Project</div>
-      </div>
-      <div class="icon" onclick="window.location='add.html'">
-        <img src="https://img.icons8.com/fluency/256/add.png">
-        <div class="icon-title">Add New Project</div>
-      </div>
-      <div class="icon" onclick="window.location='delete.html'">
-        <img src="https://img.icons8.com/arcade/256/trash.png">
-        <div class="icon-title">Delete Projects</div>
-      </div>
+      <a href="/src/main/resources/templates/AddProject.html">
+        <div class="icon-title">Add New Project
+      </a><br>
     </div>
-      <footer>
+
+  </div>
+  <div class="icon" onclick="window.location='delete.html'">
+    <img src="https://img.icons8.com/arcade/256/trash.png">
+    <div class="icon-title">Delete Projects</div>
+  </div>
+  </div>
+
+</body>
+<footer>
   <p class="copyright">&copy; Copyright</p>
   <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
 </footer>
-  </body>
 
 </html>
