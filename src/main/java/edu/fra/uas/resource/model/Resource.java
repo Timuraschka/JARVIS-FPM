@@ -21,18 +21,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.fra.uas.JarvisFpmApplication;
+import edu.fra.uas.project.model.Project;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.user.model.User;
-
-
-
 
 @Entity // declares this class as an Entity for the database
 @Table(name = "Resources") // creates the table inside the database
 public class Resource {
 
 	// ID
-	
+
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "RESOURCE_ID") // creates the column inside the table
@@ -41,7 +39,7 @@ public class Resource {
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
 	// Attributes
-	
+
 	@Column(name = "NAME") // creates the column inside the table
 	private String name;
 
@@ -50,9 +48,9 @@ public class Resource {
 
 	@Column(name = "HOURLY_RATE")
 	private double hourlyRate = 0;
-	
+
 	// Foreign Keys
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "SUPERVISOR")
 	private Resource supervisor; // usually the Project Manager
@@ -60,19 +58,16 @@ public class Resource {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER")
 	private User user; // The actual resource
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "PROJECT_REFERENCE")
-	private Resource project; 
-	
+	private Project project;
 
 	// Foreign Keys Collection
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "resources", cascade = CascadeType.PERSIST)
 	private Set<Task> tasks;
 
-	
-	
 	public Resource() {
 		super();
 		this.tasks = new HashSet<>();
@@ -85,13 +80,13 @@ public class Resource {
 	}
 
 	public void removeTaskFromRessource(Task taskToRemove) {
-		
+
 		for (Task task : tasks) {
-			   if (task.getId() == taskToRemove.getId()) {
-			      tasks.remove(task);
-			      break;
-			   }
+			if (task.getId() == taskToRemove.getId()) {
+				tasks.remove(task);
+				break;
 			}
+		}
 		log.debug("Task removed from resource " + this.name);
 	}
 
