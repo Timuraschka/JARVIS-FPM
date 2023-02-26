@@ -28,7 +28,7 @@ public class JPAConfig {
 		
 		User u1 = new User();
 		u1.setEmail("123@gmail.com");
-		u1.setPassword("123");
+		u1.setPassword("Password123!");
 		
 		HashSet<Resource> hs1 = (HashSet<Resource>) u1.getResourceIn();
 		Resource r1 = new Resource(); 
