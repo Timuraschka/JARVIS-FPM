@@ -23,7 +23,7 @@ import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
 
 @Entity
-@Table(name = "Project")
+@Table(name = "Projects")
 public class Project {
 	
 	// ID

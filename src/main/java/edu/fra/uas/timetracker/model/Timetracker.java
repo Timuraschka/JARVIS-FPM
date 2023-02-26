@@ -8,13 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-
-import edu.fra.uas.project.model.Project;
-import edu.fra.uas.task.model.Task;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import edu.fra.uas.project.model.Project;
+import edu.fra.uas.task.model.Task;
+
 
 /**
  * This class is a simple time tracker. It holds a time period and the duration
@@ -24,7 +25,7 @@ import jakarta.persistence.Table;
  * 
  * There could be a library with those things already done
  * 
- * @author timur
+ * 
  *
  */
 @Entity
@@ -53,16 +54,17 @@ public class Timetracker {
 	private double duration_in_hours;
 
 	// Foreign Keys
+	
+	@OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
+	private Project projectReference;
 
 	@OneToOne(mappedBy = "timetracker", cascade = CascadeType.ALL)
 	private Task TaskReference;
 
 	@OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
-	private Project projectReference;
-
-	@OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
 	private Project project;
-
+	
+	
 	public Timetracker() {
 		super();
 	}
@@ -93,7 +95,7 @@ public class Timetracker {
 	public void setDuration_in_days(double duration_in_days) {
 		this.duration_in_days = duration_in_days;
 
-		this.duration_in_hours = duration_in_days * project.getSettings().getHours_a_day();
+		this.duration_in_hours = duration_in_days * projectReference.getSettings().getHours_a_day();
 		shiftEndDate();
 	}
 
@@ -111,7 +113,7 @@ public class Timetracker {
 
 		this.duration_in_hours = duration_in_hours;
 
-		this.duration_in_days = duration_in_hours / project.getSettings().getHours_a_day();
+		this.duration_in_days = duration_in_hours / projectReference.getSettings().getHours_a_day();
 		shiftEndDate();
 	}
 
@@ -146,7 +148,7 @@ public class Timetracker {
 		this.endDate = endDate;
 
 		duration_in_days = startDate.until(endDate, ChronoUnit.DAYS);
-		duration_in_hours = duration_in_days * project.getSettings().getHours_a_day();
+		duration_in_hours = duration_in_days * projectReference.getSettings().getHours_a_day();
 	}
 
 	public LocalDate getStartDate() {

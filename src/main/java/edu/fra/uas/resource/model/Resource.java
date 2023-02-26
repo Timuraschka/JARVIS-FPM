@@ -13,6 +13,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +24,11 @@ import edu.fra.uas.JarvisFpmApplication;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.user.model.User;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+
 
 
 @Entity // declares this class as an Entity for the database
-@Table(name = "Resource") // creates the table inside the database
+@Table(name = "Resources") // creates the table inside the database
 public class Resource {
 
 	// ID

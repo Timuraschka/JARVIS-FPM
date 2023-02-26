@@ -7,7 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -16,9 +18,7 @@ import java.util.HashSet;
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
+
 
 
 @Entity // declares this class as an Entity for the database

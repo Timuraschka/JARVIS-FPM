@@ -89,8 +89,8 @@ public class Task {
 	private Set<Resource> resources;
 
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "prerequisite_tasks")
-	@Column
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "DEPENDENT_ON")
 	private Set<Task> dependencies;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
