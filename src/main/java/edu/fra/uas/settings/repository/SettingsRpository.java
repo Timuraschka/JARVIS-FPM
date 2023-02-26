@@ -1,5 +1,9 @@
 package edu.fra.uas.settings.repository;
 
-public interface SettingsRpository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import edu.fra.uas.settings.model.Settings;
+
+public interface SettingsRpository extends JpaRepository<Settings, Long>{
 
 }
