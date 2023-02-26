@@ -90,14 +90,15 @@ public class Task {
 
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "DEPENDENT_ON")
-	private Set<Task> dependencies;
+	@JoinColumn(name = "FOLLOWING_TASKS")
+	private Set<Task> following_tasks;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PREQUISITORS_OF")
+	@JoinColumn(name = "PREREQUISITORS_OF")
 	private Set<Task> prerequisite_tasks;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parent", cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name= "SUB_TASKS")
 	private Set<Task> subtasks;
 	
 	// Attributes
@@ -153,9 +154,9 @@ public class Task {
 	public boolean isReady() {
 		boolean allDone = true;
 
-		if (!dependencies.isEmpty()) {
+		if (!following_tasks.isEmpty()) {
 
-			for (Task task : dependencies) {
+			for (Task task : following_tasks) {
 
 				if (!task.done) {
 					allDone = false;
@@ -309,11 +310,11 @@ public class Task {
 	}
 
 	public Set<Task> getDependencies() {
-		return dependencies;
+		return following_tasks;
 	}
 
 	public void setDependencies(Set<Task> predecudor) {
-		this.dependencies = predecudor;
+		this.following_tasks = predecudor;
 	}
 
 	public String getName() {
