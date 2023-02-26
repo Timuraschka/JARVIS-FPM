@@ -30,16 +30,13 @@ public class JPAConfig {
 		u1.setEmail("123@gmail.com");
 		u1.setPassword("Password123!");
 		
-		HashSet<Resource> hs1 = (HashSet<Resource>) u1.getResourceIn();
-		Resource r1 = new Resource(); 
-		r1.setProjectMember(u1);
-		hs1.add(r1);
 		
 		
+
 		
 		return args -> {
 			userR.save(u1);
-			resourceR.save(r1);
+			
 		};
 		
 	}
