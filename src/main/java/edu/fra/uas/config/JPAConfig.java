@@ -43,7 +43,5 @@ public class JPAConfig {
 		};
 		
 	}
-  
-  
 
 }

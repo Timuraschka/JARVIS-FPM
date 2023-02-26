@@ -34,7 +34,7 @@ public class User {
 	
 	// Attributes
 
-	@Column(name = "FIRST_NAME")
+	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "USERNAME")

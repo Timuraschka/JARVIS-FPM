@@ -1,52 +1,98 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-    <title>Kanban Board</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div id="kanban-board">
-        <h1>Kanban Board</h1>
-        <div class="board-column" id="todo">
-            <h2>To-Do</h2>
-            <div class="board-card" id="card1">
-                <h3>Card Title</h3>
-                <p>Card Description</p>
-                <button class="move-right">Move Right</button>
-            </div>
-            <div class="board-card" id="card2">
-                <h3>Card Title</h3>
-                <p>Card Description</p>
-                <button class="move-right">Move Right</button>
-            </div>
-        </div>
-        <div class="board-column" id="in-progress">
-            <h2>In Progress</h2>
-            <div class="board-card" id="card3">
-                <h3>Card Title</h3>
-                <p>Card Description</p>
-                <button class="move-right">Move Right</button>
-                <button class="move-left">Move Left</button>
-            </div>
-        </div>
-         <div class="board-column" id="review">
-            <h2>Review</h2>
-            <div class="board-card" id="card3">
-                <h3>Card Title</h3>
-                <p>Card Description</p>
-                <button class="move-right">Move Right</button>
-                <button class="move-left">Move Left</button>
-            </div>
-        </div>
-        <div class="board-column" id="done">
-            <h2>Done</h2>
-            <div class="board-card" id="card4">
-                <h3>Card Title</h3>
-                <p>Card Description</p>
-                <button class="move-left">Move Left</button>
-            </div>
-        </div>
+
+  <head>
+    <style>
+     
+    </style>
+    
+      
+   
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Kanban.css">
+    <nav class="site-nav" role="navigation">
+      <div class="site-nav__inner">
+        <header class="header">
+          <h1>Jarvis-FPM</h1>
+        </header>
+        <ul class="menu-primary">
+          <li><a class="menu-primary__item" href="/">Welcome, </a></li>
+          <!-- Link to the user's profile -->
+        </ul>
+      </div>
+    </nav>
+
+  </head>
+
+  <body>
+  <head>
+  
+  <h2>Kanban-Board | Overview</h2>
+  </head>
+<div class="form-group1">
+  <label for="project">Please choose your Project:</label>
+  <select id="project">
+    <!-- Hier sollten Sie die Optionen für die Projekte aus Ihrer Datenbank einfügen -->
+    <option value="project1">Project Webdesign</option>
+    <option value="project2">Project Test</option>
+    <option value="project3">Project lets try</option>
+  </select>
+</div>
+    <!-- Button to open the popup window for creating a ticket -->
+    <button id="create-ticket-btn">Create Ticket</button>
+    <!-- Popup window for creating a ticket -->
+    <div class="overlay" id="create-ticket-overlay">
+
+      <div class="popup">
+        <h3>Create Ticket</h3>
+        <!-- Form for inputting ticket details -->
+        <form id="create-ticket-form">
+          <div class="form-group">
+            <label for="assignee">Assignee:</label>
+            <input type="text" id="assignee" name="assignee" required>
+          </div>
+
+          <div class="form-group">
+            <label for="task">Task:</label>
+            <input type="text" id="task" name="task" required>
+          </div>
+
+          <div class="priority">
+            <label for="priority">Priority</label>
+            <select id="priority">
+              <option value="high">High</option>
+              <option value="medium">Moderate</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <input type="submit" value="Add Ticket">
+          <a class="close-btn">&times;</a>
+        </form>
+      </div>
     </div>
-</body>
+    <div class="board">
+      <div class="column" id="backlog">
+        <h3>Backlog</h3>
+
+      </div>
+      <div class="column" id="inprogress">
+        <h3>In Progress</h3>
+
+      </div>
+      <div class="column" id="inreview">
+        <h3>In Review</h3>
+
+      </div>
+      <div class="column" id="done">
+        <h3>Done</h3>
+
+      </div>
+    </div>
+    <footer>
+  <p class="copyright">&copy; Copyright</p>
+  <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
+</footer>
+<script type="text/javascript" src="/src/main/resources/static/js/Kanban.js"></script>
+  </body>
+
 </html>
