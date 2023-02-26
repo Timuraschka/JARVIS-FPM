@@ -1,10 +1,115 @@
-<!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>JARVIS-FPM</title>
-</head>
-<body>
+  <head>
+    <title>Aufgabenliste</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .description {
+        width: 30%;
+      }
+      .progress {
+        width: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="addTask()">Task hinzufügen</button>
+    <button onclick="enableEditing()">Tabelle bearbeiten</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Time</th>
+          <th>Resource</th>
+          <th class="description">Beschreibung</th>
+          <th class="progress">Fortschritt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Phase 1</td>
+          <td>2 Stunden</td>
+          <td>Ressource A</td>
+          <td class="description">Task.1 erledigt von ..</td>
+          <td class="progress">50%</td>
+        </tr>
+        <tr>
+          <td>Phase 2</td>
+          <td>3 Stunden</td>
+          <td>Ressource B</td>
+          <td class="description">Task.2 erledigt von ..</td>
+          <td class="progress">25%</td>
+        </tr>
+        <tr>
+          <td>Phase 3</td>
+          <td>1 Stunde</td>
+          <td>Ressource C</td>
+          <td class="description">Task.3 erledigt von ..</td>
+          <td class="progress">75%</td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="saveTable()">Tabelle speichern</button>
+    <script>
+      function addTask() {
+        // Neue Zeile einfügen
+        var table = document.getElementsByTagName('table')[0];
+        var newRow = table.insertRow(-1);
 
-</body>
+        // Neue Zellen einfügen
+        var phaseCell = newRow.insertCell(0);
+        var timeCell = newRow.insertCell(1);
+        var resourceCell = newRow.insertCell(2);
+        var descriptionCell = newRow.insertCell(3);
+        var progressCell = newRow.insertCell(4);
+
+        // Platzhalter-Texte einfügen
+        phaseCell.innerHTML = 'Neue Phase';
+        timeCell.innerHTML = '0 Stunden';
+        resourceCell.innerHTML = 'Neue Ressource';
+        descriptionCell.innerHTML = 'Beschreibung';
+        progressCell.innerHTML = '0%';
+      }
+      function enableEditing() {
+      var password = prompt('Bitte geben Sie das Passwort ein:');
+      if (password === '123') {
+        // Tabelle bearbeitbar machen
+        var table = document.getElementsByTagName('table')[0];
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+          var cells = rows[i].getElementsByTagName('td');
+          for (var j = 0; j < cells.length; j++) {
+            cells[j].contentEditable = true;
+          }
+        }
+        // Originaltabelle speichern
+        originalTable = table.innerHTML;
+      } else {
+        alert('Falsches Passwort!');
+      }
+    }
+
+     function saveTable() {
+      var table = document.getElementsByTagName('table')[0];
+      // Überprüfen, ob die Tabelle bearbeitet wurde
+      if (originalTable !== table.innerHTML) {
+        // Tabelle speichern
+        alert('Tabelle gespeichert!');
+      } else {
+        // Keine Änderungen vorgenommen
+        alert('Keine Änderungen vorgenommen.');
+      }
+    }
+  </script>
+  </body>
 </html>

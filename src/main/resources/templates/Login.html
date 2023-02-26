@@ -1,22 +1,89 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div id="login-form">
-      <h1>Sign in to your account</h1>
-      <form action="/user" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Sign in">
-      </form>
+
+<head>
+    <title>Login Form</title>
+    <style>
+        .p2 {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .login-form {
+            width: 400px;
+            margin: auto;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        form {
+            margin-top: 50px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: lightblue;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: blue;
+        }
+
+        .register-link {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-form">
+        <form action="">
+            <h2>Login - JARVIS</h2>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit">Login</button>
+            <p>Noch keinen Account?</p>
+            <a href="#" class="register-link">hier Registrieren</a></p>
+        </form>
     </div>
-  </body>
+
+</body>
+
 </html>
