@@ -89,7 +89,7 @@ public class User {
 	}
 
 	public boolean validatePassword(String password) { // requirements have been set for creating a new password
-		String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+		String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
 		if (password.matches(pattern)) {
 			return true;
 		}
