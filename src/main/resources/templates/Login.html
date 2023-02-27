@@ -67,7 +67,7 @@
 
 <body>
 	<div class="login-form">
-		<form th:action="@{/user}" method="post">">
+		<form th:action="@{/user}" method="post">
 			<h2>Login - JARVIS</h2>
 			<div class="form-group">
 				<label for="username">Username:</label>
@@ -108,7 +108,7 @@
 			}
 
 			if (!/[\W_]/.test(password)) {
-				alert("Das Passwort muss mindestens ein Sonderzeichen oder Unterstrich enthalten.");
+				alert("Das Passwort muss mindestens ein Sonderzeichen enthalten.");
 				return false;
 			}
 
