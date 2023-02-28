@@ -9,7 +9,7 @@ header {
   font-family: Calibri;
 }
 
-h2{
+h2 {
   color: black;
   font-size: 13pt;
   position: fixed;
@@ -17,9 +17,11 @@ h2{
   top: 30px;
 }
 
-h3{
+h3 {
   font-family: Calibri;
+  font-size: 20pt;
 }
+
 /* quick & dirty reset css */
 * {
   padding: 0;
@@ -63,23 +65,22 @@ h3{
 
 .board {
   display: flex;
-  margin-top: 10%;
-  min-height: 400px;
+  margin-top: 5%;
+  min-height: 800px;
   width: 60%;
-  justify-content: center;
   text-align: center;
-
 }
 
 .column {
-  flex-basis: 200px;
+  flex-basis: 200%;
   border: 1px solid black;
   margin: 8px;
   padding: 8px;
+  width: max-content;
   background-color: #f2f2f2;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  
+
 }
 
 
@@ -88,31 +89,27 @@ h3{
 
 
 footer {
-    background-color: #82b74b;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 15px;
-    padding: 10px;
-    position: fixed;
-    opacity: 0.7;
-    
-  }
+  background-color: #82b74b;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 15px;
+  padding: 10px;
+  position: fixed;
+  opacity: 0.7;
 
-  .copyright {
-    color: black;
-    font-size: 8pt;
-    
-  }
+}
 
-  .address {
-    color: black;
-    font-size: 8pt;
-   
-  }
+.copyright {
+  color: black;
+  font-size: 8pt;
 
+}
 
+.address {
+  color: black;
+  font-size: 8pt;
 
-
+}
