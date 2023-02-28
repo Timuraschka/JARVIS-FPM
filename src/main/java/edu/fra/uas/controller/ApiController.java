@@ -45,8 +45,11 @@ public class ApiController {
 		
 	}
 	
-	@RequestMapping( value = "",
-			method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<CollectionModel>
+//	/**
+//	 * 
+//	 */
+//	@RequestMapping( value = "",
+//			method = RequestMethod.GET)
+//	@ResponseBody
+//	public Respons
 }

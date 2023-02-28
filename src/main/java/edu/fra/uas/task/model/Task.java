@@ -332,6 +332,52 @@ public class Task {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Task getParent () {
+		return this.parent;
+	}
+	
+	public void setParent (Task parent) {
+		this.parent = parent;
+	}
+
+	public Set<Task> getFollowing_tasks() {
+		return following_tasks;
+	}
+
+	public void setFollowing_tasks(Set<Task> following_tasks) {
+		this.following_tasks = following_tasks;
+	}
+
+	public Set<Task> getPrerequisite_tasks() {
+		return prerequisite_tasks;
+	}
+
+	public void setPrerequisite_tasks(Set<Task> prerequisite_tasks) {
+		this.prerequisite_tasks = prerequisite_tasks;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Timetracker getTimetracker() {
+		return timetracker;
+	}
+
+	public void setTimetracker(Timetracker timetracker) {
+		this.timetracker = timetracker;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+	}
+	
+	
 
 //	public List<String> getKeywords() {
 //		return keywords;

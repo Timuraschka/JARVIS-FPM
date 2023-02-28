@@ -19,6 +19,7 @@ import jakarta.persistence.Table;
 
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.settings.model.Settings;
+import edu.fra.uas.task.model.RootTask;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
 
@@ -71,6 +72,11 @@ public class Project {
 	@JoinColumn(name="TIME")
 	private Timetracker time;
 
+	@OneToOne
+	@JoinColumn(name = "ROOT_TASK")
+	RootTask rootTask;
+	
+	
 	
 	
 	public Project() {
@@ -82,6 +88,20 @@ public class Project {
 		
 		
 	}
+	
+	
+
+	public Task getRootTask() {
+		return rootTask;
+	}
+
+
+
+	public void setRootTask(RootTask rootTask) {
+		this.rootTask = rootTask;
+	}
+
+
 
 	public String getDescription() {
 		return description;
@@ -123,4 +143,34 @@ public class Project {
 		this.projectManager = projectManager;
 	}
 
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public Resource getProjectOwner() {
+		return projectOwner;
+	}
+
+	public void setProjectOwner(Resource projectOwner) {
+		this.projectOwner = projectOwner;
+	}
+
+	public Timetracker getTime() {
+		return time;
+	}
+
+	public void setTime(Timetracker time) {
+		this.time = time;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	
+	
 }
