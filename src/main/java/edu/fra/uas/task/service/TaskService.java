@@ -7,16 +7,22 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.hibernate.mapping.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import edu.fra.uas.controller.ApiController;
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.repository.ProjectRepository;
-import edu.fra.uas.task.model.RootTask;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.repository.TaskRepository;
 
 public class TaskService implements ITaskService{
 
+	
+	private static final Logger log = LoggerFactory.getLogger(TaskService.class);
+
+	
 	@Autowired
 	private TaskRepository taskR;
 	@Autowired
@@ -34,12 +40,25 @@ public class TaskService implements ITaskService{
 	public TreeMap<Integer, Task> getTaskHierarchy(Project p) {
 		
 		// get the first task
-		Task root = p.getRootTask();
+		Task root; 
+		root = getRootTaskOfProject(p);
 		
 		TreeMap<Integer, Task> tree = new TreeMap<>();
 		tree = addTaskToMap(root, tree, 0);
 		
 		return tree;
+	}
+
+	private Task getRootTaskOfProject(Project p) {
+		List <Task> tasks = getTasksInProject(p);
+		for (Task t : tasks) {
+			if (t.getParent() == null) {
+				// ist die "RootTask"
+				return t;
+			}
+		}
+		log.debug("TASK SERVICE: Root Task konnte nicht gefunden werden alle tasks haben einen parent!!");
+		return null;
 	}
 	
 	private TreeMap<Integer, Task> addTaskToMap(Task task, TreeMap<Integer, Task> tasksMap, int lineNumber) {
@@ -81,7 +100,7 @@ public class TaskService implements ITaskService{
 	public boolean addTask (Task t) {
 		
 		if (t.getParent() == null) {
-			t.setParent(t.getProject().getRootTask());
+			t.setParent(getRootTaskOfProject(t.getProject()));
 		}
 		
 		if ( ! t.getSubtasks().isEmpty()) {

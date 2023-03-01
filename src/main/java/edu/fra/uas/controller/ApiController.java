@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,33 +26,38 @@ public class ApiController {
 
 	private static final Logger log = LoggerFactory.getLogger(ApiController.class);
 	
-	private UserService userR;
-	private TaskService taskR;
-	private ProjectService projectR;
-	private ResouceService resourceR;
-	private SettingsService settingsR;
-	private TimertrackerService timeR;
+	private UserService userS;
+	private TaskService taskS;
+	private ProjectService projectS;
+	private ResouceService resourceS;
+	private SettingsService settingsS;
+	private TimertrackerService timeS;
 	
 	
 	@Autowired
-	public ApiController (UserService userR, TaskService taskR, ProjectService projectR, 
-			ResouceService resourceR, SettingsService settingsR, TimertrackerService timeR) 
+	public ApiController (UserService userS, TaskService taskS, ProjectService projectS, 
+			ResouceService resourceS, SettingsService settingsS, TimertrackerService timeS) 
 	{
 		
-		this.userR = userR;
-		this.taskR = taskR;
-		this.projectR = projectR;
-		this.resourceR = resourceR;
-		this.settingsR = settingsR;
-		this.timeR = timeR;
+		this.userS = userS;
+		this.taskS = taskS;
+		this.projectS = projectS;
+		this.resourceS = resourceS;
+		this.settingsS = settingsS;
+		this.timeS = timeS;
 		
 	}
 	
-//	/**
-//	 * 
-//	 */
-//	@RequestMapping( value = "",
-//			method = RequestMethod.GET)
-//	@ResponseBody
-//	public Respons
+	/**
+	 * Diese Methode braucht 
+	 */
+	@RequestMapping( value = "user/{token}/project",
+			method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Object> getProjects (@PathVariable("token") String token){
+		
+		
+		
+		return null;
+	}
 }

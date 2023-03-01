@@ -19,7 +19,6 @@ import jakarta.persistence.Table;
 
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.settings.model.Settings;
-import edu.fra.uas.task.model.RootTask;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
 
@@ -72,9 +71,6 @@ public class Project {
 	@JoinColumn(name="TIME")
 	private Timetracker time;
 
-	@OneToOne
-	@JoinColumn(name = "ROOT_TASK")
-	RootTask rootTask;
 	
 	
 	
@@ -88,19 +84,6 @@ public class Project {
 		
 		
 	}
-	
-	
-
-	public Task getRootTask() {
-		return rootTask;
-	}
-
-
-
-	public void setRootTask(RootTask rootTask) {
-		this.rootTask = rootTask;
-	}
-
 
 
 	public String getDescription() {
