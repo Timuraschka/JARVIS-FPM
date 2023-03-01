@@ -1,115 +1,269 @@
 <html>
-  <head>
-    <title>Aufgabenliste</title>
-    <style>
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      th, td {
-        text-align: left;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-      }
-      th {
-        background-color: #f2f2f2;
-      }
-      .description {
-        width: 30%;
-      }
-      .progress {
-        width: 20%;
-      }
-    </style>
-  </head>
-  <body>
-    <button onclick="addTask()">Task hinzufügen</button>
-    <button onclick="enableEditing()">Tabelle bearbeiten</button>
-    <table>
-      <thead>
-        <tr>
-          <th>Phase</th>
-          <th>Time</th>
-          <th>Resource</th>
-          <th class="description">Beschreibung</th>
-          <th class="progress">Fortschritt</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Phase 1</td>
-          <td>2 Stunden</td>
-          <td>Ressource A</td>
-          <td class="description">Task.1 erledigt von ..</td>
-          <td class="progress">50%</td>
-        </tr>
-        <tr>
-          <td>Phase 2</td>
-          <td>3 Stunden</td>
-          <td>Ressource B</td>
-          <td class="description">Task.2 erledigt von ..</td>
-          <td class="progress">25%</td>
-        </tr>
-        <tr>
-          <td>Phase 3</td>
-          <td>1 Stunde</td>
-          <td>Ressource C</td>
-          <td class="description">Task.3 erledigt von ..</td>
-          <td class="progress">75%</td>
-        </tr>
-      </tbody>
-    </table>
-    <button onclick="saveTable()">Tabelle speichern</button>
-    <script>
-      function addTask() {
-        // Neue Zeile einfügen
-        var table = document.getElementsByTagName('table')[0];
-        var newRow = table.insertRow(-1);
 
-        // Neue Zellen einfügen
-        var phaseCell = newRow.insertCell(0);
-        var timeCell = newRow.insertCell(1);
-        var resourceCell = newRow.insertCell(2);
-        var descriptionCell = newRow.insertCell(3);
-        var progressCell = newRow.insertCell(4);
+<head>
+	<title>Aufgabenliste</title>
+	<style>
+		@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
 
-        // Platzhalter-Texte einfügen
-        phaseCell.innerHTML = 'Neue Phase';
-        timeCell.innerHTML = '0 Stunden';
-        resourceCell.innerHTML = 'Neue Ressource';
-        descriptionCell.innerHTML = 'Beschreibung';
-        progressCell.innerHTML = '0%';
-      }
-      function enableEditing() {
-      var password = prompt('Bitte geben Sie das Passwort ein:');
-      if (password === '123') {
-        // Tabelle bearbeitbar machen
-        var table = document.getElementsByTagName('table')[0];
-        var rows = table.getElementsByTagName('tr');
-        for (var i = 0; i < rows.length; i++) {
-          var cells = rows[i].getElementsByTagName('td');
-          for (var j = 0; j < cells.length; j++) {
-            cells[j].contentEditable = true;
-          }
-        }
-        // Originaltabelle speichern
-        originalTable = table.innerHTML;
-      } else {
-        alert('Falsches Passwort!');
-      }
-    }
+		* {
+			margin: 0;
+			padding: 8px;
+			outline: none;
+			text-decoration: none;
+			list-style: none;
+			font-family: 'Mulish', sans-serif;
 
-     function saveTable() {
-      var table = document.getElementsByTagName('table')[0];
-      // Überprüfen, ob die Tabelle bearbeitet wurde
-      if (originalTable !== table.innerHTML) {
-        // Tabelle speichern
-        alert('Tabelle gespeichert!');
-      } else {
-        // Keine Änderungen vorgenommen
-        alert('Keine Änderungen vorgenommen.');
-      }
-    }
-  </script>
-  </body>
+		}
+
+		.cardTop {
+
+			width: 497px;
+			height: 284px;
+			background: #FAC24F;
+			border-radius: 20px;
+			display: flex;
+			overflow: hidden;
+			align-items: flex-end;
+
+
+
+		}
+
+		.timeline {
+
+			width: 355px;
+			height: 696px;
+			background: #ECF1F524;
+			mix-blend-mode: normal;
+			backdrop-filter: blur(15px);
+
+			overflow: hidden;
+			position: absolute;
+			top: 375px;
+			margin-left: 71px;
+			box-shadow: 0px 20px 53px -30px rgba(95, 102, 173, 0.566816);
+			border-radius: 10px;
+
+		}
+
+		h3 {
+			font-family: Open Sans;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 22px;
+			line-height: 30px;
+			color: #FFFFFF;
+			margin-left: 66px;
+			margin-top: 40px;
+
+
+
+		}
+
+		label {
+
+			font-family: Open Sans;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 22px;
+			/* identical to box height */
+			margin-left: 66px;
+			margin-top: 10px;
+
+			color: #FFFFFF;
+
+		}
+
+
+		table {
+			border-collapse: collapse;
+			width: 70%;
+		}
+
+		th,
+		td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+			border: 1px solid rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		.description {
+			width: 30%;
+		}
+
+		.progress {
+			width: 20%;
+		}
+	</style>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(function () {
+			$("#datepicker").datepicker();
+		});
+	</script>
+</head>
+
+<body>
+	<p>Wählen Sie ein Datum:</p>
+	<input type="text" id="datepicker">
+	<button onclick="addTask()">Task hinzufügen</button>
+	<button onclick="enableEditing()">Tabelle bearbeiten</button>
+	<table>
+		<thead>
+			<tr>
+				<th>Time</th>
+				<th>Resource</th>
+				<th class="description">Beschreibung</th>
+				<th class="progress">Fortschritt</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>2 Stunden</td>
+				<td>Ressource A</td>
+				<td class="description">Task.1 erledigt von ..</td>
+				<td class="progress">50%</td>
+			</tr>
+			<tr>
+				<td>3 Stunden</td>
+				<td>Ressource B</td>
+				<td class="description">Task.2 erledigt von ..</td>
+				<td class="progress">25%</td>
+			</tr>
+			<tr>
+				<td>1 Stunde</td>
+				<td>Ressource C</td>
+				<td class="description">Task.3 erledigt von ..</td>
+				<td class="progress">75%</td>
+			</tr>
+		</tbody>
+	</table>
+	<button onclick="saveTable()">Tabelle speichern</button>
+	<button onclick="deleteColumn(4)">Spalte löschen</button>
+	<div class="main" align="left">
+
+		<div class="cardTop">
+
+			<svg width="497" height="219" viewBox="0 0 497 219" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path fill-rule="evenodd" clip-rule="evenodd"
+					d="M-38.5 196C-38.5 196 34 91 133.5 91C233 91 427 159 532.5 30C638 -99 518 236 518 236L-49 246.5L-38.5 196Z"
+					fill="#FF768E" />
+			</svg>
+
+		</div>
+		<div class="timeline">
+
+			<h3>Updates</h3>
+			<label>23 in the last 7 hours</label>
+
+			<div class="box">
+
+				<div class="container">
+
+					<div class="lines">
+						<div class="dot"></div>
+						<div class="line"></div>
+						<div class="dot"></div>
+						<div class="line"></div>
+						<div class="dot"></div>
+						<div class="line"></div>
+					</div>
+
+					<div class="cards">
+						<div class="card">
+
+							<h4>16:30</h4>
+							<p>Believing Is The Absence<br> Of Doubt</p>
+						</div>
+						<div class="card mid">
+							<h4>15:22</h4>
+							<p>Start With A Baseline</p>
+						</div>
+						<div class="card">
+							<h4>14:15</h4>
+							<p>Break Through Self Doubt<br> And Fear</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="bottom">
+
+					<div class="btn">Show all updates</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script>
+		function addTask() {
+			// Neue Zeile einfügen
+			var table = document.getElementsByTagName('table')[0];
+			var newRow = table.insertRow(-1);
+
+			// Neue Zellen einfügen
+			var phaseCell = newRow.insertCell(0);
+			var timeCell = newRow.insertCell(1);
+			var resourceCell = newRow.insertCell(2);
+			var descriptionCell = newRow.insertCell(3);
+			var progressCell = newRow.insertCell(4);
+
+			// Platzhalter-Texte einfügen
+			phaseCell.innerHTML = 'Neue Phase';
+			timeCell.innerHTML = '0 Stunden';
+			resourceCell.innerHTML = 'Neue Ressource';
+			descriptionCell.innerHTML = 'Beschreibung';
+			progressCell.innerHTML = '0%';
+		}
+		function enableEditing() {
+			var password = prompt('Bitte geben Sie das Passwort ein:');
+			if (password === '123') {
+				// Tabelle bearbeitbar machen
+				var table = document.getElementsByTagName('table')[0];
+				var rows = table.getElementsByTagName('tr');
+				for (var i = 0; i < rows.length; i++) {
+					var cells = rows[i].getElementsByTagName('td');
+					for (var j = 0; j < cells.length; j++) {
+						cells[j].contentEditable = true;
+					}
+				}
+				// Originaltabelle speichern
+				originalTable = table.innerHTML;
+			} else {
+				alert('Falsches Passwort!');
+			}
+		}
+
+		function saveTable() {
+			var table = document.getElementsByTagName('table')[0];
+			// Überprüfen, ob die Tabelle bearbeitet wurde
+			if (originalTable !== table.innerHTML) {
+				// Tabelle speichern
+				alert('Tabelle gespeichert!');
+			} else {
+				// Keine Änderungen vorgenommen
+				alert('Keine Änderungen vorgenommen.');
+			}
+		}
+
+		function deleteColumn(colIndex) {
+			var table = document.getElementsByTagName('table')[0];
+			var rows = table.getElementsByTagName('tr');
+			for (var i = 0; i < rows.length; i++) {
+				rows[i].deleteCell(colIndex);
+			}
+		}
+	</script>
+</body>
+
 </html>
