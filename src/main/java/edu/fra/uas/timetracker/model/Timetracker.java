@@ -163,4 +163,37 @@ public class Timetracker {
 		return duration_in_days;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Project getProjectReference() {
+		return projectReference;
+	}
+
+	public void setProjectReference(Project projectReference) {
+		this.projectReference = projectReference;
+	}
+
+	public Task getTaskReference() {
+		return TaskReference;
+	}
+
+	public void setTaskReference(Task taskReference) {
+		TaskReference = taskReference;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+
 }

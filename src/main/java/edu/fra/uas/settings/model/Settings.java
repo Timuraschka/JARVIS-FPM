@@ -65,4 +65,8 @@ public class Settings {
 		this.automatic_shift = automatic_shift;
 	}
 
+	public long getId() {
+		return id;
+	}
+
 }
