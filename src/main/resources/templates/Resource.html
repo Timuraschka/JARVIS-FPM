@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Aufgabenliste</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      .description {
+        width: 30%;
+      }
+      .progress {
+        width: 20%;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="addTask()">Resource hinzufügen</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Resource Name</th>
+          <th class="team">Team</th>
+          <th class="hourlyRate">Hourly Rate</th>
+          <th class="tasks">involved Tasks</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each = "resource : ${listAllResources}">
+          <td th:text = "${resourec.name}">empty</td>
+          <td th:text = "${resourec.team}">empty</td>
+          <td th:text = "${resourec.taskList}">"${task}"</td>  <!-- taskList sollte ein String mit den Task ID's sein oder anzahl der Tasks hm -->
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="saveTable()">Tabelle speichern</button>
+    
+    <script>
+      function addTask() {
+        // Neue Zeile einfügen
+        var table = document.getElementsByTagName('table')[0];
+        var newRow = table.insertRow(-1);
+
+        // Neue Zellen einfügen
+        var phaseCell = newRow.insertCell(0);
+        var timeCell = newRow.insertCell(1);
+        var resourceCell = newRow.insertCell(2);
+        var descriptionCell = newRow.insertCell(3);
+        var progressCell = newRow.insertCell(4);
+
+        // Platzhalter-Texte einfügen
+        phaseCell.innerHTML = 'Neue Phase';
+        timeCell.innerHTML = '0 Stunden';
+        resourceCell.innerHTML = 'Neue Ressource';
+        descriptionCell.innerHTML = 'Beschreibung';
+        progressCell.innerHTML = '0%';
+      }
+
+
+
+  </script>
+  </body>
+</html>

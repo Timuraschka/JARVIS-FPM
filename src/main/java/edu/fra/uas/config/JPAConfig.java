@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import edu.fra.uas.project.repository.ProjectRepository;
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.resource.repository.ResourceRepository;
-import edu.fra.uas.settings.repository.SettingsRpository;
+import edu.fra.uas.settings.repository.SettingsRepository;
 import edu.fra.uas.task.repository.TaskRepository;
 import edu.fra.uas.timetracker.repository.TimetrackerRepository;
 import edu.fra.uas.user.model.User;
@@ -24,7 +24,7 @@ public class JPAConfig {
 
 
 	@Bean
-	CommandLineRunner init (UserRepository userR, TaskRepository taskR, ProjectRepository projectR, ResourceRepository resourceR, SettingsRpository settingsR, TimetrackerRepository timeR) {
+	CommandLineRunner init (UserRepository userR, TaskRepository taskR, ProjectRepository projectR, ResourceRepository resourceR, SettingsRepository settingsR, TimetrackerRepository timeR) {
 		
 		User u1 = new User();
 		u1.setEmail("123@gmail.com");

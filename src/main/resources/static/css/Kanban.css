@@ -62,56 +62,6 @@ h3 {
   color: #94a1af;
 }
 
-#create-ticket-btn {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 10px 150px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-#create-ticket-btn:hover {
-  background-color: #3e8e41;
-}
-
-#create-ticket-btn:active {
-  background-color: #4CAF50;
-}
-
-
-/* Stile für das Popup-Fenster */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-}
-
-.popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  text-align: left;
-  border-radius: 5px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-}
 
 .board {
   display: flex;
@@ -134,34 +84,10 @@ h3 {
 
 }
 
-.card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  margin-bottom: 8px;
-  cursor: grab;
-}
 
 
-input[type="submit"] {
-  display: block;
-  margin-top: 10px;
-  padding: 5px;
-  border-radius: 3px;
-  border: none;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
 
-input[type="text"], select{
-  width: 100%;
-  padding: 5px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+
 
 footer {
   background-color: #82b74b;
