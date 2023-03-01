@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.repository.ProjectRepository;
 import edu.fra.uas.resource.model.Resource;
+import edu.fra.uas.user.model.User;
 
 @Service
 public class ProjectService implements IprojectService {
@@ -27,7 +28,12 @@ public class ProjectService implements IprojectService {
 		return projectR.findAll();
 	}
 
-	
+	@Override
+	public List<Project> getProjectsForUser(User u){
+		// TODO: 
+		
+		return null;
+	}
 	
 	
 	@Override

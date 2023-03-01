@@ -37,8 +37,9 @@
         <tr th:each = "resource : ${listAllResources}">
           <td th:text = "${resourec.name}">empty</td>
           <td th:text = "${resourec.team}">empty</td>
-          <td th:text = "${resourec.taskList}">"${task}"</td>  <!-- taskList sollte ein String mit den Task ID's sein oder anzahl der Tasks hm -->
-          <td></td>
+          <td th:number = "${resource.hourlyRate}"> emtyp </td>
+    <!--       <td th:text = "${resoure.taskList}">empty</td>  <!-- taskList sollte ein String mit den Task ID's sein oder anzahl der Tasks hm -->
+          
         </tr>
       </tbody>
     </table>

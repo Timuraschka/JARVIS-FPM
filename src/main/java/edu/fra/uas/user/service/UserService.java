@@ -1,11 +1,15 @@
 package edu.fra.uas.user.service;
 
+import edu.fra.uas.token.TokenService;
 import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.repository.UserRepository;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
+
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,17 @@ public class UserService implements IUserService {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	TokenService tokenS;
 
+	public User getUserWithToken(String token) {
+		UUID uuid = UUID.fromString(token);
+		long userID = tokenS.getUserIdByToken(uuid);
+		
+		User user = userRepository.findById(userID);
+		
+		return user;
+	}
 
 	public User getUserWithEmail(String email) {
 
@@ -42,7 +56,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public void createUser(User user) {
-
+		
 		userRepository.save(user);
 	}
 
