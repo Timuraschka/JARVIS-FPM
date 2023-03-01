@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.repository.ProjectRepository;
+import edu.fra.uas.task.model.RootTask;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.repository.TaskRepository;
 
@@ -59,6 +60,10 @@ public class TaskService implements ITaskService{
 		
 		for (Task t : taskR.findAll()) {
 			if (t.getProject().getId() == p.getId() ) {
+				if (t.getParent() == null) {
+					// is the RootTask
+					break;
+				}
 				tasks.add(t);
 			}
 		}
@@ -70,7 +75,7 @@ public class TaskService implements ITaskService{
 	 * 
 	 * @param t - is the task which should be added to the database
 	 * 
-	 * Wo sollte die Task angefügt werden??
+	 * Die RootTask wird nicht über diese Methode laufen das passier in der createProject Methode im ProjectService
 	 * @return
 	 */
 	public boolean addTask (Task t) {
@@ -80,8 +85,12 @@ public class TaskService implements ITaskService{
 		}
 		
 		if ( ! t.getSubtasks().isEmpty()) {
-			
+			for (Task i : t.getSubtasks()) {
+				i.setParent(t);
+			}
 		}
+		
+		t.setLine(t.getProject().getTasks().size());
 		return true;
 	}
 	
