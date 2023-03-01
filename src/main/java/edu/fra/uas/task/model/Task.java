@@ -33,7 +33,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
-import java.io.Serializable;
 
 /**
  * 
@@ -46,11 +45,7 @@ import java.io.Serializable;
  * after the predecessor ! If the Setting is not disabled
  */
 @Cacheable
-@org.hibernate.annotations.Cache(
-		   usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, 
-		   region = "Task", 
-		   include = "non-lazy"
-		)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE, region = "Task", include = "non-lazy")
 
 @Entity
 @Table(name = "Task")
@@ -58,10 +53,8 @@ public class Task {
 
 	private static final Logger log = LoggerFactory.getLogger(Task.class);
 
-	
-	
 	// ID
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TASK_ID")
@@ -69,11 +62,11 @@ public class Task {
 
 	// foreign Keys
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "PARENT_TASK")
 	private Task parent;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
@@ -83,24 +76,22 @@ public class Task {
 
 	// Collection of foreign Keys
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), 
-	inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
 	private Set<Resource> resources;
 
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "FOLLOWING_TASKS")
 	private Set<Task> following_tasks;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PREREQUISITORS_OF")
 	private Set<Task> prerequisite_tasks;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name= "SUB_TASKS")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "SUB_TASKS")
 	private Set<Task> subtasks;
-	
+
 	// Attributes
 
 	@Column(name = "DEADLINE")
@@ -130,9 +121,9 @@ public class Task {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-//	@ElementCollection
-//	@Column(name = "KEYWORDS")
-//	private List<String> keywords = new ArrayList<String>();
+	// @ElementCollection
+	// @Column(name = "KEYWORDS")
+	// private List<String> keywords = new ArrayList<String>();
 
 	@Column(name = "READY")
 	private boolean ready;
@@ -144,7 +135,7 @@ public class Task {
 	private boolean automatic_shift;
 
 	public Task() {
-		
+
 	}
 
 	/**
@@ -203,17 +194,17 @@ public class Task {
 		return cost;
 	}
 
-//	public void addKeyword(String keyword) {
-//		keywords.add(keyword);
-//	}
-//
-//	public void deleteKeyword(String keyword) {
-//		keywords.remove(keyword);
-//	}
-//
-//	public void removeAllKeywords() {
-//		keywords = new ArrayList<String>();
-//	}
+	// public void addKeyword(String keyword) {
+	// keywords.add(keyword);
+	// }
+	//
+	// public void deleteKeyword(String keyword) {
+	// keywords.remove(keyword);
+	// }
+	//
+	// public void removeAllKeywords() {
+	// keywords = new ArrayList<String>();
+	// }
 
 	// TODO should this method exist??
 	public void setWork_hours(double work_hours) {
@@ -332,12 +323,12 @@ public class Task {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public Task getParent () {
+
+	public Task getParent() {
 		return this.parent;
 	}
-	
-	public void setParent (Task parent) {
+
+	public void setParent(Task parent) {
 		this.parent = parent;
 	}
 
@@ -376,15 +367,13 @@ public class Task {
 	public void setReady(boolean ready) {
 		this.ready = ready;
 	}
-	
-	
 
-//	public List<String> getKeywords() {
-//		return keywords;
-//	}
-//
-//	public void setKeywords(List<String> keywords) {
-//		this.keywords = keywords;
-//	}
+	// public List<String> getKeywords() {
+	// return keywords;
+	// }
+	//
+	// public void setKeywords(List<String> keywords) {
+	// this.keywords = keywords;
+	// }
 
 }

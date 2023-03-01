@@ -1,6 +1,5 @@
 package edu.fra.uas.project.model;
 
-
 import java.util.Set;
 import java.util.HashSet;
 
@@ -16,75 +15,68 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-
 import edu.fra.uas.resource.model.Resource;
 import edu.fra.uas.settings.model.Settings;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Projects")
 public class Project {
-	
+
 	// ID
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PROJECT_ID")
 	private long id;
 
 	// Attributes
-	
+
 	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "DESCRIPTION")
 	private String description;
-	
+
 	// Collection of Foreign Keys
-	
-//	@OneToMany(fetch = FetchType.EAGER)
-//	@Column(name = "KEYWORDS")
-//	private List<String> keywords = new ArrayList<String>();
-	
+
+	// @OneToMany(fetch = FetchType.EAGER)
+	// @Column(name = "KEYWORDS")
+	// private List<String> keywords = new ArrayList<String>();
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Column(name = "TASKS")
 	private Set<Task> tasks;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_MANAGER")
-	private Set <Resource> projectManager;
-	
+	private Set<Resource> projectManager;
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Resource> members;
-	
+
 	// Foreign Keys
-	
+
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="PROJECT_OWNER")
+	@JoinColumn(name = "PROJECT_OWNER")
 	private Resource projectOwner;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private Settings settings;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="TIME")
+	@JoinColumn(name = "TIME")
 	private Timetracker time;
 
-	
-	
-	
-	
 	public Project() {
-		
-		
+
 		this.settings = new Settings();
 		this.members = new HashSet<>();
-		this.projectManager =new HashSet<>();
-		
-		
-	}
+		this.projectManager = new HashSet<>();
 
+	}
 
 	public String getDescription() {
 		return description;
@@ -122,7 +114,7 @@ public class Project {
 		return projectManager;
 	}
 
-	public void setProjectManager( Set<Resource> projectManager) {
+	public void setProjectManager(Set<Resource> projectManager) {
 		this.projectManager = projectManager;
 	}
 
@@ -154,6 +146,4 @@ public class Project {
 		return id;
 	}
 
-
-	
 }

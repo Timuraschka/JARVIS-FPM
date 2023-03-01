@@ -51,7 +51,7 @@ public class Resource {
 
 	// Foreign Keys
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "SUPERVISOR")
 	private Resource supervisor; // usually the Project Manager
 
@@ -59,7 +59,7 @@ public class Resource {
 	@JoinColumn(name = "USER")
 	private User user; // The actual resource
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
