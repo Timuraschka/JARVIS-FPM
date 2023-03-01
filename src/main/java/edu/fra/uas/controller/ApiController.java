@@ -1,5 +1,8 @@
 package edu.fra.uas.controller;
 
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.fra.uas.controller.ApiController;
+import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.service.ProjectService;
 import edu.fra.uas.resource.service.ResouceService;
 import edu.fra.uas.settings.service.SettingsService;
@@ -56,7 +60,7 @@ public class ApiController {
 	@ResponseBody
 	public ResponseEntity<Object> getProjects (@PathVariable("token") String token){
 		
-		
+//		List<Project> = projectS.getAllProjects();
 		
 		return null;
 	}

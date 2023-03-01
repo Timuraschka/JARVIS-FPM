@@ -10,6 +10,7 @@ import org.hibernate.mapping.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.fra.uas.controller.ApiController;
 import edu.fra.uas.project.model.Project;
@@ -17,6 +18,7 @@ import edu.fra.uas.project.repository.ProjectRepository;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.repository.TaskRepository;
 
+@Service
 public class TaskService implements ITaskService{
 
 	
