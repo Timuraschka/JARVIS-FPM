@@ -28,8 +28,48 @@
   
   <h2>Kanban-Board | Overview</h2>
   </head>
+<div class="form-group1">
+  <label for="project">Please choose your Project:</label>
+  <select id="project">
+    <!-- Hier sollten Sie die Optionen für die Projekte aus Ihrer Datenbank einfügen -->
+    <option value="project1">Project Webdesign</option>
+    <option value="project2">Project Test</option>
+    <option value="project3">Project lets try</option>
+  </select>
+</div>
+    <!-- Button to open the popup window for creating a ticket -->
+    <button id="create-ticket-btn">Create Ticket</button>
+    <!-- Popup window for creating a ticket -->
+    <div class="overlay" id="create-ticket-overlay">
 
-   
+      <div class="popup">
+        <h3>Create Ticket</h3>
+        <!-- Form for inputting ticket details -->
+        <form id="create-ticket-form">
+          <div class="form-group">
+            <label for="assignee">Assignee:</label>
+            <input type="text" id="assignee" name="assignee" required>
+          </div>
+
+          <div class="form-group">
+            <label for="task">Task:</label>
+            <input type="text" id="task" name="task" required>
+          </div>
+
+          <div class="priority">
+            <label for="priority">Priority</label>
+            <select id="priority">
+              <option value="high">High</option>
+              <option value="medium">Moderate</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <input type="submit" value="Add Ticket">
+          <a class="close-btn">&times;</a>
+        </form>
+      </div>
+    </div>
     <div class="board">
       <div class="column" id="backlog">
         <h3>Backlog</h3>
