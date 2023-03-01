@@ -206,49 +206,30 @@ select {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
- /* Style for the ticket details popup */
-      #ticket-details {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        width: 40%;
-        height: 60%;
-        z-index: 1;
-        display: none;
-      }
 
-      /* Style for the close button in the ticket details popup */
-      #ticket-details .close-btn {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        font-size: 1.5em;
-        cursor: pointer;
-      }
       /* Stil für die Detailseite */
 #detail-page {
   display: none; /* Am Anfang ausgeblendet */
   position: fixed;
-  top: 20%;
   right: 0;
   width: 40%;
-  height: 100%;
+  height: 50%;
+  margin-top: 0%;
   background-color: lightgrey;
- 
+  flex-direction: column; /* Setzt die Hauptachse auf die vertikale Ausrichtung */
+justify-content: space-between; /* Platzierung von Inhalten auf der Hauptachse */
+padding: 0px;
+overflow-y: scroll;
 }
-#detail-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #f2f2f2;
+#detail-header {
+display: flex; /* Flex-Container */
+justify-content: space-between; /* Platzierung von Inhalten auf der Hauptachse */
+align-items: center; /* Zentrierung auf der Kreuzachse */
+padding: 0px;
+background-color: #f2f2f2;
 }
-#detail-header h2 {
-  margin: 0;
-}
-#detail-header button {
+
+#detail-footer button {
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -266,7 +247,6 @@ select {
   padding: 10px;
   height: 80%;
   border: 1px solid black;
-  overflow-y: auto;
   background-color: white;
 }
 
@@ -368,11 +348,7 @@ select {
 
 <!-- Hier wird die Detailseite angezeigt -->
 <div id="detail-page">
-  <div id="detail-header">
-    <h2>Detailpage of Ticket</h2>
-    <button id="save-btn" onclick="saveDetails()">Speichern</button>
-    <button id="close-btn" onclick="closeDetails()">Schließen</button>
-  </div>
+  
   <div id="detail-content" contenteditable="true">
     <h3>Timetracker</h3>
     <p>Anfangsdatum: <span id="start-date"></span></p>
@@ -388,6 +364,11 @@ select {
     <p>SubTasks:</p>
     <ul id="subtasks"></ul>
   </div>
+  <div id="detail-footer">
+    <h2>Detailpage of Ticket</h2>
+    <button id="save-btn" onclick="saveDetails()">Speichern</button>
+    <button id="close-btn" onclick="closeDetails()">Schließen</button>
+  </div>
 </div>
 
     <footer>
@@ -397,53 +378,7 @@ select {
 
   </body>
   <script> // Globale Variablen
-    var currentTicket = null;
     
-    // Diese Funktion wird aufgerufen, wenn das Ticket doppelgeklickt wird
-    function showDetails() {
-      // Das Detail-Element auswählen
-      var detailPage = document.getElementById("detail-page");
-      // Das Ticket-Element auswählen
-      var ticket = event.currentTarget;
-      // Die Ticket-Details abrufen
-      var ticketDetails = ticket.innerHTML;
-      // Das Ticket-Element ausblenden
-      ticket.style.display = "none";
-      // Die Detailseite einblenden
-      detailPage.style.display = "block";
-      // Die Ticket-Details in die Detailseite einfügen
-      var detailContent = document.getElementById("detail-content");
-      detailContent.innerHTML = ticketDetails;
-      // Das aktuelle Ticket speichern
-      currentTicket = ticket;
-    }
-    
-    // Diese Funktion wird aufgerufen, wenn der Speichern-Button auf der Detailseite gedrückt wird
-    function saveDetails() {
-      // Die Detailseite auswählen
-      var detailPage = document.getElementById("detail-page");
-      // Die Detail-Content auswählen
-      var detailContent = document.getElementById("detail-content");
-      // Die bearbeiteten Details des aktuellen Tickets einfügen
-      currentTicket.innerHTML = detailContent.innerHTML;
-      // Das Ticket-Element wieder einblenden
-      currentTicket.style.display = "block";
-      // Die Detailseite ausblenden
-      detailPage.style.display = "none";
-      // Das aktuelle Ticket auf null setzen
-      currentTicket = null;
-    }
-    
-    // Diese Funktion wird aufgerufen, wenn der Schließen-Button auf der Detailseite gedrückt wird
-    function closeDetails() {
-      // Das Ticket-Element wieder einblenden
-      currentTicket.style.display = "block";
-      // Die Detailseite ausblenden
-      var detailPage = document.getElementById("detail-page");
-      detailPage.style.display = "none";
-      // Das aktuelle Ticket auf null setzen
-      currentTicket = null;
-    }
     const columns = document.querySelectorAll('.column');
     let draggedItem = null;
     
@@ -527,7 +462,7 @@ select {
       newCard.innerHTML = `Assignee: ${assignee} <br> Task: ${task} <br> Priority: ${priority}`;
     
       newCard.addEventListener('dblclick', showDetails);
-    
+     
       // Append the new card to the backlog column
       backlogColumn.insertBefore(newCard, backlogColumn.secondChild);
       // Clear the input fields
@@ -535,10 +470,57 @@ select {
         
       // Close the popup window
       document.getElementById("create-ticket-overlay").style.display = "none";
-       // Add event listener for double-click
+      
         
+    })
+    var currentTicket = null;
+    
+    // Diese Funktion wird aufgerufen, wenn das Ticket doppelgeklickt wird
+    function showDetails() {
+      // Das Detail-Element auswählen
+      var detailPage = document.getElementById("detail-page");
+      // Das Ticket-Element auswählen
+      var ticket = event.currentTarget;
+      // Die Ticket-Details abrufen
+      var ticketDetails = ticket.innerHTML;
+      // Das Ticket-Element ausblenden
+      ticket.style.display = "block";
+      // Die Detailseite einblenden
+      detailPage.style.display = "block";
+      // Die Ticket-Details in die Detailseite einfügen
+      var detailContent = document.getElementById("detail-content");
+      detailContent.innerHTML = ticketDetails;
+      // Das aktuelle Ticket speichern
+      currentTicket = ticket;
+      
     }
-    )
+    
+    // Diese Funktion wird aufgerufen, wenn der Speichern-Button auf der Detailseite gedrückt wird
+    function saveDetails() {
+      // Die Detailseite auswählen
+      var detailPage = document.getElementById("detail-page");
+      // Die Detail-Content auswählen
+      var detailContent = document.getElementById("detail-content");
+      // Die bearbeiteten Details des aktuellen Tickets einfügen
+      currentTicket.innerHTML = detailContent.innerHTML;
+      // Das Ticket-Element wieder einblenden
+      currentTicket.style.display = "block";
+      // Die Detailseite ausblenden
+      detailPage.style.display = "none";
+      // Das aktuelle Ticket auf null setzen
+      currentTicket = null;
+    }
+    
+    // Diese Funktion wird aufgerufen, wenn der Schließen-Button auf der Detailseite gedrückt wird
+    function closeDetails() {
+      // Das Ticket-Element wieder einblenden
+      currentTicket.style.display = "block";
+      // Die Detailseite ausblenden
+      var detailPage = document.getElementById("detail-page");
+      detailPage.style.display = "none";
+      // Das aktuelle Ticket auf null setzen
+      currentTicket = null;
+    }
     
     </script>
 </html>
