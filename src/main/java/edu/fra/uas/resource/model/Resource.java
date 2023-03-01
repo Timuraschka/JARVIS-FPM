@@ -51,7 +51,7 @@ public class Resource {
 
 	// Foreign Keys
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "SUPERVISOR")
 	private Resource supervisor; // usually the Project Manager
 
@@ -59,13 +59,13 @@ public class Resource {
 	@JoinColumn(name = "USER")
 	private User user; // The actual resource
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
 	// Foreign Keys Collection
 
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "resources", cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "resources", cascade = CascadeType.ALL)
 	private Set<Task> tasks;
 
 	public Resource() {

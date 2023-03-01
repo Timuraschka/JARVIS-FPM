@@ -29,13 +29,43 @@ public class JPAConfig {
 		User u1 = new User();
 		u1.setEmail("123@gmail.com");
 		u1.setPassword("Password123!");
+		u1.setId(1);
+		u1.setUsername("Quackofif");
+
+		User u2 = new User();
+		u2.setEmail("456@hotmail.de");
+		u2.setPassword("Password456!");
+		u2.setId(2);
+		u2.setUsername("Timuraschka");
+
+		User u3 = new User();
+		u3.setEmail("lilly@gmx.de");
+		u3.setPassword("Password789!");
+		u3.setId(3);
+		u3.setUsername("Micho mit der Garro");
+
+		User u4 = new User();
+		u4.setEmail("samuel@gmail.com");
+		u4.setPassword("Testing123!");
+		u4.setId(4);
+		u4.setUsername("Szucki069");
 
 		Project p1 = new Project();
 		p1.setName("ProjectTest");
+		p1.setDescription("Das Projekt ist das geilste");
+		p1.setMembers(null);
 
 		Task t1 = new Task();
-		t1.setName("Aufgabe1");
+		t1.setName("Aufgabe 1");
 		t1.setProject(p1);
+		
+		Task t2 = new Task();
+		t2.setName("Aufgabe 2");
+		t2.setProject(p1);
+
+		Task t3 = new Task();
+		t3.setName("Aufgabe 3");
+		t3.setProject(p1);
 
 		Timetracker tt1 = new Timetracker();
 		tt1.setTaskReference(t1);
@@ -48,7 +78,12 @@ public class JPAConfig {
 
 		return args -> {
 			userR.save(u1);
+			userR.save(u2);
+			userR.save(u3);
+			userR.save(u4);
 			taskR.save(t1);
+			taskR.save(t2);
+			taskR.save(t3);
 			projectR.save(p1);
 			settingsR.save(s1);
 			timeR.save(tt1);

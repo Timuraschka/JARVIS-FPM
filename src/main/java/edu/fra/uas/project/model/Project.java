@@ -47,11 +47,11 @@ public class Project {
 //	@Column(name = "KEYWORDS")
 //	private List<String> keywords = new ArrayList<String>();
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Column(name = "TASKS")
 	private Set<Task> tasks;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_MANAGER")
 	private Set <Resource> projectManager;
 	
@@ -60,14 +60,14 @@ public class Project {
 	
 	// Foreign Keys
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="PROJECT_OWNER")
 	private Resource projectOwner;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "project")
 	private Settings settings;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="TIME")
 	private Timetracker time;
 

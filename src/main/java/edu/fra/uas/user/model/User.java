@@ -48,13 +48,13 @@ public class User {
 	
 	// Foreign Keys Collection
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECTS")
 	private Set<Project> projects;
 	
 	
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "RESOURCE")
 	private Set<Resource> resourceIn;
 
