@@ -1,7 +1,7 @@
 package edu.fra.uas.project.service.DTO;
 
 import java.util.Date;
-import org.springframework.hateoas.*;
+import org.springframework.hateoas.RepresentationModel;
 
 
 public class ProjectDTO extends RepresentationModel<ProjectDTO>{

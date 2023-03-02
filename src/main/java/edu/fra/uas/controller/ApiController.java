@@ -72,14 +72,13 @@ public class ApiController {
 	public ResponseEntity<Object> getProjects (@PathVariable("token") String token){
 		
 		User u = userS.getUserWithToken(token);
-		List<Project> projects = projectS.getProjectsForUser(u);
+		List<ProjectDTO> projects = projectS.getProjectsForUser(u);
 		
-		
-		Collection<Project> collection = projects;
-
-		
+		Collection<ProjectDTO> collection = projects;
 		return new ResponseEntity<>(collection, HttpStatus.OK);
 	}
+	
+	
 }
 
 
