@@ -58,7 +58,7 @@ public class JPAConfig {
 		Task t1 = new Task();
 		t1.setName("Aufgabe 1");
 		t1.setProject(p1);
-		
+
 		Task t2 = new Task();
 		t2.setName("Aufgabe 2");
 		t2.setProject(p1);
@@ -72,11 +72,14 @@ public class JPAConfig {
 
 		Settings s1 = new Settings();
 		s1.setHours_a_day(10);
+		s1.setProject(p1);
 
 		Resource r1 = new Resource();
 		r1.setName("Mitarbeiter");
 
 		return args -> {
+			projectR.save(p1);
+			settingsR.save(s1);
 			userR.save(u1);
 			userR.save(u2);
 			userR.save(u3);
@@ -84,8 +87,6 @@ public class JPAConfig {
 			taskR.save(t1);
 			taskR.save(t2);
 			taskR.save(t3);
-			projectR.save(p1);
-			settingsR.save(s1);
 			timeR.save(tt1);
 			resourceR.save(r1);
 		};

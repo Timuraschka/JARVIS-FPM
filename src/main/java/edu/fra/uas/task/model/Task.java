@@ -66,7 +66,7 @@ public class Task {
 	@JoinColumn(name = "PARENT_TASK")
 	private Task parent;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
@@ -76,19 +76,19 @@ public class Task {
 
 	// Collection of foreign Keys
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
 	private Set<Resource> resources;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FOLLOWING_TASKS")
 	private Set<Task> following_tasks;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PREREQUISITORS_OF")
 	private Set<Task> prerequisite_tasks;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SUB_TASKS")
 	private Set<Task> subtasks;
 
