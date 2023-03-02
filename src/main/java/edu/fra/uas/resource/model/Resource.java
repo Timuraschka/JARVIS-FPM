@@ -59,7 +59,7 @@ public class Resource {
 	@JoinColumn(name = "USER")
 	private User user; // The actual resource
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 

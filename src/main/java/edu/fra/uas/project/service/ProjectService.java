@@ -18,8 +18,6 @@ public class ProjectService implements IprojectService {
 
 	@Autowired
 	private ProjectRepository projectR;
-	
-	
 
 	@Override
 	public Project getProject(long id) {
@@ -32,23 +30,22 @@ public class ProjectService implements IprojectService {
 	}
 
 	@Override
-	public List<ProjectDTO> getProjectsForUser(User u){
-		
-		List <Project> projects = projectR.findAllByUser(u.getId());
-		
-		List <ProjectDTO> dtos = new ArrayList();
-		
+	public List<ProjectDTO> getProjectsForUser(User u) {
+
+		// List <Project> projects = projectR.findAllByUser(u.getId());
+
+		List<ProjectDTO> dtos = new ArrayList();
+
 		for (Project p : projects) {
 			ProjectDTO dto = new ProjectDTO();
 			dto.setLeader(p.getProjectOwner().getName());
 			dto.setTitel(p.getName());
 			dto.setDeadline(p.get);
 		}
-		
+
 		return null;
 	}
-	
-	
+
 	@Override
 	public List<Resource> getResourcesInProject() {
 		// TODO Auto-generated method stub
@@ -60,6 +57,5 @@ public class ProjectService implements IprojectService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
 }

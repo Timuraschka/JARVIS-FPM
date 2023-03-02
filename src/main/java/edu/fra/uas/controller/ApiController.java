@@ -62,18 +62,18 @@ public class ApiController {
 	/**
 	 * 
 	 */
-	@RequestMapping( value = "user/{token}/project",
-			method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<Object> getProjects (@PathVariable("token") String token){
+	// @RequestMapping( value = "user/{token}/project",
+	// 		method = RequestMethod.GET,
+	// 		produces = MediaType.APPLICATION_JSON_VALUE)
+	// @ResponseBody
+	// public ResponseEntity<Object> getProjects (@PathVariable("token") String token){
 		
-		User u = userS.getUserWithToken(token);
-		List<ProjectDTO> projects = projectS.getProjectsForUser(u);
+	// 	User u = userS.getUserWithToken(token);
+	// 	List<ProjectDTO> projects = projectS.getProjectsForUser(u);
 		
-		Collection<ProjectDTO> collection = projects;
-		return new ResponseEntity<>(collection, HttpStatus.OK);
-	}
+	// 	Collection<ProjectDTO> collection = projects;
+	// 	return new ResponseEntity<>(collection, HttpStatus.OK);
+	// }
 	
 	
 }

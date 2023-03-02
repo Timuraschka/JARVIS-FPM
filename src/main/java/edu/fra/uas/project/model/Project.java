@@ -71,8 +71,7 @@ public class Project {
 	@Column(name = "TASKS")
 	private Set<Task> tasks;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PROJECT_MANAGER")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Resource> projectManager;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
