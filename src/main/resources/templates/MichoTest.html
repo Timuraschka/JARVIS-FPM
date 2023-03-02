@@ -1,526 +1,662 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <style>
-     header {
-  position: fixed;
-  width: 100%;
-  height: 10px;
-  display: flex;
-  justify-content: left;
-  font-size: 17pt;
-  color: white;
-  font-family: Calibri;
-}
+        header {
+            position: fixed;
+            width: 100%;
+            height: 10px;
+            display: flex;
+            justify-content: left;
+            font-size: 17pt;
+            color: white;
+            font-family: Calibri;
+        }
 
-h2{
-  color: black;
-  font-size: 13pt;
-  position: fixed;
-  font-family: Calibri;
-  top: 30px;
-}
+        h2 {
+            color: black;
+            font-size: 13pt;
+            position: fixed;
+            font-family: Calibri;
+            top: 30px;
+        }
 
-h3{
-  font-family: Calibri;
-}
-/* quick & dirty reset css */
-* {
-  padding: 0;
-  margin: 0;
-  outline: none;
-}
+        h3 {
+            font-family: Calibri;
+        }
 
-.site-nav {
-  height: 50px;
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  background-color: #82b74b;
-  opacity: 1;
-}
+        /* quick & dirty reset css */
+        * {
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
 
-.site-nav__inner {
-  display: flex;
-  justify-content: right;
+        .site-nav {
+            height: 50px;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            background-color: #82b74b;
+            opacity: 1;
+        }
 
-}
+        .site-nav__inner {
+            display: flex;
+            justify-content: right;
 
-.menu-primary {
-  display: flex;
-  list-style: none;
-}
+        }
 
-.menu-primary__item {
-  color: White;
-  display: block;
-  padding: 1.5rem 1.8rem;
-  transition: ease-in-out 150ms;
-  text-decoration: none;
-}
+        .menu-primary {
+            display: flex;
+            list-style: none;
+        }
 
-.menu-primary__item:hover {
-  color: #94a1af;
-}
+        .menu-primary__item {
+            color: White;
+            display: block;
+            padding: 1.5rem 1.8rem;
+            transition: ease-in-out 150ms;
+            text-decoration: none;
+        }
 
-#create-ticket-btn {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 10px 350px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 60pt;
-}
+        .menu-primary__item:hover {
+            color: #94a1af;
+        }
 
-#create-ticket-btn:hover {
-  background-color: #3e8e41;
-}
+        #create-ticket-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 350px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 60pt;
+        }
 
-#create-ticket-btn:active {
-  background-color: #4CAF50;
-}
+        #create-ticket-btn:hover {
+            background-color: #3e8e41;
+        }
 
-
-/* Stile für das Popup-Fenster */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: none;
-}
-
-.popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  text-align: left;
-  border-radius: 5px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.board {
-  display: flex;
-  margin-top: 50px;
-  min-height: 400px;
-  justify-content: center;
-  text-align: center;
-  width: 60%;
-}
-
-.column {
-  flex-basis: 200px;
-  border: 1px solid black;
-  margin: 8px;
-  padding: 8px;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
- 
-  
-}
-
-.card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  margin-bottom: 8px;
-  cursor: grab;
-}
+        #create-ticket-btn:active {
+            background-color: #4CAF50;
+        }
 
 
-input[type="submit"] {
-  display: block;
-  margin-top: 10px;
-  padding: 5px;
-  border-radius: 3px;
-  border: none;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
+        /* Stile für das Popup-Fenster */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
 
-input[type="text"], select{
-  width: 100%;
-  padding: 5px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            border-radius: 5px;
+        }
 
-footer {
-    background-color: #82b74b;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 15px;
-    padding: 10px;
-    position: fixed;
-    opacity: 0.7;
-    
-  }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
 
-  .copyright {
-    color: black;
-    font-size: 8pt;
-    
-  }
+        .board {
+            display: flex;
+            margin-top: 50px;
+            min-height: 400px;
+            justify-content: center;
+            text-align: center;
+            width: 60%;
+        }
 
-  .address {
-    color: black;
-    font-size: 8pt;
-   
-  }
-
-
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  font-family: calibri;
-}
-
-select {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-      /* Stil für die Detailseite */
-#detail-page {
-  display: none; /* Am Anfang ausgeblendet */
-  position: fixed;
-  right: 0;
-  width: 40%;
-  height: 50%;
-  margin-top: 0%;
-  background-color: lightgrey;
-  flex-direction: column; /* Setzt die Hauptachse auf die vertikale Ausrichtung */
-justify-content: space-between; /* Platzierung von Inhalten auf der Hauptachse */
-padding: 0px;
-overflow-y: scroll;
-}
-#detail-header {
-display: flex; /* Flex-Container */
-justify-content: space-between; /* Platzierung von Inhalten auf der Hauptachse */
-align-items: center; /* Zentrierung auf der Kreuzachse */
-padding: 0px;
-background-color: #f2f2f2;
-}
-
-#detail-footer button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-#detail-content {
-  margin: 20px;
-  padding: 10px;
-  height: 80%;
-  border: 1px solid black;
-  background-color: white;
-}
+        .column {
+            flex-basis: 200px;
+            border: 1px solid black;
+            margin: 8px;
+            padding: 8px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
 
+        }
 
-/* Stil für das Ticket */
-.ticket {
-  background-color: #f2f2f2;
-  border: 1px solid black;
-  padding: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            margin-bottom: 8px;
+            cursor: grab;
+        }
 
 
+        input[type="submit"] {
+            display: block;
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 3px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        footer {
+            background-color: #82b74b;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 15px;
+            padding: 10px;
+            position: fixed;
+            opacity: 0.7;
+
+        }
+
+        .copyright {
+            color: black;
+            font-size: 8pt;
+
+        }
+
+        .address {
+            color: black;
+            font-size: 8pt;
+
+        }
+
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-family: calibri;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Stil für die Detailseite */
+        #detail-page {
+            display: none;
+            /* Am Anfang ausgeblendet */
+            position: fixed;
+            right: 0;
+            width: 40%;
+            height: 50%;
+            margin-top: 0%;
+            background-color: lightgrey;
+            flex-direction: column;
+            /* Setzt die Hauptachse auf die vertikale Ausrichtung */
+            justify-content: space-between;
+            /* Platzierung von Inhalten auf der Hauptachse */
+
+
+        }
+
+        #detail-header {
+            display: flex;
+            /* Flex-Container */
+            justify-content: space-between;
+            /* Platzierung von Inhalten auf der Hauptachse */
+            align-items: center;
+            /* Zentrierung auf der Kreuzachse */
+            padding: 0px;
+            background-color: #f2f2f2;
+        }
+
+        #detail-footer button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        #detail-content {
+            margin: 20px;
+            padding: 10px;
+            height: 80%;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+
+
+        /* Stil für das Ticket */
+        .ticket {
+            background-color: #f2f2f2;
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
     </style>
-    
-      
-   
+
+
+
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Kanban.css">
     <nav class="site-nav" role="navigation">
-      <div class="site-nav__inner">
-        <header class="header">
-          <h1>Jarvis-FPM</h1>
-        </header>
-        <ul class="menu-primary">
-          <li><a class="menu-primary__item" href="/">Welcome, </a></li>
-          <!-- Link to the user's profile -->
-        </ul>
-      </div>
+        <div class="site-nav__inner">
+            <header class="header">
+                <h1>Jarvis-FPM</h1>
+            </header>
+            <ul class="menu-primary">
+                <li><a class="menu-primary__item" href="/">Welcome, </a></li>
+                <!-- Link to the user's profile -->
+            </ul>
+        </div>
     </nav>
 
-  </head>
+</head>
 
-  <body>
-  <head>
-  
-  <h2>Kanban-Board | Overview</h2>
-  
-  </head>
+<body>
+
+    <head>
+
+        <h2>Kanban-Board | Overview</h2>
+
+    </head>
 
     <!-- Button to open the popup window for creating a ticket -->
     <button id="create-ticket-btn">Create Ticket</button>
     <!-- Popup window for creating a ticket -->
-    <div class="overlay" id="create-ticket-overlay" >
+    <div class="overlay" id="create-ticket-overlay">
 
-      <div class="popup">
-        <h3>Create Ticket</h3>
-        <!-- Form for inputting ticket details -->
-        <form id="create-ticket-form">
-        
-          <div class="form-group">
-            <label for="assignee">Assignee:</label>
-            <input type="text" id="assignee" name="assignee" required>
-          </div>
+        <div class="popup">
+            <h3>Create Ticket</h3>
+            <!-- Form for inputting ticket details -->
+            <form id="create-ticket-form">
 
-          <div class="form-group">
-            <label for="task">Task:</label>
-            <input type="text" id="task" name="task" required>
-          </div>
+                <div class="form-group">
+                    <label for="assignee">Assignee:</label>
+                    <input type="text" id="assignee" name="assignee" required>
+                </div>
 
-          <div class="priority">
-            <label for="priority">Priority</label>
-            <select id="priority">
-              <option value="high">High</option>
-              <option value="medium">Moderate</option>
-              <option value="low">Low</option>
-            </select>
-          </div>
+                <div class="form-group">
+                    <label for="task">Task:</label>
+                    <input type="text" id="task" name="task" required>
+                </div>
 
-          <input type="submit" value="Add Ticket">
-          
-          <a class="close-btn">&times;</a>
-          
-        </form>
-      
-      </div>
-      
+                <div class="priority">
+                    <label for="priority">Priority</label>
+                    <select id="priority">
+                        <option value="high">High</option>
+                        <option value="medium">Moderate</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+
+                <input type="submit" value="Add Ticket">
+
+                <a class="close-btn">&times;</a>
+
+            </form>
+
+        </div>
+
     </div>
-    
+
     <div class="board">
-      <div class="column" id="backlog">
-        <h3>Backlog</h3>
-      </div>
-      <div class="column" id="inprogress" >
-        <h3>In Progress</h3>
+        <div class="column" id="backlog">
+            <h3>Backlog</h3>
+        </div>
+        <div class="column" id="inprogress">
+            <h3>In Progress</h3>
 
-      </div>
-      <div class="column" id="inreview">
-        <h3>In Review</h3>
+        </div>
+        <div class="column" id="inreview">
+            <h3>In Review</h3>
 
-      </div>
-      <div class="column" id="done">
-      <h3>Done</h3> 
-      </div>
-      
-      </div>
-       
+        </div>
+        <div class="column" id="done">
+            <h3>Done</h3>
+        </div>
 
-<!-- Hier wird die Detailseite angezeigt -->
-<div id="detail-page">
-  
-  <div id="detail-content" contenteditable="true">
-    <h3>Timetracker</h3>
-    <p>Anfangsdatum: <span id="start-date"></span></p>
-    <p>Enddatum: <span id="end-date"></span></p>
-    <p>Anzahl in Tagen: <span id="days"></span></p>
-    <p>Anzahl in Stunden: <span id="hours"></span></p>
-    <p>Task Ressources:</p>
-    <ul id="resources"></ul>
-    <p>Following Tasks:</p>
-    <ul id="following-tasks"></ul>
-    <p>Prerequisite Tasks:</p>
-    <ul id="prerequisite-tasks"></ul>
-    <p>SubTasks:</p>
-    <ul id="subtasks"></ul>
-  </div>
-  <div id="detail-footer">
-    <h2>Detailpage of Ticket</h2>
-    <button id="save-btn" onclick="saveDetails()">Speichern</button>
-    <button id="close-btn" onclick="closeDetails()">Schließen</button>
-  </div>
-</div>
+    </div>
+
+
+    <!-- Hier wird die Detailseite angezeigt -->
+    <div id="detail-page">
+        <form id="detail-form">
+            <div id="detail-content">
+                <label for="ticket-title">Title:</label>
+                <input type="text" id="ticket-title" value="{{ticket.title}}">
+
+
+                <label for="start-date">Start Date:</label>
+                <br> <input type="date" id="start-date" value="{{ticket.startDate}}"> <br>
+
+                <label for="end-date">End Date:</label>
+                <br> <input type="date" id="end-date" value="{{ticket.endDate}}"> <br>
+
+                <label for="days">Days:</label>
+                <br> <input type="number" id="days" value="{{ticket.days}}"> <br>
+
+                <label for="hours">Hours:</label>
+                <br> <input type="number" id="hours" value="{{ticket.hours}}"> <br>
+
+                <label for="resources">Task Ressources:</label>
+                <ul id="resources">
+                    {% for resource in ticket.resources %}
+                    <li>{{ resource }}</li>
+                    {% endfor %}
+                </ul>
+
+                <label for="following-tasks">Following Tasks:</label>
+                <ul id="following-tasks">
+                    {% for task in ticket.followingTasks %}
+                    <li>{{ task }}</li>
+                    {% endfor %}
+                </ul>
+
+                <label for="prerequisite-tasks">Prerequisite Tasks:</label>
+                <ul id="prerequisite-tasks">
+                    {% for task in ticket.prerequisiteTasks %}
+                    <li>{{ task }}</li>
+                    {% endfor %}
+                </ul>
+
+                <label for="subtasks">SubTasks:</label>
+                <ul id="subtasks">
+                    {% for subtask in ticket.subTasks %}
+                    <li>{{ subtask }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div id="detail-footer">
+                <h2>Detailpage of Ticket</h2>
+                <button type="submit" id="save-btn">Save</button>
+                <button type="button" id="close-btn" onclick="closeDetails()">Close</button>
+            </div>
+        </form>
+    </div>
 
     <footer>
-  <p class="copyright">&copy; Copyright</p>
-  <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
-</footer>
+        <p class="copyright">&copy; Copyright</p>
+        <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
+    </footer>
 
-  </body>
-  <script> // Globale Variablen
-    
+</body>
+<script>
+    // Selektiere alle Spalten
     const columns = document.querySelectorAll('.column');
+    // Initialisiere das zu ziehende Element
     let draggedItem = null;
-    
+    // Schleife über alle Spalten
     for (const column of columns) {
-      column.addEventListener('dragstart', function(event) {
-        draggedItem = event.target;
-        event.target.style.opacity = .5;
-      });
-    
-      column.addEventListener('dragend', function(event) {
-        event.target.style.opacity = "";
-        draggedItem = null;
-      });
-    
-      column.addEventListener('dragover', function(event) {
-        event.preventDefault();
-      });
-    
-      column.addEventListener('dragenter', function(event) {
-        event.target.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
-      });
-    
-      column.addEventListener('dragleave', function(event) {
-        event.target.style.backgroundColor = "";
-      });
-    
-      column.addEventListener('drop', function(event) {
-        event.target.style.backgroundColor = "";
-        event.target.appendChild(draggedItem);
-      });
+        // Wenn der Drag-Vorgang in dieser Spalte gestartet wird
+        column.addEventListener('dragstart', function (event) {
+            // Das gezogene Element ist das Ereignisziel
+            draggedItem = event.target;
+            // Setze die Opazität des gezogenen Elements auf 50%
+            event.target.style.opacity = .5;
+        });
+        // Wenn der Drag-Vorgang in dieser Spalte endet
+        column.addEventListener('dragend', function (event) {
+            // Setze die Opazität des gezogenen Elements auf den ursprünglichen Wert zurück
+            event.target.style.opacity = "";
+             // Setze das gezogene Element zurück
+            draggedItem = null;
+        });
+        // Wenn das gezogene Element über dieser Spalte schwebt
+        column.addEventListener('dragover', function (event) {
+            // Verhindere den Standard-Drag-Over-Effekt
+            event.preventDefault();
+        });
+        // Wenn das gezogene Element in diese Spalte hineinzieht
+        column.addEventListener('dragenter', function (event) {
+            // Ändere die Hintergrundfarbe der Spalte, um das Ziehen visuell zu kennzeichnen
+            event.target.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+        });
+        // Wenn das gezogene Element diese Spalte verlässt
+        column.addEventListener('dragleave', function (event) {
+              // Setze die Hintergrundfarbe der Spalte zurück
+            event.target.style.backgroundColor = "";
+        });
+        // Wenn das gezogene Element in dieser Spalte abgelegt wird
+        column.addEventListener('drop', function (event) {
+            // Setze die Hintergrundfarbe der Spalte zurück
+            event.target.style.backgroundColor = "";
+             // Füge das gezogene Element als Kindknoten dieser Spalte hinzu
+            event.target.appendChild(draggedItem);
+        });
     }
+    // Selektiere den Button zum Erstellen von Tickets
     var createTicketBtn = document.getElementById("create-ticket-btn");
+    // Selektiere das Overlay zum Erstellen von Tickets
     var overlay = document.getElementById("create-ticket-overlay");
+    // Selektiere den Schließen-Button
     var closeBtn = document.querySelector(".close-btn");
-    
-    createTicketBtn.onclick = function() {
-      overlay.style.display = "block";
+    // Wenn der Button zum Erstellen von Tickets angeklickt wird
+    createTicketBtn.onclick = function () {
+        // Zeige das Overlay zum Erstellen von Tickets an
+        overlay.style.display = "block";
     }
-    
-    closeBtn.onclick = function() {
-      overlay.style.display = "none";
+    // Wenn der Schließen-Button angeklickt wird
+    closeBtn.onclick = function () {
+        // Verstecke das Overlay zum Erstellen von Tickets
+        overlay.style.display = "none";
     }
-    
+    // Selektiere das Formularelement zum Erstellen von Tickets
     const createTicketForm = document.getElementById("create-ticket-form");
+    // Selektiere das Overlay zum Hinzufügen von Tickets
     const addTicketPopup = document.getElementById("add-ticket-overlay");
-    
-    
-    
-    
-    // Open the popup window when the create ticket button is clicked
-    createTicketBtn.addEventListener("click", function() {
-      addTicketPopup.style.display = "block";
+
+
+
+
+    // Wenn der Button zum Erstellen von Tickets angeklickt wird
+    createTicketBtn.addEventListener("click", function () {
+        // Zeige das Overlay zum Hinzufügen von Tickets an
+        addTicketPopup.style.display = "block";
     });
-    
-    // Close the popup window when the close button is clicked
-    closeBtn.addEventListener("click", function() {
-      addTicketPopup.style.display = "none";
+
+    // Wenn der Schließen-Button angeklickt wird
+    closeBtn.addEventListener("click", function () {
+    // Verstecke das Overlay zum Hinzufügen von Tickets
+        addTicketPopup.style.display = "none";
     });
-    
-    
+
+
     // Get the form element
     const form = document.getElementById('create-ticket-form');
-    
+
     // Get the backlog column
     const backlogColumn = document.getElementById('backlog');
     
+    function showDetails(ticket) {
+        const detailForm = document.getElementById("detail-form");
+        const ticketTitleInput = document.getElementById("ticket-title");
+        const startDateInput = document.getElementById("start-date");
+        const endDateInput = document.getElementById("end-date");
+        const daysInput = document.getElementById("days");
+        const hoursInput = document.getElementById("hours");
+        const resourcesList = document.getElementById("resources");
+        const followingTasksList = document.getElementById("following-tasks");
+        const prerequisiteTasksList = document.getElementById("prerequisite-tasks");
+        const subtasksList = document.getElementById("subtasks");
+
+        // Set the form input values based on the ticket data
+        ticketTitleInput.value = ticket.title;
+        startDateInput.value = ticket.startDate;
+        endDateInput.value = ticket.endDate;
+        daysInput.value = ticket.days;
+        hoursInput.value = ticket.hours;
+
+        // Populate the resources list
+        resourcesList.innerHTML = "";
+        ticket.resources.forEach(function (resource) {
+            const li = document.createElement("li");
+            li.textContent = resource;
+            resourcesList.appendChild(li);
+        });
+
+        // Populate the following tasks list
+        followingTasksList.innerHTML = "";
+        ticket.followingTasks.forEach(function (task) {
+            const li = document.createElement("li");
+            li.textContent = task;
+            followingTasksList.appendChild(li);
+        });
+
+        // Populate the prerequisite tasks list
+        prerequisiteTasksList.innerHTML = "";
+        ticket.prerequisiteTasks.forEach(function (task) {
+            const li = document.createElement("li");
+            li.textContent = task;
+            prerequisiteTasksList.appendChild(li);
+        });
+
+        // Populate the subtasks list
+        subtasksList.innerHTML = "";
+        ticket.subTasks.forEach(function (subtask) {
+            const li = document.createElement("li");
+            li.textContent = subtask;
+            subtasksList.appendChild(li);
+        });
+
+        // Show the detail page
+        detailPage.classList.add("open");
+    }
+
+    function saveDetails() {
+        const ticketTitleInput = document.getElementById("ticket-title");
+        const startDateInput = document.getElementById("start-date");
+        const endDateInput = document.getElementById("end-date");
+        const daysInput = document.getElementById("days");
+        const hoursInput = document.getElementById("hours");
+
+        // Get the updated ticket data from the form inputs
+        const updatedTicket = {
+            title: ticketTitleInput.value,
+            startDate: startDateInput.value,
+            endDate: endDateInput.value,
+            days: daysInput.value,
+            hours: hoursInput.value,
+            resources: [],
+            followingTasks: [],
+            prerequisiteTasks: [],
+            subTasks: []
+        };
+
+        // Get the resources, following tasks, prerequisite tasks, and subtasks
+        const resourcesList = document.getElementById("resources");
+        const followingTasksList = document.getElementById("following-tasks");
+        const prerequisiteTasksList = document.getElementById("prerequisite-tasks");
+        const subtasksList = document.getElementById("subtasks");
+
+        // Add the resource values to the updated ticket
+        const resourceItems = resourcesList.querySelectorAll("li");
+        resourceItems.forEach(function (item) {
+            updatedTicket.resources.push(item.textContent);
+        });
+
+        // Add the following task values to the updated ticket
+        const followingTaskItems = followingTasksList.querySelectorAll("li");
+        followingTaskItems.forEach(function (item) {
+            updatedTicket.followingTasks.push(item.textContent);
+        });
+
+        // Add the prerequisite task values to the updated ticket
+        const prerequisiteTaskItems = prerequisiteTasksList.querySelectorAll("li");
+        prerequisiteTaskItems.forEach(function (item) {
+            updatedTicket.prerequisiteTasks.push(item.textContent);
+        });
+
+        // Add the subtask values to the updated ticket
+        const subtaskItems = subtasksList.querySelectorAll("li");
+        subtaskItems.forEach(function (item) {
+            updatedTicket.subTasks.push(item.textContent);
+        });
+
+        // TODO: Save the updated ticket data to the server
+
+        // Close the detail page
+        closeDetails();
+    }
+
+    function closeDetails() {
+        const detailPage = document.getElementById("detail-page");
+        detailPage.classList.remove("open");
+    }
+
     // Submit event listener for the form
     form.addEventListener('submit', (event) => {
-      event.preventDefault();
-    
-      // Get the input values from the form
-      const assignee = document.getElementById('assignee').value;
-      const task = document.getElementById('task').value;
-      const priority = document.getElementById('priority').value;
-    
-      // Create a new card with the input values
-      const newCard = document.createElement('div');
-      newCard.classList.add('card');
-      newCard.setAttribute('draggable', 'true');
-    
-      newCard.innerHTML = `Assignee: ${assignee} <br> Task: ${task} <br> Priority: ${priority}`;
-    
-      newCard.addEventListener('dblclick', showDetails);
-     
-      // Append the new card to the backlog column
-      backlogColumn.insertBefore(newCard, backlogColumn.secondChild);
-      // Clear the input fields
-      form.reset();
-        
-      // Close the popup window
-      document.getElementById("create-ticket-overlay").style.display = "none";
-      
-        
+        event.preventDefault();
+
+        // Get the input values from the form
+        const assignee = document.getElementById('assignee').value;
+        const task = document.getElementById('task').value;
+        const priority = document.getElementById('priority').value;
+
+        // Create a new card with the input values
+        const newCard = document.createElement('div');
+        newCard.classList.add('card');
+        newCard.setAttribute('draggable', 'true');
+
+        newCard.innerHTML = `Assignee: ${assignee} <br> Task: ${task} <br> Priority: ${priority}`;
+
+        newCard.addEventListener('dblclick', () => {
+        showDetails(ticket);
+    });
+
+        // Append the new card to the backlog column
+        backlogColumn.insertBefore(newCard, backlogColumn.secondChild);
+        // Clear the input fields
+        form.reset();
+
+        // Close the popup window
+        document.getElementById("create-ticket-overlay").style.display = "none";
+
+
     })
-    var currentTicket = null;
+    const detailForm = document.getElementById("detail-form");
+    detailForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        saveDetails();
+    });
     
-    // Diese Funktion wird aufgerufen, wenn das Ticket doppelgeklickt wird
-    function showDetails() {
-      // Das Detail-Element auswählen
-      var detailPage = document.getElementById("detail-page");
-      // Das Ticket-Element auswählen
-      var ticket = event.currentTarget;
-      // Die Ticket-Details abrufen
-      var ticketDetails = ticket.innerHTML;
-      // Das Ticket-Element ausblenden
-      ticket.style.display = "block";
-      // Die Detailseite einblenden
-      detailPage.style.display = "block";
-      // Die Ticket-Details in die Detailseite einfügen
-      var detailContent = document.getElementById("detail-content");
-      detailContent.innerHTML = ticketDetails;
-      // Das aktuelle Ticket speichern
-      currentTicket = ticket;
-      
-    }
-    
-    // Diese Funktion wird aufgerufen, wenn der Speichern-Button auf der Detailseite gedrückt wird
-    function saveDetails() {
-      // Die Detailseite auswählen
-      var detailPage = document.getElementById("detail-page");
-      // Die Detail-Content auswählen
-      var detailContent = document.getElementById("detail-content");
-      // Die bearbeiteten Details des aktuellen Tickets einfügen
-      currentTicket.innerHTML = detailContent.innerHTML;
-      // Das Ticket-Element wieder einblenden
-      currentTicket.style.display = "block";
-      // Die Detailseite ausblenden
-      detailPage.style.display = "none";
-      // Das aktuelle Ticket auf null setzen
-      currentTicket = null;
-    }
-    
-    // Diese Funktion wird aufgerufen, wenn der Schließen-Button auf der Detailseite gedrückt wird
-    function closeDetails() {
-      // Das Ticket-Element wieder einblenden
-      currentTicket.style.display = "block";
-      // Die Detailseite ausblenden
-      var detailPage = document.getElementById("detail-page");
-      detailPage.style.display = "none";
-      // Das aktuelle Ticket auf null setzen
-      currentTicket = null;
-    }
-    
-    </script>
+
+</script>
+
 </html>
