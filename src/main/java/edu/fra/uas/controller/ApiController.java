@@ -63,7 +63,7 @@ public class ApiController {
 	}
 	
 	/**
-	 * Diese Methode braucht 
+	 * 
 	 */
 	@RequestMapping( value = "user/{token}/project",
 			method = RequestMethod.GET,
@@ -72,14 +72,13 @@ public class ApiController {
 	public ResponseEntity<Object> getProjects (@PathVariable("token") String token){
 		
 		User u = userS.getUserWithToken(token);
-		List<Project> projects = projectS.getProjectsForUser(u);
+		List<ProjectDTO> projects = projectS.getProjectsForUser(u);
 		
-		
-//		Collection<ProjectDTO> collection = projects;
-
-		
+		Collection<ProjectDTO> collection = projects;
 		return new ResponseEntity<>(collection, HttpStatus.OK);
 	}
+	
+	
 }
 
 
