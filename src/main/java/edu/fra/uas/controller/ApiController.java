@@ -63,7 +63,7 @@ public class ApiController {
 	}
 	
 	/**
-	 * Diese Methode braucht 
+	 * 
 	 */
 	@RequestMapping( value = "user/{token}/project",
 			method = RequestMethod.GET,
@@ -75,7 +75,7 @@ public class ApiController {
 		List<Project> projects = projectS.getProjectsForUser(u);
 		
 		
-//		Collection<ProjectDTO> collection = projects;
+		Collection<Project> collection = projects;
 
 		
 		return new ResponseEntity<>(collection, HttpStatus.OK);
