@@ -1,82 +1,248 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Add Project Page</title>
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/AddProject.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/src/main/resources/static/js/AddProject.js"></script>
     <style>
-      /* CSS styling for the page */
+        /* CSS styling for the page */
+        body {
+            background-color: #f2f2f2;
+            font-family: 'Didact Gothic', sans-serif;
+            font-size: 16px;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #1e90ff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Navigation styling */
+        .site-nav {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+            z-index: 1;
+        }
+
+        .site-nav__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .menu-primary {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .menu-primary__item {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+
+            .menu-primary__item:hover {
+                color: #1e90ff;
+            }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #1e90ff;
+            color: white;
+        }
+
+        /* Popup window styling */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            display: none;
+        }
+
+        .popup {
+            background-color: white;
+            border-radius: 5px;
+            width: 400px;
+            padding: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #1e90ff;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
     </style>
- 
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+</head>
+<body>
     <nav class="site-nav" role="navigation">
-      <div class="site-nav__inner">
-        <header class="header">
-          <h1>Jarvis-FPM</h1>
-        </header>
-        <ul class="menu-primary">
-          <li><a class="menu-primary__item" href="/">Profile</a></li>
-          <!-- Link to the user's profile -->
-        </ul>
-      </div>
+        <div class="site-nav__inner">
+            <header class="header">
+                <h1>Jarvis-FPM</h1>
+            </header>
+            <ul class="menu-primary">
+                <li><a class="menu-primary__item" href="/">Profile</a></li>
+                <!-- Link to the user's profile -->
+            </ul>
+        </div>
     </nav>
-  </head>
-
-  <body>
-    
     <!-- Button to open the popup window for adding projects -->
-    <button id="add-project-btn"></button>
-
+    <button id="add-project-btn">Add Project</button>
     <!-- Table displaying all saved projects -->
     <table id="project-table">
-      <thead>
-        <tr>
-          <th>Projectleader</th>
-          <th>Project Team</th>
-          <th>Project Title</th>
-          <th>Deadline</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <!-- Example project data -->
-        <tr>
-          <td>Test</td>
-          <td>Tom,Jerry,Christina</td>
-          <td>Creating Website</td>
-          <td>2023-02-28</td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>Projektleiter</th>
+                <th>Projektteam</th>
+                <th>Projekttitel</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example project data -->
+            <tr>
+                <td>Test</td>
+                <td>Tom,Jerry,Christina</td>
+                <td>Creating Website</td>
+                <td>2023-02-28</td>
+            </tr>
+        </tbody>
     </table>
-
     <!-- Popup window for adding projects -->
     <div class="overlay" id="add-project-overlay">
-      <div class="popup">
-        <h2>Add Project</h2>
-        <!-- Form for inputting project details -->
-        <form id="add-project-form">
-          <div class="form-group">
-            <label for="project-leader">Name Project Leader:</label>
-            <input type="text" id="project-leader" name="project-leader" required>
-          </div>
-          <div class="form-group">
-            <label for="project-team">Project Team:</label>
-            <input type="text" id="project-team" name="project-team" required>
-          </div>
-          <div class="form-group">
-            <label for="project-title">Project Title:</label>
-            <input type="text" id="project-title" name="project-title" required>
-          </div>
-          <div class="form-group">
-            <label for="deadline">Deadline:</label>
-            <input type="date" id="deadline" name="deadline" required>
-          </div>
-          <input type="submit" value="Save">
-          <span class="close-btn">&times;</span>
-        </form>
-      </div>
+        <div class="popup">
+            <h2>Add Project</h2>
+            <!-- Form for inputting project details -->
+            <form id="add-project-form">
+                <div class="form-group">
+                    <label for="project-leader">Name Projektleiter:</label>
+                    <input type="text" id="project-leader" name="project-leader" required>
+                </div>
+                <div class="form-group">
+                    <label for="project-team">Projectteam:</label>
+                    <input type="text" id="project-team" name="project-team" required>
+                </div>
+                <div class="form-group">
+                    <label for="project-title">Projecttitel:</label>
+                    <input type="text" id="project-title" name="project-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="deadline">Deadline:</label>
+                    <input type="date" id="deadline" name="deadline" required>
+                </div>
+                <!-- Fixed the name of the submit button -->
+                <input type="submit" name="submit" value="Save">
+                <span class="close-btn">&times;</span>
+            </form>
+        </div>
     </div>
-    <script type="text/javascript" src="/src/main/resources/static/js/AddProject.js"></script>
-  </body>
+    <script>// Get the popup window and save button
+        var popup = document.getElementById("add-project-overlay");
+        var saveBtn = document.getElementById("add-project-form").elements.namedItem("submit");
 
+        // Function to show the popup window
+        function showPopup() {
+            popup.style.display = "block";
+        }
+
+        // Function to hide the popup window
+        function hidePopup() {
+            popup.style.display = "none";
+        }
+
+        // Function to add a new project to the table
+        function addProject() {
+            // Get the input values from the form
+            var leader = document.getElementById("project-leader").value;
+            var team = document.getElementById("project-team").value;
+            var title = document.getElementById("project-title").value;
+            var deadline = document.getElementById("deadline").value;
+
+            // Create a new table row and fill it with the input values
+            var table = document.getElementById("project-table");
+            var row = table.insertRow(-1);
+            var leaderCell = row.insertCell(0);
+            var teamCell = row.insertCell(1);
+            var titleCell = row.insertCell(2);
+            var deadlineCell = row.insertCell(3);
+            leaderCell.innerHTML = leader;
+            teamCell.innerHTML = team;
+            titleCell.innerHTML = title;
+            deadlineCell.innerHTML = deadline;
+
+            // Hide the popup window and reset the form
+            hidePopup();
+            document.getElementById("add-project-form").reset();
+        }
+
+        // Add event listeners to show and hide the popup window
+        document.getElementById("add-project-btn").addEventListener("click", showPopup);
+        document.getElementsByClassName("close-btn")[0].addEventListener("click", hidePopup);
+
+        // Add event listener to the form submit button to add a new project
+        saveBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            addProject();
+        });</script>
+</body>
 </html>

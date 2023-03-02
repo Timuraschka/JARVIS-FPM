@@ -7,7 +7,7 @@
     </style>
     
       
-   
+   <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/All.css">
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Kanban.css">
     <nav class="site-nav" role="navigation">
       <div class="site-nav__inner">
@@ -29,31 +29,126 @@
   <h2>Kanban-Board | Overview</h2>
   </head>
 
-   
-    <div class="board">
-      <div class="column" id="backlog">
-        <h3>Backlog</h3>
+    <!-- Button to open the popup window for creating a ticket -->
+    <button id="create-ticket-btn">Create Ticket</button>
+    <!-- Popup window for creating a ticket -->
+    <div class="overlay" id="create-ticket-overlay">
 
-      </div>
-      <div class="column" id="inprogress">
-        <h3>In Progress</h3>
+        <div class="popup">
+            <h3>Create Ticket</h3>
+            <!-- Form for inputting ticket details -->
+            <form id="create-ticket-form">
 
-      </div>
-      <div class="column" id="inreview">
-        <h3>In Review</h3>
+                <div class="form-group">
+                    <label for="assignee">Assignee:</label>
+                    <input type="text" id="assignee" name="assignee" required>
+                </div>
 
-      </div>
-      <div class="column" id="done">
-        <h3>Done</h3>
+                <div class="form-group">
+                    <label for="task">Task:</label>
+                    <input type="text" id="task" name="task" required>
+                </div>
 
-      </div>
+                <div class="priority">
+                    <label for="priority">Priority</label>
+                    <select id="priority">
+                        <option value="high">High</option>
+                        <option value="medium">Moderate</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+
+                <input type="submit" value="Add Ticket">
+
+                <a class="close-btn">&times;</a>
+
+            </form>
+
+        </div>
+
     </div>
-  
-    <footer>
-  <p class="copyright">&copy; Copyright</p>
-  <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
-</footer>
-<script type="text/javascript" src="/src/main/resources/static/js/Kanban.js"></script>
-  </body>
 
+    <div class="board">
+        <div class="column" id="backlog">
+            <h3>Backlog</h3>
+        </div>
+        <div class="column" id="inprogress">
+            <h3>In Progress</h3>
+
+        </div>
+        <div class="column" id="inreview">
+            <h3>In Review</h3>
+
+        </div>
+        <div class="column" id="done">
+            <h3>Done</h3>
+        </div>
+
+    </div>
+
+
+    <!-- Hier wird die Detailseite angezeigt -->
+    <div id="detail-page">
+        <form id="detail-form" >
+            <div id="detail-content">
+                <label for="ticket-title">Title:</label>
+                <input type="text" id="ticket-title" value="{{ticket.title}}">
+
+                <label for="start-date">Start Date:</label>
+                <br> <input type="date" id="start-date" value="{{ticket.startDate}}"> <br>
+
+                <label for="end-date">End Date:</label>
+                <br> <input type="date" id="end-date" value="{{ticket.endDate}}"> <br>
+
+                <label for="days">Duration in Days:</label>
+                <br> <input type="number" id="days" value="{{ticket.days}}"> <br>
+
+                <label for="hours">Duration in Hours:</label>
+                <br> <input type="number" id="hours" value="{{ticket.hours}}"> <br>
+
+                <label for="resources">Task Ressources:</label>
+                <ul id="resources">
+                    {% for resource in ticket.resources %}
+                    <li>{{ resource }}</li>
+                    {% endfor %}
+                </ul>
+
+                <label for="following-tasks">Following Tasks:</label>
+                <ul id="following-tasks">
+                    {% for task in ticket.followingTasks %}
+                    <li>{{ task }}</li>
+                    {% endfor %}
+                </ul>
+
+                <label for="prerequisite-tasks">Prerequisite Tasks:</label>
+                <ul id="prerequisite-tasks">
+                    {% for task in ticket.prerequisiteTasks %}
+                    <li>{{ task }}</li>
+                    {% endfor %}
+                </ul>
+
+                <label for="subtasks">SubTasks:</label>
+                <ul id="subtasks">
+                    {% for subtask in ticket.subTasks %}
+                    <li>{{ subtask }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div id="detail-footer">
+                <h2>Detailpage of Ticket</h2>
+                <button type="submit" id="save-btn">Save</button>
+                <button type="button" id="close-btn" onclick="closeDetails()">Close</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <p class="copyright">&copy; Copyright</p>
+        <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
+    </footer>
+
+</body>
+
+<script src="/src/main/resources/static/js/Kanban.js"></script>
 </html>
