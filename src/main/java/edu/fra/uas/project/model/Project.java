@@ -16,7 +16,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import edu.fra.uas.resource.model.Resource;
-import edu.fra.uas.settings.model.Settings;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
 import java.io.Serializable;
@@ -39,6 +38,28 @@ public class Project {
 
 	@Column(name = "DESCRIPTION")
 	private String description;
+
+	@Column(name = "HOURS_A_DAY")
+	private int hours_a_day = 8;
+
+	public int getHours_a_day() {
+		return hours_a_day;
+	}
+
+	public void setHours_a_day(int hours_a_day) {
+		this.hours_a_day = hours_a_day;
+	}
+
+	public boolean isAutomatic_shift() {
+		return automatic_shift;
+	}
+
+	public void setAutomatic_shift(boolean automatic_shift) {
+		this.automatic_shift = automatic_shift;
+	}
+
+	@Column(name = "AUTOMATIC_SHIFT")
+	private boolean automatic_shift = true; // Whether the tasks should shift automatically
 
 	// Collection of Foreign Keys
 
@@ -63,16 +84,11 @@ public class Project {
 	private Resource projectOwner;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SETTINGS_ID")
-	private Settings settings;
-
-	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "TIME")
 	private Timetracker time;
 
 	public Project() {
 
-		this.settings = new Settings();
 		this.members = new HashSet<>();
 		this.projectManager = new HashSet<>();
 
@@ -100,14 +116,6 @@ public class Project {
 
 	public void setMembers(Set<Resource> members) {
 		this.members = members;
-	}
-
-	public Settings getSettings() {
-		return settings;
-	}
-
-	public void setSettings(Settings settings) {
-		this.settings = settings;
 	}
 
 	public Set<Resource> getProjectManager() {
@@ -145,5 +153,7 @@ public class Project {
 	public long getId() {
 		return id;
 	}
+	
+	
 
 }

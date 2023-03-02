@@ -25,7 +25,6 @@ import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.service.ProjectService;
 import edu.fra.uas.project.service.DTO.ProjectDTO;
 import edu.fra.uas.resource.service.ResouceService;
-import edu.fra.uas.settings.service.SettingsService;
 import edu.fra.uas.task.service.TaskService;
 import edu.fra.uas.timetracker.service.TimertrackerService;
 import edu.fra.uas.token.TokenService;
@@ -44,20 +43,18 @@ public class ApiController {
 	private TaskService taskS;
 	private ProjectService projectS;
 	private ResouceService resourceS;
-	private SettingsService settingsS;
 	private TimertrackerService timeS;
 	
 	
 	@Autowired
 	public ApiController (UserService userS, TaskService taskS, ProjectService projectS, 
-			ResouceService resourceS, SettingsService settingsS, TimertrackerService timeS) 
+			ResouceService resourceS, TimertrackerService timeS) 
 	{
 		
 		this.userS = userS;
 		this.taskS = taskS;
 		this.projectS = projectS;
 		this.resourceS = resourceS;
-		this.settingsS = settingsS;
 		this.timeS = timeS;
 		
 	}

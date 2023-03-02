@@ -31,13 +31,23 @@ public class ProjectService implements IprojectService {
 
 	@Override
 
-	public List<ProjectDTO> getProjectsForUser(User u){
-		
-		List <Project> projects = projectR.findAllByUser(u.getId());
-		
-		List <ProjectDTO> respone = new ArrayList();
-		
-		for (Project)
+	public List<ProjectDTO> getProjectsForUser(User u) {
+
+		Set<Project> projects = u.getProjects();
+
+		List<ProjectDTO> dtos = new ArrayList();
+
+		for (Project p : projects) {
+
+			ProjectDTO dto = new ProjectDTO();
+
+			dto.setLeader(p.getProjectOwner().getName());
+			dto.setTitel(p.getName());
+			dto.setProjectID(p.getId());
+			dto.setLeaderID(p.getProjectOwner().getProjectMember().getId());
+
+			dtos.add(dto);
+		}
 		return null;
 	}
 
