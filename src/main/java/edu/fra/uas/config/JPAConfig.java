@@ -18,6 +18,7 @@ import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.repository.UserRepository;
 import edu.fra.uas.settings.model.Settings;
 import edu.fra.uas.timetracker.model.Timetracker;
+import java.util.*;
 
 @Configuration
 public class JPAConfig {
@@ -25,6 +26,11 @@ public class JPAConfig {
 	@Bean
 	CommandLineRunner init(UserRepository userR, TaskRepository taskR, ProjectRepository projectR,
 			ResourceRepository resourceR, SettingsRepository settingsR, TimetrackerRepository timeR) {
+
+		Project p1 = new Project();
+		p1.setName("ProjectTest");
+		p1.setDescription("Das Projekt ist das geilste");
+		p1.setMembers(null);
 
 		User u1 = new User();
 		u1.setEmail("123@gmail.com");
@@ -50,11 +56,6 @@ public class JPAConfig {
 		u4.setId(4);
 		u4.setUsername("Szucki069");
 
-		Project p1 = new Project();
-		p1.setName("ProjectTest");
-		p1.setDescription("Das Projekt ist das geilste");
-		p1.setMembers(null);
-
 		Task t1 = new Task();
 		t1.setName("Aufgabe 1");
 		t1.setProject(p1);
@@ -68,18 +69,20 @@ public class JPAConfig {
 		t3.setProject(p1);
 
 		Timetracker tt1 = new Timetracker();
+		tt1.setProject(p1);
 		tt1.setTaskReference(t1);
 
 		Settings s1 = new Settings();
-		s1.setHours_a_day(10);
 		s1.setProject(p1);
+		s1.setHours_a_day(10);
+		s1.setAutomatic_shift(false);
 
 		Resource r1 = new Resource();
 		r1.setName("Mitarbeiter");
 
 		return args -> {
-			projectR.save(p1);
 			settingsR.save(s1);
+			projectR.save(p1);
 			userR.save(u1);
 			userR.save(u2);
 			userR.save(u3);

@@ -33,7 +33,7 @@ public class Settings {
 	@Column(name = "AUTOMATIC_SHIFT")
 	private boolean automatic_shift = true; // Whether the tasks should shift automatically
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT") // creates the column inside the table
 	private Project project;
 

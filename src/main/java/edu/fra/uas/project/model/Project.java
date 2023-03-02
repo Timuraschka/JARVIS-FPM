@@ -63,7 +63,8 @@ public class Project {
 	@JoinColumn(name = "PROJECT_OWNER")
 	private Resource projectOwner;
 
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "project")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "SETTINGS_ID")
 	private Settings settings;
 
 	@OneToOne(fetch = FetchType.EAGER)
