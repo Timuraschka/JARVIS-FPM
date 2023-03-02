@@ -30,9 +30,9 @@
     <table id="project-table">
         <thead>
             <tr>
-                <th>Projektleiter</th>
-                <th>Projektteam</th>
-                <th>Projekttitel</th>
+                <th>Project-Title</th>
+                <th>Project-Leader</th>
+                <th>Project-Team</th>
                 <th>Deadline</th>
             </tr>
         </thead>
@@ -53,29 +53,33 @@
             <!-- Form for inputting project details -->
             <form id="add-project-form" th:action="@{user/{token}/projects}" method="post">
                 <div class="form-group">
-                    <label for="project-leader">Name Projektleiter:</label>
-                    <input type="text" id="project-leader" name="project-leader" required>
-                </div>
-                <div class="form-group">
-                    <label for="project-team">Projectteam:</label>
-                    <input type="text" id="project-team" name="project-team" required>
-                </div>
-                <div class="form-group">
-                    <label for="project-title">Projecttitel:</label>
-                    <input type="text" id="project-title" name="project-title" required>
-                </div>
-                <div class="form-group">
-                    <label for="deadline">Deadline:</label>
-                    <input type="date" id="deadline" name="deadline" required>
-                </div>
-                <!-- Fixed the name of the submit button -->
-                <input type="submit" name="submit" value="Save">
-                <span class="close-btn">&times;</span>
+                    <div class="form-group">
+                        <label for="project-title">Project-Titel:</label>
+                        <input type="text" id="project-title" name="project-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-leader">Project-Leader:</label>
+                        <input type="text" id="project-leader" name="project-leader" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-team">Project-Team:</label>
+                        <input type="text" id="project-team" name="project-team" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Deadline:</label>
+                        <input type="date" id="deadline" name="deadline" required>
+                    </div>
+                    <!-- Fixed the name of the submit button -->
+                    <input type="submit" name="submit" value="Save">
+                    <span class="close-btn">&times;</span>
+
             </form>
         </div>
     </div>
 
 </body>
 <script src="/src/main/resources/static/js/AddProject.js"></script>
+
 
 </html>
