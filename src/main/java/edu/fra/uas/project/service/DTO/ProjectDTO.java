@@ -10,6 +10,7 @@ public class ProjectDTO extends RepresentationModel<ProjectDTO>{
 	String leader;
 	long leaderID;
 	String team;
+	Date deadline;
 	long projectID;
 
 	public ProjectDTO(String titel, String leader, String team, Date deadline, long projectID, long leaderID) {
@@ -17,12 +18,9 @@ public class ProjectDTO extends RepresentationModel<ProjectDTO>{
 		this.titel = titel;
 		this.leader = leader;
 		this.team = team;
+		this.deadline = deadline;
 		this.projectID = projectID;
 		this.leaderID = leaderID;
-	}
-
-	public ProjectDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getTitel() {
@@ -47,6 +45,14 @@ public class ProjectDTO extends RepresentationModel<ProjectDTO>{
 
 	public void setTeam(String team) {
 		this.team = team;
+	}
+
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
 	}
 
 	public long getLeaderID() {
