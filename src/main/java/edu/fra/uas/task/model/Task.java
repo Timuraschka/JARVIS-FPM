@@ -88,8 +88,7 @@ public class Task {
 	@JoinTable(name = "PREREQUISITORS_OF", joinColumns = @JoinColumn(name = "FOLLOWING_TASKS"), inverseJoinColumns = @JoinColumn(name = "TASK_ID"))
 	private Set<Task> prerequisite_tasks;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "SUB_TASKS", joinColumns = @JoinColumn(name = "PARENT_TASK"), inverseJoinColumns = @JoinColumn(name = "TASK_ID"))
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "parent")
 	private Set<Task> subtasks;
 
 	// Attributes

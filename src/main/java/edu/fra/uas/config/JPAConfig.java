@@ -17,6 +17,7 @@ import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.repository.UserRepository;
 import edu.fra.uas.timetracker.model.Timetracker;
 import java.util.*;
+import java.time.LocalDate;
 
 @Configuration
 public class JPAConfig {
@@ -56,15 +57,20 @@ public class JPAConfig {
 
 		Task t1 = new Task();
 		t1.setName("Aufgabe 1");
+		t1.setDescription("Aufbau der Struktur");
 		t1.setProject(p1);
+		t1.setCritical(false);
+		t1.setDone(false);
 
 		Task t2 = new Task();
 		t2.setName("Aufgabe 2");
 		t2.setProject(p1);
+		t2.setParent(t1);
 
 		Task t3 = new Task();
 		t3.setName("Aufgabe 3");
 		t3.setProject(p1);
+		t3.setParent(t1);
 
 		Timetracker tt1 = new Timetracker();
 		tt1.setProject(p1);
