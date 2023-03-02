@@ -95,7 +95,7 @@ public class Timetracker {
 	public void setDuration_in_days(double duration_in_days) {
 		this.duration_in_days = duration_in_days;
 
-		this.duration_in_hours = duration_in_days * projectReference.getHours_a_day();
+		this.duration_in_hours = duration_in_days * projectReference.getSettings().getHours_a_day();
 		shiftEndDate();
 	}
 
@@ -113,7 +113,7 @@ public class Timetracker {
 
 		this.duration_in_hours = duration_in_hours;
 
-		this.duration_in_days = duration_in_hours / projectReference.getHours_a_day();
+		this.duration_in_days = duration_in_hours / projectReference.getSettings().getHours_a_day();
 		shiftEndDate();
 	}
 
@@ -148,7 +148,7 @@ public class Timetracker {
 		this.endDate = endDate;
 
 		duration_in_days = startDate.until(endDate, ChronoUnit.DAYS);
-		duration_in_hours = duration_in_days * projectReference.getHours_a_day();
+		duration_in_hours = duration_in_days * projectReference.getSettings().getHours_a_day();
 	}
 
 	public LocalDate getStartDate() {

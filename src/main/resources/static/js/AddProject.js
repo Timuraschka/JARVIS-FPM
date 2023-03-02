@@ -38,15 +38,13 @@ event.preventDefault();
 const projectLeaderInput = document.getElementById("project-leader");
 const projectTeamInput = document.getElementById("project-team");
 const projectTitleInput = document.getElementById("project-title");
-const deadlineInput = document.getElementById("deadline");
 
 // Create a new table row with the input field data
 const newRow = projectTable.insertRow(0);
 newRow.innerHTML = `
+<td>${projectTitleInput.value}</td> 
 <td>${projectLeaderInput.value}</td> 
 <td>${projectTeamInput.value}</td> 
-<td>${projectTitleInput.value}</td> 
-<td>${deadlineInput.value}</td> 
 `;
 // Add the new row at the beginning of the table
 
@@ -64,24 +62,23 @@ projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelec
 	addProjectOverlay.style.display = "none";
 });
 
-// Funktion zum Erstellen eines Hyperlink-Tags mit dem Projekt-Titel und Link zur anderen Seite
-function createLink(projectTitle) {
-  const link = document.createElement("a");
-  link.href = "/src/main/resources/templates/Kanban.html"; // Link zur anderen Seite
-  link.textContent = projectTitle;
-  return link;
-}
+// Select all edit project buttons and add event listener
+const editProjectBtns = document.querySelectorAll('.edit-project-btn');
+editProjectBtns.forEach(editProjectBtn => {
+    editProjectBtn.addEventListener('click', () => {
+        // Replace "#" with the URL of your edit project page
+        window.location.href = '/src/main/resources/templates/Kanban.html';
+    });
+});
 
-// Funktion, die alle Project-Titel in der Tabelle klickbar macht
-function makeProjectTitlesClickable() {
-  const projectTitleCells = document.querySelectorAll("#project-table tbody td:first-child");
-  projectTitleCells.forEach(cell => {
-    const projectTitle = cell.textContent;
-    const link = createLink(projectTitle);
-    cell.textContent = "";
-    cell.appendChild(link);
-  });
-}
-
-// Aufrufen der Funktion, sobald das Dokument geladen ist
-document.addEventListener("DOMContentLoaded", makeProjectTitlesClickable);
+// Select all delete project buttons and add event listener
+const deleteProjectBtns = document.querySelectorAll('.delete-project-btn');
+deleteProjectBtns.forEach(deleteProjectBtn => {
+    deleteProjectBtn.addEventListener('click', () => {
+        // Get the row of the clicked delete project button
+        const row = deleteProjectBtn.parentNode.parentNode;
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
+        // Here you can write code to delete the project from the database using AJAX
+    });
+});

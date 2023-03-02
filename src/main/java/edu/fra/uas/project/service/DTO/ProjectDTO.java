@@ -23,10 +23,6 @@ public class ProjectDTO extends RepresentationModel<ProjectDTO>{
 		this.leaderID = leaderID;
 	}
 
-	public ProjectDTO() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public String getTitel() {
 		return titel;
 	}

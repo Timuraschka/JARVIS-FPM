@@ -30,19 +30,14 @@ public class ProjectService implements IprojectService {
 	}
 
 	@Override
-	public List<ProjectDTO> getProjectsForUser(User u) {
 
-		// List <Project> projects = projectR.findAllByUser(u.getId());
-
-		List<ProjectDTO> dtos = new ArrayList();
-
-		for (Project p : projects) {
-			ProjectDTO dto = new ProjectDTO();
-			dto.setLeader(p.getProjectOwner().getName());
-			dto.setTitel(p.getName());
-			dto.setDeadline(p.get);
-		}
-
+	public List<ProjectDTO> getProjectsForUser(User u){
+		
+		List <Project> projects = projectR.findAllByUser(u.getId());
+		
+		List <ProjectDTO> respone = new ArrayList();
+		
+		for (Project)
 		return null;
 	}
 
