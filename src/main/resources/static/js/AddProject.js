@@ -52,6 +52,7 @@ newRow.innerHTML = `
 
 projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelector("tbody").firstChild);
 
+
 // Clear the input fields
 
 	projectLeaderInput.value = "";
@@ -62,3 +63,25 @@ projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelec
 // Close the popup window
 	addProjectOverlay.style.display = "none";
 });
+
+// Funktion zum Erstellen eines Hyperlink-Tags mit dem Projekt-Titel und Link zur anderen Seite
+function createLink(projectTitle) {
+  const link = document.createElement("a");
+  link.href = "/src/main/resources/templates/Kanban.html"; // Link zur anderen Seite
+  link.textContent = projectTitle;
+  return link;
+}
+
+// Funktion, die alle Project-Titel in der Tabelle klickbar macht
+function makeProjectTitlesClickable() {
+  const projectTitleCells = document.querySelectorAll("#project-table tbody td:first-child");
+  projectTitleCells.forEach(cell => {
+    const projectTitle = cell.textContent;
+    const link = createLink(projectTitle);
+    cell.textContent = "";
+    cell.appendChild(link);
+  });
+}
+
+// Aufrufen der Funktion, sobald das Dokument geladen ist
+document.addEventListener("DOMContentLoaded", makeProjectTitlesClickable);
