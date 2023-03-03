@@ -4,233 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <title>WBS</title>
-    <link href="<https://fonts.googleapis.com/css?family=Didact+Gothic>" rel="stylesheet">
-    <style>
-        p {
-            font-family: 'Didact Gothic', sans-serif;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            border-radius: 10px;
-        }
-
-        body {
-            background-color: #f2f2f2;
-            font-family: 'Didact Gothic', sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 50px;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 0 auto;
-            width: 90%;
-            max-width: 1200px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-        }
-
-        .section {
-            flex-basis: 30%;
-            margin-bottom: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: white;
-        }
-
-        .form input[type=text],
-        .form input[type=date],
-        .form input[type=number] {
-            display: block;
-            margin-bottom: 10px;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        .form2 input[type=text] {
-            display: block;
-            margin-bottom: 20px;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 60px;
-            font-size: 16px;
-            box-sizing: border-box;
-
-        }
-
-        .form button[type=button] {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .form button[type=button]:hover {
-            background-color: #0062cc;
-        }
-
-        #task-list {
-            margin-top: 30px;
-        }
-
-        #task-list th,
-        #task-list td {
-            padding: 5px 25px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-
-        #task-list th {
-            background-color: #f2f2f2;
-        }
-
-        .timeline {
-            position: relative;
-            margin-top: 10px;
-            height: 50px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .timeline .bar {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            background-color: #007bff;
-            width: 10px;
-            border-radius: 5px;
-        }
-
-        .timeline .label {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            height: 20px;
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
-
-        .timeline .label-bar {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            font-size: 14px;
-            text-align: center;
-            width: 100%;
-        }
-
-        #timeline-start {
-            position: absolute;
-            top: 170px;
-            left: 0;
-            font-size: 14px;
-            text-align: center;
-            width: 100%;
-        }
-
-        #date {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        #task-details {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 15px 103px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-        }
-
-        #task-details h2 {
-            margin-top: 10px;
-        }
-
-        #task-details p {
-            margin-bottom: 0px;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/WBS.css">
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/all.css">
+    <nav class="site-nav" role="navigation">
+        <div class="site-nav__inner">
+            <header class="header">
+                <h1>Jarvis-FPM</h1>
+            </header>
+            <ul class="menu-primary">
+                <li><a class="menu-primary__item" href="/">Profile</a></li>
+                <!-- Link to the user's profile -->
+            </ul>
+        </div>
+    </nav>
 </head>
+
 <body>
-    <h1>JARVIS-FPM WBS</h1>
-        <div class="container">
-            <div class="section">
-                <h2>Tasks</h2>
-                <table id="task-list">
-                    <thead>
-                        <tr>
-                            <th>Zeile</th>
-                            <th>Titel</th>
-                            <th>Start</th>
-                            <th>Ende</th>
-                            <th>Ressourcen</th>
-                            <th>Dependent on</th>
-                            <th>Kosten</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            <div class="section">
-                <h2>Timeline</h2>
-                <div id="date">Datum</div>
-                <div class="timeline">
-                    <div class="label">
-                        <div id="timeline-end">Start</div>
-                        <div id="timeline-end">End</div>
-                    </div>
-                    <div class="bar" id="timeline-bar-1">
-                        <div class="label-bar"></div>
-                    </div>
+    <head>
+
+        <h2>WBS | Overview</h2>
+    </head>
+
+   
+    <div class="container">
+        <div class="section">
+            <h4>Tasks</h4>
+            <table id="task-list">
+                <thead>
+                    <tr>
+                        <th>Zeile</th>
+                        <th>Titel</th>
+                        <th>Start</th>
+                        <th>Ende</th>
+                        <th>Ressourcen</th>
+                        <th>Dependent on</th>
+                        <th>Kosten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h4>Timeline</h4>
+            <div id="date">Datum</div>
+            <div class="timeline">
+                <div class="label">
+                    <div id="timeline-end">Start</div>
+                    <div id="timeline-end">End</div>
+                </div>
+                <div class="bar" id="timeline-bar-1">
+                    <div class="label-bar"></div>
                 </div>
             </div>
-            <div class="section">
-                <div class="form">
-                    <button type="button" onclick="openPopup()">Add</button>
-                    <div id="popup" style="display: none;">
-                        <div class="form">
-<<<<<<< HEAD
-                            <h2>Task hinzufÃ¼gen</h2>
-                            <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
-=======
-                            <h2>Task hinzufügen</h2>
->>>>>>> ae6c1cb0249ee72fb1c247c60ef850ae72ea5200
+        </div>
+        <div class="section">
+            <div class="form">
+                <button type="button" onclick="openPopup()">Add</button>
+                <div id="popup" style="display: none;">
+                    <div class="form">
+                        <h4>Task hinzufügen</h4>
+                        <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
+
                             <input type="text" id="task-name" placeholder="Titel">
-                            <label for="start-date">Startdatum:</label><input type="date" id="task-start-date" placeholder="Startdatum">
-                            <label for="end-date">Enddatum:</label><input type="date" id="task-end-date" placeholder="Enddatum">
+                            <label for="start-date">Startdatum:</label><input type="date" id="task-start-date"
+                                placeholder="Startdatum">
+                            <label for="end-date">Enddatum:</label><input type="date" id="task-end-date"
+                                placeholder="Enddatum">
                             <input type="text" id="task-resources" placeholder="Ressourcen">
                             <input type="checkbox" id="task-dependent" placeholder="Dependent">critical
                             <input type="number" id="task-costs" placeholder="Kosten">
@@ -241,16 +81,15 @@
                             <button type="button" onclick="addTask()">Hinzufügen</button>
                             <button type="button" onclick="closePopup()">Abbrechen</button>
                             <button type="button" onclick="closeTaskDetails()">Details</button>
-                            </form>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="task-details">
-                <form th:action="@{/user/{token}/project/{id}}" method="GET">
-                <h2>Task Details</h2>
-                <h2>Name:</h2>
+        <div id="task-details">
+            <form th:action="@{/user/{token}/project/{id}}" method="GET">
+                <h4>Task Details</h4>
                 <h2 id="task-name-details"></h2>
                 <p>Start:</p>
                 <p id="task-start-date-details"></p>
@@ -264,142 +103,9 @@
                 <p id="task-costs-details"></p>
                 <p>Beschreibung:</p>
                 <p id="task-definition-details"></p>
-                </form>
-            </div>
-            <script>
-
-                let date = new Date().toLocaleDateString("de-DE");
-                document.getElementById("date").innerHTML = date;
-
-                let timelineStart = document.getElementById("timeline-start");
-                let timelineEnd = document.getElementById("timeline-end");
-                let timelineBar1 = document.getElementById("timeline-bar-1");
-
-                let taskList = document.getElementById("task-list");
-                let taskName = document.getElementById("task-name");
-                let taskStartDate = document.getElementById("task-start-date");
-                let taskEndDate = document.getElementById("task-end-date");
-                let taskResources = document.getElementById("task-resources");
-                let taskDependent = document.getElementById("task-dependent");
-                let taskCosts = document.getElementById("task-costs");
-                let taskBeschreibung = document.getElementById("task-definition");
-                let taskNameDetails = document.getElementById("task-name-details");
-                let taskStartDateDetails = document.getElementById("task-start-date-details");
-                let taskEndDateDetails = document.getElementById("task-end-date-details");
-                let taskResourcesDetails = document.getElementById("task-resources-details");
-                let taskDependentDetails = document.getElementById("task-dependent-details");
-                let taskCostsDetails = document.getElementById("task-costs-details");
-                let taskBeschreibungDetails = document.getElementById("task-definition-details");
-
-                let tasks = [];
-
-                function addTask() {
-                    let task = {
-                        name: taskName.value,
-                        startDate: taskStartDate.value,
-                        endDate: taskEndDate.value,
-                        resources: taskResources.value,
-                        dependent: taskDependent.value,
-                        costs: taskCosts.value,
-                        beschreibung: taskBeschreibung.value
-                    };
-
-                    tasks.push(task);
-
-                    let taskRow = `
-                <tr onclick="showTaskDetails(${tasks.length - 1})">
-                	<td>${task.name}</td>
-                    <td>${task.name}</td>
-                    <td>${task.startDate}</td>
-                    <td>${task.endDate}</td>
-                    <td>${task.resources}</td>
-                    <td>${task.dependent}</td>
-                    <td>${task.costs}</td>
-                </tr>
-            `;
-                    taskList.innerHTML += taskRow;
-
-                    let timelineBarNew = document.createElement("div");
-                    timelineBarNew.className = "bar";
-                    timelineBarNew.style.width = `${task.duration * 10}px`;
-                    timelineBarNew.setAttribute("id", `timeline-bar-${tasks.length}`);
-
-                    let labelBarNew = document.createElement("div");
-                    labelBarNew.className = "label-bar";
-                    labelBarNew.innerHTML = task.name;
-                    timelineBarNew.appendChild(labelBarNew);
-
-                    let timeline = document.querySelector(".timeline");
-                    timeline.appendChild(timelineBarNew);
-
-                    updateTimelineEnd(new Date(task.endDate));
-                }
-                function showTaskDetails(index) {
-                    taskNameDetails.innerHTML = tasks[index].name;
-                    taskStartDateDetails.innerHTML = tasks[index].startDate;
-                    taskEndDateDetails.innerHTML = tasks[index].endDate;
-                    taskResourcesDetails.innerHTML = tasks[index].resources;
-                    taskDependentDetails.innerHTML = tasks[index].dependent;
-                    taskCostsDetails.innerHTML = tasks[index].costs;
-                    taskBeschreibungDetails.innerHTML = tasks[index].beschreibung;
-
-                    let timelineBarOld = document.getElementById("timeline-bar-selected");
-                    if (timelineBarOld) {
-                        timelineBarOld.removeAttribute("id");
-                    }
-                    let timelineBars = document.getElementsByClassName("bar");
-                    timelineBars[index].setAttribute("id", "timeline-bar-selected");
-                    // sichtbar machen des Task Details-Fensters
-                    document.getElementById("task-details").style.display = "block";
-                }
-
-                function ShowTaskDetails() {
-                    // verbergen des Task Details-Fensters
-                    document.getElementById("task-details").style.display = "none";
-                }
-
-
-
-                function showTaskDetails(index) {
-                    taskNameDetails.innerHTML = tasks[index].name;
-                    taskStartDateDetails.innerHTML = tasks[index].startDate;
-                    taskEndDateDetails.innerHTML = tasks[index].endDate;
-                    taskResourcesDetails.innerHTML = tasks[index].resources;
-                    taskDependentDetails.innerHTML = tasks[index].dependent;
-                    taskCostsDetails.innerHTML = tasks[index].costs;
-                    taskBeschreibungDetails.innerHTML = tasks[index].beschreibung;
-
-
-                    let timelineBarOld = document.getElementById("timeline-bar-selected");
-                    if (timelineBarOld) {
-                        timelineBarOld.removeAttribute("id");
-                    }
-                    let timelineBars = document.getElementsByClassName("bar");
-                    timelineBars[index].setAttribute("id", "timeline-bar-selected");
-                }
-
-
-                function getDayDifference(date1, date2) {
-                    let timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                    let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                    return dayDiff;
-                }
-
-                function updateTimelineEnd(date) {
-                    let currentTimelineEnd = new Date(timelineEnd.innerHTML);
-                    if (date > currentTimelineEnd) {
-                        timelineEnd.innerHTML = date.toISOString().slice(0, 10);
-                        timelineBar1.style.width = `${getDayDifference(new Date(timelineEnd.innerHTML), new Date(timelineStart.innerHTML)) * 10}px`;
-                    }
-                }
-                function openPopup() {
-                    document.getElementById("popup").style.display = "block";a
-                }
-
-                function closePopup() {
-                    document.getElementById("popup").style.display = "none";
-                }
-            </script>
+            </form>
+        </div>
+        <script src="/src/main/resources/static/js/WBS.js"></script>
 </body>
 
 </html>
