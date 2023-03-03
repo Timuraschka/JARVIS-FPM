@@ -183,10 +183,8 @@
     </style>
     <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 </head>
-
 <body>
     <h1>JARVIS-FPM WBS</h1>
-    <form method="POST" action="/submit">
         <div class="container">
             <div class="section">
                 <h2>Tasks</h2>
@@ -225,6 +223,7 @@
                     <div id="popup" style="display: none;">
                         <div class="form">
                             <h2>Task hinzufÃ¼gen</h2>
+                            <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
                             <input type="text" id="task-name" placeholder="Titel">
                             <input type="date" id="task-start-date" placeholder="Startdatum">
                             <input type="date" id="task-end-date" placeholder="Enddatum">
@@ -238,12 +237,14 @@
                             <button type="button" onclick="addTask()">HinzufÃ¼gen</button>
                             <button type="button" onclick="closePopup()">Abbrechen</button>
                             <button type="button" onclick="closeTaskDetails()">Details</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="task-details">
+                <form th:action="@{/user/{token}/project/{id}}" method="GET">
                 <h2>Task Details</h2>
                 <h2>Name:</h2>
                 <h2 id="task-name-details"></h2>
@@ -259,6 +260,7 @@
                 <p id="task-costs-details"></p>
                 <p>Beschreibung:</p>
                 <p id="task-definition-details"></p>
+                </form>
             </div>
             <script>
 
