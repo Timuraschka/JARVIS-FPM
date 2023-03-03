@@ -26,6 +26,9 @@ public class UserController {
     //if (tokenService.checkIfTokenExistsAndIsValid(userToken)){
     //return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 
+
+
+
     @CrossOrigin
     // Mapping to Login
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -42,6 +45,11 @@ public class UserController {
 
 
         return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+    }
+
+    @RequestMapping(value = "/login", method =RequestMethod.GET)
+    public String openLoginPage(){
+        return "login";
     }
 
     @CrossOrigin
