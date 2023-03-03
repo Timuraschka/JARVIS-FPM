@@ -1,10 +1,12 @@
 package edu.fra.uas.user.controller;
 
+import edu.fra.uas.controller.ApiController;
 import edu.fra.uas.token.Token;
 import edu.fra.uas.token.TokenService;
 import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
 
@@ -26,9 +29,16 @@ public class UserController {
     //if (tokenService.checkIfTokenExistsAndIsValid(userToken)){
     //return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 
-    @CrossOrigin
-    // Mapping to Login
-    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+
+
+    
+    
+    /**
+     * logs the user in: 
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> loginUser(@RequestBody User user) {
 
         if (userService.loginUser(user.getEmail(), user.getPassword())){
@@ -43,6 +53,12 @@ public class UserController {
 
         return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
     }
+
+    // @GetMapping(value = "/login")
+    // public EntityModel<User> openLoginPage(){
+
+    //     return EntityModel.of(,linkTo(methodOn(UserController.class).all().withRel()));
+    // }
 
     @CrossOrigin
     // Mapping to get a user

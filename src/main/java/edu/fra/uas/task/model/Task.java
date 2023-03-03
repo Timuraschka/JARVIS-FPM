@@ -32,8 +32,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-
-
 /**
  * 
  * 
@@ -62,11 +60,16 @@ public class Task {
 
 	// foreign Keys
 
-	@ManyToOne
-	@JoinColumn(name = "PARENT_TASK")
-	private Task parent;
+	public void setId(long id) {
+		this.id = id;
+	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	@ManyToOne
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
@@ -74,23 +77,29 @@ public class Task {
 	@JoinColumn(name = "TIME")
 	private Timetracker timetracker;
 
+	@ManyToOne(targetEntity = Task.class)
+	@JoinColumn(name = "PARENT_TASK")
+	private Task parent;
+
+
 	// Collection of foreign Keys
+
+	@OneToMany(targetEntity = Task.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "SUBTASKS")
+	private Set<Task> subtasks = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TASK_RESOURCES", joinColumns = @JoinColumn(name = "TASK_ID"), inverseJoinColumns = @JoinColumn(name = "RESOUCE_ID"))
-	private Set<Resource> resources;
+	private Set<Resource> resources = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "FOLLOWING_TASKS")
-	private Set<Task> following_tasks;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "FOLLOWING_TASKS", joinColumns = @JoinColumn(name = "PREREQUISITORS_OF"), inverseJoinColumns = @JoinColumn(name = "TASK_ID"))
+	private Set<Task> following_tasks = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PREREQUISITORS_OF")
-	private Set<Task> prerequisite_tasks;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "PREREQUISITORS_OF", joinColumns = @JoinColumn(name = "FOLLOWING_TASKS"), inverseJoinColumns = @JoinColumn(name = "TASK_ID"))
+	private Set<Task> prerequisite_tasks = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SUB_TASKS")
-	private Set<Task> subtasks;
 
 	// Attributes
 
@@ -136,6 +145,11 @@ public class Task {
 
 	public Task() {
 
+	}
+
+
+	public void addAsSubTask(Task subtask){
+		this.subtasks.add(subtask);
 	}
 
 	/**

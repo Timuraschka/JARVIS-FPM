@@ -33,6 +33,10 @@ public class Project {
 
 	// Attributes
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Column(name = "NAME")
 	private String name;
 
@@ -71,8 +75,7 @@ public class Project {
 	@Column(name = "TASKS")
 	private Set<Task> tasks;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PROJECT_MANAGER")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Resource> projectManager;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")

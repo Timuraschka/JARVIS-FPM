@@ -14,24 +14,20 @@ import jakarta.persistence.Table;
 import java.util.Set;
 import java.util.HashSet;
 
-
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.resource.model.Resource;
-
-
-
 
 @Entity // declares this class as an Entity for the database
 @Table(name = "User") // creates the table inside the database
 public class User {
 
 	// ID
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
 	private long id;
-	
+
 	// Attributes
 
 	@Column(name = "NAME")
@@ -45,17 +41,14 @@ public class User {
 
 	@Column(name = "EMAIL")
 	private String email;
-	
+
 	// Foreign Keys Collection
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECTS")
 	private Set<Project> projects;
-	
-	
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "RESOURCE")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Resource> resourceIn;
 
 	public User() {
@@ -63,8 +56,7 @@ public class User {
 		projects = new HashSet<>();
 		resourceIn = new HashSet<>();
 	}
-	
-	
+
 	public long getId() {
 		return id;
 	}
@@ -72,6 +64,7 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -117,20 +110,18 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Set<Project> getProjects() {
 		return projects;
 	}
-
 
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 
-
 	public Set<Resource> getResourceIn() {
 		return resourceIn;
 	}
-
 
 	public void setResourceIn(Set<Resource> resourceIn) {
 		this.resourceIn = resourceIn;

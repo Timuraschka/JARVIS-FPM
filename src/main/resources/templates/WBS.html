@@ -62,11 +62,23 @@
             box-sizing: border-box;
         }
 
+        .form2 input[type=text] {
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 60px;
+            font-size: 16px;
+            box-sizing: border-box;
+
+        }
+
         .form button[type=button] {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 15px;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
@@ -78,12 +90,12 @@
         }
 
         #task-list {
-            margin-top: 10px;
+            margin-top: 30px;
         }
 
         #task-list th,
         #task-list td {
-            padding: 5px 10px;
+            padding: 5px 25px;
             border: 1px solid #ccc;
             text-align: center;
         }
@@ -181,11 +193,13 @@
                 <table id="task-list">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Startdatum</th>
-                            <th>Enddatum</th>
-                            <th>Dauer in Tagen</th>
+                            <th>Zeile</th>
+                            <th>Titel</th>
+                            <th>Start</th>
+                            <th>Ende</th>
                             <th>Ressourcen</th>
+                            <th>Dependent on</th>
+                            <th>Kosten</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -206,28 +220,48 @@
                 </div>
             </div>
             <div class="section">
-                <h2>Task hinzufügen</h2>
                 <div class="form">
-                    <input type="text" id="task-name" placeholder="Name">
-                    <input type="date" id="task-start-date" placeholder="Startdatum">
-                    <input type="date" id="task-end-date" placeholder="Enddatum">
-                    <input type="number" id="task-duration" placeholder="Dauer in Tagen">
-                    <input type="text" id="task-resources" placeholder="Ressourcen">
-                    <input type="number" id="task-costs" placeholder="Kosten">
-                    <input type="number" id="task-hours" placeholder="Stunden">
-                    <input type="text" id="task-definition" placeholder="Beschreibung">
-                    <button type="button" onclick="addTask()">Hinzufügen</button>
+                    <button type="button" onclick="openPopup()">Add</button>
+                    <div id="popup" style="display: none;">
+                        <div class="form">
+                            <h2>Task hinzufügen</h2>
+                            <input type="text" id="task-name" placeholder="Titel">
+                            <label for="start-date">Startdatum:</label><input type="date" id="task-start-date" placeholder="Startdatum">
+                            <label for="end-date">Enddatum:</label><input type="date" id="task-end-date" placeholder="Enddatum">
+                            <input type="text" id="task-resources" placeholder="Ressourcen">
+                            <input type="checkbox" id="task-dependent" placeholder="Dependent">critical
+                            <input type="number" id="task-costs" placeholder="Kosten">
+
+                            <div class="form2">
+                                <input type="text" id="task-definition" placeholder="Beschreibung">
+                            </div>
+                            <button type="button" onclick="addTask()">Hinzufügen</button>
+                            <button type="button" onclick="closePopup()">Abbrechen</button>
+                            <button type="button" onclick="closeTaskDetails()">Details</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div id="task-details">
                 <h2>Task Details</h2>
+                <h2>Name:</h2>
                 <h2 id="task-name-details"></h2>
+                <p>Start:</p>
                 <p id="task-start-date-details"></p>
+                <p>End:</p>
                 <p id="task-end-date-details"></p>
-                <p id="task-duration-details"></p>
+                <p>Ressource:</p>
                 <p id="task-resources-details"></p>
+                <p>Dependent:</p>
+                <p id="task-dependent-details"></p>
+                <p>Kosten:</p>
+                <p id="task-costs-details"></p>
+                <p>Beschreibung:</p>
+                <p id="task-definition-details"></p>
             </div>
             <script>
+
                 let date = new Date().toLocaleDateString("de-DE");
                 document.getElementById("date").innerHTML = date;
 
@@ -239,13 +273,17 @@
                 let taskName = document.getElementById("task-name");
                 let taskStartDate = document.getElementById("task-start-date");
                 let taskEndDate = document.getElementById("task-end-date");
-                let taskDuration = document.getElementById("task-duration");
                 let taskResources = document.getElementById("task-resources");
+                let taskDependent = document.getElementById("task-dependent");
+                let taskCosts = document.getElementById("task-costs");
+                let taskBeschreibung = document.getElementById("task-definition");
                 let taskNameDetails = document.getElementById("task-name-details");
                 let taskStartDateDetails = document.getElementById("task-start-date-details");
                 let taskEndDateDetails = document.getElementById("task-end-date-details");
-                let taskDurationDetails = document.getElementById("task-duration-details");
                 let taskResourcesDetails = document.getElementById("task-resources-details");
+                let taskDependentDetails = document.getElementById("task-dependent-details");
+                let taskCostsDetails = document.getElementById("task-costs-details");
+                let taskBeschreibungDetails = document.getElementById("task-definition-details");
 
                 let tasks = [];
 
@@ -254,19 +292,23 @@
                         name: taskName.value,
                         startDate: taskStartDate.value,
                         endDate: taskEndDate.value,
-                        duration: taskDuration.value,
                         resources: taskResources.value,
+                        dependent: taskDependent.value,
+                        costs: taskCosts.value,
+                        beschreibung: taskBeschreibung.value
                     };
 
                     tasks.push(task);
 
                     let taskRow = `
                 <tr onclick="showTaskDetails(${tasks.length - 1})">
+                	<td>${task.name}</td>
                     <td>${task.name}</td>
                     <td>${task.startDate}</td>
                     <td>${task.endDate}</td>
-                    <td>${task.duration}</td>
                     <td>${task.resources}</td>
+                    <td>${task.dependent}</td>
+                    <td>${task.costs}</td>
                 </tr>
             `;
                     taskList.innerHTML += taskRow;
@@ -286,13 +328,41 @@
 
                     updateTimelineEnd(new Date(task.endDate));
                 }
+                function showTaskDetails(index) {
+                    taskNameDetails.innerHTML = tasks[index].name;
+                    taskStartDateDetails.innerHTML = tasks[index].startDate;
+                    taskEndDateDetails.innerHTML = tasks[index].endDate;
+                    taskResourcesDetails.innerHTML = tasks[index].resources;
+                    taskDependentDetails.innerHTML = tasks[index].dependent;
+                    taskCostsDetails.innerHTML = tasks[index].costs;
+                    taskBeschreibungDetails.innerHTML = tasks[index].beschreibung;
+
+                    let timelineBarOld = document.getElementById("timeline-bar-selected");
+                    if (timelineBarOld) {
+                        timelineBarOld.removeAttribute("id");
+                    }
+                    let timelineBars = document.getElementsByClassName("bar");
+                    timelineBars[index].setAttribute("id", "timeline-bar-selected");
+                    // sichtbar machen des Task Details-Fensters
+                    document.getElementById("task-details").style.display = "block";
+                }
+
+                function ShowTaskDetails() {
+                    // verbergen des Task Details-Fensters
+                    document.getElementById("task-details").style.display = "none";
+                }
+
+
 
                 function showTaskDetails(index) {
                     taskNameDetails.innerHTML = tasks[index].name;
                     taskStartDateDetails.innerHTML = tasks[index].startDate;
                     taskEndDateDetails.innerHTML = tasks[index].endDate;
-                    taskDurationDetails.innerHTML = tasks[index].duration;
                     taskResourcesDetails.innerHTML = tasks[index].resources;
+                    taskDependentDetails.innerHTML = tasks[index].dependent;
+                    taskCostsDetails.innerHTML = tasks[index].costs;
+                    taskBeschreibungDetails.innerHTML = tasks[index].beschreibung;
+
 
                     let timelineBarOld = document.getElementById("timeline-bar-selected");
                     if (timelineBarOld) {
@@ -301,6 +371,7 @@
                     let timelineBars = document.getElementsByClassName("bar");
                     timelineBars[index].setAttribute("id", "timeline-bar-selected");
                 }
+
 
                 function getDayDifference(date1, date2) {
                     let timeDiff = Math.abs(date2.getTime() - date1.getTime());
@@ -314,6 +385,13 @@
                         timelineEnd.innerHTML = date.toISOString().slice(0, 10);
                         timelineBar1.style.width = `${getDayDifference(new Date(timelineEnd.innerHTML), new Date(timelineStart.innerHTML)) * 10}px`;
                     }
+                }
+                function openPopup() {
+                    document.getElementById("popup").style.display = "block";a
+                }
+
+                function closePopup() {
+                    document.getElementById("popup").style.display = "none";
                 }
             </script>
 </body>
