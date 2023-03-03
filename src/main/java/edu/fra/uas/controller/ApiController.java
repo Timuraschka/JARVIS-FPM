@@ -27,6 +27,7 @@ import edu.fra.uas.project.service.ProjectService;
 import edu.fra.uas.project.service.DTO.ProjectDTO;
 import edu.fra.uas.resource.service.ResouceService;
 import edu.fra.uas.task.service.TaskService;
+import edu.fra.uas.task.service.DTO.TaskDTO;
 import edu.fra.uas.timetracker.service.TimertrackerService;
 import edu.fra.uas.token.TokenService;
 import edu.fra.uas.user.model.User;
@@ -77,10 +78,11 @@ public class ApiController {
 	}
 
 	@RequestMapping(value = "/user/{token}/project/{project_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List> getKanbanWBS(@PathVariable("token") String token,
+	public ResponseEntity<List<TaskDTO>> getKanbanWBS(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id) {
-
-		return null;
+		List<TaskDTO> kanbanWBS = taskS.getTasksInProject(projectS.getProject(project_id));
+		List<TaskDTO> collection = kanbanWBS;
+		return new ResponseEntity<List<TaskDTO>>(collection, HttpStatusCode.valueOf(200));
 	}
 
 	@RequestMapping(value = "/user/{token}/project/{project_id}/tasks/{task_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

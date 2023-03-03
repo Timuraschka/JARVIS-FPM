@@ -29,43 +29,14 @@ import edu.fra.uas.user.model.User;
 @Table(name = "Resources") // creates the table inside the database
 public class Resource {
 
+	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
+
 	// ID
 
 	@Id // used to identify the columns inside the table
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "RESOURCE_ID") // creates the column inside the table
 	private long id;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public static Logger getLog() {
-		return log;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
-
 	// Attributes
 
 	@Column(name = "NAME") // creates the column inside the table
@@ -96,12 +67,6 @@ public class Resource {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "resources", cascade = CascadeType.ALL)
 	private Set<Task> tasks;
 
-	public Resource() {
-		super();
-		this.tasks = new HashSet<>();
-
-	}
-
 	public void addTaskToRessource(Task task) {
 		tasks.add(task);
 		log.debug("Task added to the resource " + this.name);
@@ -116,6 +81,40 @@ public class Resource {
 			}
 		}
 		log.debug("Task removed from resource " + this.name);
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public static Logger getLog() {
+		return log;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Resource() {
+		super();
+		this.tasks = new HashSet<>();
+
 	}
 
 	public void setHourlyRate(double hourlyRate) {
