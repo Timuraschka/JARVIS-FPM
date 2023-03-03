@@ -33,6 +33,10 @@ public class Project {
 
 	// Attributes
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Column(name = "NAME")
 	private String name;
 

@@ -43,25 +43,9 @@ public class ResouceService {
 
     public void changeResource(String ResourceId, Resource resourceNeu) {
         Resource resourceAlt = getResource(ResourceId);
-        resourceAlt.setId(resourceNeu.getId());
+        resourceNeu.setId(resourceAlt.getId());
+        resourceR.save(resourceNeu);
 
-        // if (!resourceAlt.getName().equals(resourceNeu.getName())) {
-        //     resourceAlt.setName(resourceNeu.getName());
-        // }
-        // if (resourceAlt.getProject().getId() != resourceNeu.getProject().getId()){
-        //     resourceAlt.setProject(resourceNeu.getProject());
-    
-        // }
-        // if (resourceAlt.getHourlyRate() != resourceNeu.getHourlyRate()){
-        //     resourceAlt.setHourlyRate(resourceNeu.getHourlyRate());
-        // }
-        // if(resourceAlt.getProjectMember() != resourceNeu.getProjectMember()){
-        //     resourceAlt.setProjectMember(resourceNeu.getProjectMember());
-        // }
-        // if(resourceAlt.getSupervisor() != resourceNeu.getSupervisor()){
-        //     resourceAlt.setSupervisor(resourceNeu.getSupervisor());
-        // }
-         }
-        
     }
 
+}
