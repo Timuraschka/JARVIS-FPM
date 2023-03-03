@@ -36,10 +36,12 @@ public class TimertrackerService {
 		timeR.save(timeNeu);
 
 	}
-	public void deleteTime(String timeId){
+
+	public void deleteTime(String timeId) {
 		timeR.delete(getTimetracker(timeId));
 	}
-	public void insertTime(Timetracker timetracker){
+
+	public void insertTime(Timetracker timetracker) {
 		timeR.save(timetracker);
 	}
 }
