@@ -114,11 +114,15 @@ public class TaskService implements ITaskService {
 	}
 
 	public void changeTask(String TaskId, Task taskNeu) {
-		Long l = Long.parseLong(TaskId);
-		Task taskAlt = getTaskInProject(l); // getTaskInProject siehe obige Methode ?
+		Task taskAlt = getTask(TaskId);
 		taskNeu.setId(taskAlt.getId());
 		taskR.save(taskNeu);
 
+	}
+
+	public Task getTask(String TaskId) {
+		Long l = Long.parseLong(TaskId);
+		return taskR.findById(l).get();
 	}
 
 }
