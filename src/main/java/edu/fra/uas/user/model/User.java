@@ -45,7 +45,7 @@ public class User {
 	// Foreign Keys Collection
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Column(name = "PROJECTS")
+	@JoinColumn(name = "PROJECTS")
 	private Set<Project> projects;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
