@@ -100,3 +100,6 @@ function closeDetails() {
   // Hide the detail page
   document.getElementById('detail-page').style.display = 'none';
 }
+function updateProgressValue(value) {
+  document.getElementById("progress-value").textContent = value;
+}

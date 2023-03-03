@@ -1,57 +1,3 @@
-/* CSS styles for header section */
-header {
-position: fixed;
-top: 0;
-width: 100%;
-height: 10px;
-display: flex;
-justify-content: left;
-font-size: 11pt;
-color: white;
-font-family: Calibri;
-}
-
-/* CSS styles to reset all HTML elements */
-/* quick & dirty reset css */
-*
-{
-padding: 0;
-margin: 0;
-outline: none;
-}
-/* CSS styles for site navigation */
-.site-nav {
-height: 50px;
-position: fixed;
-top: 0%;
-left: 0%;
-width: 100%;
-background-color: #82b74b;
-opacity: 1;
-}
-
-.site-nav__inner {
-display: flex;
-justify-content: right;
-}
-
-/* CSS styles for primary menu */
-.menu-primary {
-display: flex;
-list-style: none;
-}
-
-.menu-primary__item {
-color: White;
-display: block;
-padding: 1.5rem 1.8rem;
-transition: ease-in-out 150ms;
-text-decoration: none;
-}
-
-.menu-primary__item:hover {
-color: #94a1af;
-}
 
 /* CSS styles for "Add Project" button */
 #add-project-btn {
@@ -139,7 +85,7 @@ font-weight: bold;
 margin-bottom: 5px;
 }
 
-input[type="text"], input[type="date"] {
+input[type="text"] {
 width: 100%;
 padding: 5px;
 border-radius: 3px;
