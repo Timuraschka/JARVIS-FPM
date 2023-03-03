@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <style>
-     
+
     </style>
-    
-      
-   <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/All.css">
+
+
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/All.css">
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Kanban.css">
     <nav class="site-nav" role="navigation">
-      <div class="site-nav__inner">
-        <header class="header">
-          <h1>Jarvis-FPM</h1>
-        </header>
-        <ul class="menu-primary">
-          <li><a class="menu-primary__item" href="/">Welcome, </a></li>
-          <!-- Link to the user's profile -->
-        </ul>
-      </div>
+        <div class="site-nav__inner">
+            <header class="header">
+                <h1>Jarvis-FPM</h1>
+            </header>
+            <ul class="menu-primary">
+                <li><a class="menu-primary__item1" href="/src/main/resources/templates/WBS.html">WBS</a></li>
+            </ul>
+            <ul class="menu-primary">
+                <li><a class="menu-primary__item2" href="/src/main/resources/templates/Resource.html">Ressources</a></li>
+            </ul>
+            <ul class="menu-primary">
+                <li><a class="menu-primary__item" href="/">Welcome, </a></li>
+                <!-- Link to the user's profile -->
+            </ul>
+        </div>
     </nav>
 
-  </head>
+</head>
 
-  <body>
-  <head>
-  
-  <h2>Kanban-Board | Overview</h2>
-  </head>
+<body>
+
+    <head>
+
+        <h2>Kanban-Board | Overview</h2>
+    </head>
 
     <!-- Button to open the popup window for creating a ticket -->
     <button id="create-ticket-btn">Create Ticket</button>
@@ -89,50 +96,29 @@
 
     <!-- Hier wird die Detailseite angezeigt -->
     <div id="detail-page">
-        <form id="detail-form" >
+        <form id="detail-form">
             <div id="detail-content">
                 <label for="ticket-title">Title:</label>
-                <input type="text" id="ticket-title" value="{{ticket.title}}">
+                <input type="text" id="ticket-title" value="{{ticket.title}}" readonly>
 
                 <label for="start-date">Start Date:</label>
-                <br> <input type="date" id="start-date" value="{{ticket.startDate}}"> <br>
+                <br><input type="date" id="start-date" value="{{ticket.startDate}}" readonly> <br>
 
                 <label for="end-date">End Date:</label>
-                <br> <input type="date" id="end-date" value="{{ticket.endDate}}"> <br>
+                <br> <input type="date" id="end-date" value="{{ticket.endDate}}" readonly> <br>
 
-                <label for="days">Duration in Days:</label>
-                <br> <input type="number" id="days" value="{{ticket.days}}"> <br>
+                <label for="assignee">Assignee:</label>
+                <br><input type="text" id="assignee" value="{{ticket.assignee}}" readonly> <br>
 
-                <label for="hours">Duration in Hours:</label>
-                <br> <input type="number" id="hours" value="{{ticket.hours}}"> <br>
+                <label for="progress">Progress:</label>
+                <br><input type="range" id="progress" name="progress" min="0" max="100" value="{{ticket.progress}}"
+                    onchange="updateProgressValue(this.value)">
+                <span id="progress-value">{{ticket.progress}}</span>%<br>
 
-                <label for="resources">Task Ressources:</label>
-                <ul id="resources">
-                    {% for resource in ticket.resources %}
-                    <li>{{ resource }}</li>
-                    {% endfor %}
-                </ul>
 
-                <label for="following-tasks">Following Tasks:</label>
-                <ul id="following-tasks">
-                    {% for task in ticket.followingTasks %}
-                    <li>{{ task }}</li>
-                    {% endfor %}
-                </ul>
+                <label for="done">Done:</label>
+                <br><input type="checkbox" id="done" name="done" {{ticket.done ? 'checked' : '' }}>
 
-                <label for="prerequisite-tasks">Prerequisite Tasks:</label>
-                <ul id="prerequisite-tasks">
-                    {% for task in ticket.prerequisiteTasks %}
-                    <li>{{ task }}</li>
-                    {% endfor %}
-                </ul>
-
-                <label for="subtasks">SubTasks:</label>
-                <ul id="subtasks">
-                    {% for subtask in ticket.subTasks %}
-                    <li>{{ subtask }}</li>
-                    {% endfor %}
-                </ul>
             </div>
 
             <div id="detail-footer">
@@ -151,4 +137,5 @@
 </body>
 
 <script src="/src/main/resources/static/js/Kanban.js"></script>
+
 </html>

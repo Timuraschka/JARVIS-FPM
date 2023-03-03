@@ -78,7 +78,7 @@
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 15px;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
@@ -222,11 +222,15 @@
                     <button type="button" onclick="openPopup()">Add</button>
                     <div id="popup" style="display: none;">
                         <div class="form">
+<<<<<<< HEAD
                             <h2>Task hinzufÃ¼gen</h2>
                             <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
+=======
+                            <h2>Task hinzufügen</h2>
+>>>>>>> ae6c1cb0249ee72fb1c247c60ef850ae72ea5200
                             <input type="text" id="task-name" placeholder="Titel">
-                            <input type="date" id="task-start-date" placeholder="Startdatum">
-                            <input type="date" id="task-end-date" placeholder="Enddatum">
+                            <label for="start-date">Startdatum:</label><input type="date" id="task-start-date" placeholder="Startdatum">
+                            <label for="end-date">Enddatum:</label><input type="date" id="task-end-date" placeholder="Enddatum">
                             <input type="text" id="task-resources" placeholder="Ressourcen">
                             <input type="checkbox" id="task-dependent" placeholder="Dependent">critical
                             <input type="number" id="task-costs" placeholder="Kosten">
@@ -234,7 +238,7 @@
                             <div class="form2">
                                 <input type="text" id="task-definition" placeholder="Beschreibung">
                             </div>
-                            <button type="button" onclick="addTask()">HinzufÃ¼gen</button>
+                            <button type="button" onclick="addTask()">Hinzufügen</button>
                             <button type="button" onclick="closePopup()">Abbrechen</button>
                             <button type="button" onclick="closeTaskDetails()">Details</button>
                             </form>
@@ -389,7 +393,7 @@
                     }
                 }
                 function openPopup() {
-                    document.getElementById("popup").style.display = "block";
+                    document.getElementById("popup").style.display = "block";a
                 }
 
                 function closePopup() {

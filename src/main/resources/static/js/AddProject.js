@@ -1,3 +1,23 @@
+
+// Select all edit project buttons and add event listener
+const editProjectBtn = document.querySelectorAll('.edit-project-btn');
+editProjectBtn.forEach(editProjectBtn => {
+    editProjectBtn.addEventListener('click', () => {
+         window.location.href = '/src/main/resources/templates/Kanban.html';
+    });
+});
+
+// Select all delete project buttons and add event listener
+const deleteProjectBtn = document.querySelectorAll('.delete-project-btn');
+deleteProjectBtn.forEach(deleteProjectBtn => {
+    deleteProjectBtn.addEventListener('click', () => {
+        // Get the row of the clicked delete project button
+        const row = deleteProjectBtn.parentNode.parentNode;
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
+        // Here you can write code to delete the project from the database using AJAX
+    });
+});
 // Get references to DOM elements
 var addProjectBtn = document.getElementById("add-project-btn");
 var overlay = document.getElementById("add-project-overlay");
@@ -32,7 +52,7 @@ addProjectOverlay.style.display = "none";
 addProjectForm.addEventListener("submit", (event) => {
 	
 // Prevent the form from submitting and refreshing the page
-event.preventDefault();
+//event.preventDefault();
 
 // Get references to the input fields
 const projectLeaderInput = document.getElementById("project-leader");
@@ -41,11 +61,21 @@ const projectTitleInput = document.getElementById("project-title");
 
 // Create a new table row with the input field data
 const newRow = projectTable.insertRow(0);
+
+
+
+
 newRow.innerHTML = `
 <td>${projectTitleInput.value}</td> 
 <td>${projectLeaderInput.value}</td> 
-<td>${projectTeamInput.value}</td> 
+<td>${projectTeamInput.value}</td>
+<td>
+<button class="edit-project-btn">Edit</button>
+<button class="delete-project-btn">Delete</button>
+</td>
+
 `;
+
 // Add the new row at the beginning of the table
 
 projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelector("tbody").firstChild);
@@ -56,29 +86,7 @@ projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelec
 	projectLeaderInput.value = "";
 	projectTeamInput.value = "";
 	projectTitleInput.value = "";
-	deadlineInput.value = "";
 
 // Close the popup window
 	addProjectOverlay.style.display = "none";
-});
-
-// Select all edit project buttons and add event listener
-const editProjectBtns = document.querySelectorAll('.edit-project-btn');
-editProjectBtns.forEach(editProjectBtn => {
-    editProjectBtn.addEventListener('click', () => {
-        // Replace "#" with the URL of your edit project page
-        window.location.href = '/src/main/resources/templates/Kanban.html';
-    });
-});
-
-// Select all delete project buttons and add event listener
-const deleteProjectBtns = document.querySelectorAll('.delete-project-btn');
-deleteProjectBtns.forEach(deleteProjectBtn => {
-    deleteProjectBtn.addEventListener('click', () => {
-        // Get the row of the clicked delete project button
-        const row = deleteProjectBtn.parentNode.parentNode;
-        // Remove the row from the table
-        row.parentNode.removeChild(row);
-        // Here you can write code to delete the project from the database using AJAX
-    });
 });
