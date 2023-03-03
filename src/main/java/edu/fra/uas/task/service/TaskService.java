@@ -17,6 +17,7 @@ import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.repository.ProjectRepository;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.repository.TaskRepository;
+import edu.fra.uas.timetracker.model.Timetracker;
 
 @Service
 public class TaskService implements ITaskService {
@@ -114,13 +115,13 @@ public class TaskService implements ITaskService {
 	}
 
 	public void changeTask(String TaskId, Task taskNeu) {
-		Task taskAlt = getTask(TaskId);
+		Task taskAlt = getTime(TaskId);
 		taskNeu.setId(taskAlt.getId());
 		taskR.save(taskNeu);
 
 	}
 
-	public Task getTask(String TaskId) {
+	public Task getTime(String TaskId) {
 		Long l = Long.parseLong(TaskId);
 		return taskR.findById(l).get();
 	}
