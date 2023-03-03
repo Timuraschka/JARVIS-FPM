@@ -17,6 +17,7 @@ import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.repository.ProjectRepository;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.repository.TaskRepository;
+import edu.fra.uas.task.service.DTO.TaskDTO;
 import edu.fra.uas.timetracker.model.Timetracker;
 
 @Service
@@ -88,6 +89,15 @@ public class TaskService implements ITaskService {
 		}
 
 		return tasks;
+	}
+
+	public List<TaskDTO> convertToDTO(List<Task> taskList){
+		List<TaskDTO> listDTO = new ArrayList<>();
+		for(Task t : taskList){
+			TaskDTO dto = new TaskDTO(t.getLine(), t.getName(), t.getTime().getStartDate(), t.getTime().getEndDate(), t.getResources(), t.getPrerequisite_tasks(), t.getCost());
+			listDTO.add(dto);
+		}
+		return listDTO;
 	}
 
 	/**

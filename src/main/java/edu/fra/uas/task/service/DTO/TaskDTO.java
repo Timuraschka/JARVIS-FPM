@@ -1,6 +1,7 @@
 package edu.fra.uas.task.service.DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.Set;
 
 import org.springframework.hateoas.RepresentationModel;
@@ -11,9 +12,9 @@ public class TaskDTO extends RepresentationModel<TaskDTO> {
 
     int line;
     String title;
-    Date startDate;
-    Date endDate;
-    Resource resource;
+    LocalDate startDate;
+    LocalDate endDate;
+    Set<Resource> resource;
     Set<Task> prerequisiteTask;
     double cost;
 
@@ -33,27 +34,27 @@ public class TaskDTO extends RepresentationModel<TaskDTO> {
         this.title = title;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartLocalDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartLocalDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndLocalDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public Resource getResource() {
+    public Set<Resource> getResource() {
         return resource;
     }
 
-    public void setResource(Resource resource) {
+    public void setResource(Set<Resource> resource) {
         this.resource = resource;
     }
 
@@ -73,7 +74,7 @@ public class TaskDTO extends RepresentationModel<TaskDTO> {
         this.cost = cost;
     }
 
-    public TaskDTO(int line, String title, Date startDate, Date endDate, Resource resource, Set<Task> prerequisiteTask,
+    public TaskDTO(int line, String title, LocalDate startDate, LocalDate endDate, Set<Resource> resource, Set<Task> prerequisiteTask,
             double cost) {
         super();
         this.line = line;
