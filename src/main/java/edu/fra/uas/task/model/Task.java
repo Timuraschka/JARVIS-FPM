@@ -60,6 +60,15 @@ public class Task {
 
 	// foreign Keys
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
