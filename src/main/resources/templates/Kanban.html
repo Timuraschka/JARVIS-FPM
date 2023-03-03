@@ -75,7 +75,7 @@
 
     </div>
 
-    <div class="board">
+    <div class="board" th:action="@{/user/{id}/token/project/{id}}" method="GET">
         <div class="column" id="backlog">
             <h3>Backlog</h3>
         </div>
@@ -95,8 +95,8 @@
 
 
     <!-- Hier wird die Detailseite angezeigt -->
-    <div id="detail-page">
-        <form id="detail-form">
+    <div id="detail-page" >
+        <form id="detail-form" th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="GET">
             <div id="detail-content">
                 <label for="ticket-title">Title:</label>
                 <input type="text" id="ticket-title" value="{{ticket.title}}" readonly>
