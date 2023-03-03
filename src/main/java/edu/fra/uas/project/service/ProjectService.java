@@ -63,4 +63,8 @@ public class ProjectService implements IprojectService {
 		return null;
 	}
 
+	public Project addProject(){
+		//projekt erstellen & die RootTask erstellen & Resource erstellen - User zuweisen, aber logik auch in dem Controller verbaubar
+	}
+
 }
