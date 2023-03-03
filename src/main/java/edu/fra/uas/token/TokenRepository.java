@@ -7,16 +7,20 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 @Repository
-public class TokenRepository {
+public class TokenRepository{
 
 
     public ArrayList<Token> tokenList = new ArrayList<>();
 
+
+    public TokenRepository(){
+        
+    }
     //Admin creation
     @PostConstruct
     public void init() {
 
-
+        tokenList.add(new Token(00000));
 
     }
 
