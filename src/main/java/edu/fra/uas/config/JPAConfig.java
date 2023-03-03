@@ -2,12 +2,9 @@ package edu.fra.uas.config;
 
 import java.util.HashSet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 
 import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.repository.ProjectRepository;
@@ -16,8 +13,6 @@ import edu.fra.uas.resource.repository.ResourceRepository;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.repository.TaskRepository;
 import edu.fra.uas.timetracker.repository.TimetrackerRepository;
-import edu.fra.uas.token.Token;
-import edu.fra.uas.token.TokenRepository;
 import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.repository.UserRepository;
 import edu.fra.uas.timetracker.model.Timetracker;
@@ -28,30 +23,20 @@ import edu.fra.uas.resource.service.ResouceService;
 @Configuration
 public class JPAConfig {
 
-	private static final Logger log = LoggerFactory.getLogger(JPAConfig.class);
 	@Bean
 	CommandLineRunner init(UserRepository userR, TaskRepository taskR, ProjectRepository projectR,
 			ResourceRepository resourceR, TimetrackerRepository timeR, ResouceService resourceS) {
 
-		Project p1 = new Project();
-		p1.setName("ProjectTest");
-		p1.setDescription("Das Projekt ist das geilste");
-		p1.setMembers(null);
+		// Project p1 = new Project();
+		// p1.setName("ProjectTest");
+		// p1.setDescription("Das Projekt ist das geilste");
+		// p1.setMembers(null);
 
-		User u1 = new User();
-		u1.setEmail("123@gmail.com");
-		u1.setPassword("Password123!");
-		u1.setId(1);
-		u1.setUsername("Quackofif");
-		
-		Resource r1 = new Resource();
-		r1.setProjectMember(u1);
-		r1.setProject(p1);
-		
-		Set<Resource> rx =u1.getResourceIn();
-		rx.add(r1);
-		u1.setResourceIn(rx);
-
+		// User u1 = new User();
+		// u1.setEmail("123@gmail.com");
+		// u1.setPassword("Password123!");
+		// u1.setId(1);
+		// u1.setUsername("Quackofif");
 
 		// User u2 = new User();
 		// u2.setEmail("456@hotmail.de");
@@ -91,17 +76,18 @@ public class JPAConfig {
 		// Timetracker tt1 = new Timetracker();
 		// tt1.setProject(p1);
 		// tt1.setTaskReference(t1);
-	
 
-		Token t1 = new Token(u1.getId());
-		TokenRepository tR = new TokenRepository();
-		tR.tokenList.add(t1);
+		Resource r1 = new Resource();
+		r1.setName("Mitarbeiter1");
 
-		
+		Resource r2 = new Resource();
+		r2.setName("Mitarbeiter2");
+
+		String test = String.valueOf(r1.getId());
+
 		return args -> {
 			// projectR.save(p1);
-			userR.save(u1);
-			log.info(">>>>>>>   "+t1.getUserID()+"  "+t1.getToken());
+			// userR.save(u1);
 			// userR.save(u2);
 			// userR.save(u3);
 			// userR.save(u4);
@@ -109,7 +95,8 @@ public class JPAConfig {
 			// taskR.save(t2);
 			// taskR.save(t3);
 			// timeR.save(tt1);
-			
+			resourceR.save(r1);
+			resourceS.changeResource("1", r2);
 		};
 
 	}

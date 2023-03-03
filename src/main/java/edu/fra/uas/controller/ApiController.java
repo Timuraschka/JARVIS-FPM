@@ -29,7 +29,6 @@ import edu.fra.uas.resource.service.ResouceService;
 import edu.fra.uas.task.service.TaskService;
 import edu.fra.uas.task.service.DTO.TaskDTO;
 import edu.fra.uas.timetracker.service.TimertrackerService;
-import edu.fra.uas.token.Token;
 import edu.fra.uas.token.TokenService;
 import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.service.UserService;
@@ -49,39 +48,31 @@ public class ApiController {
 
 	@Autowired
 	public ApiController(UserService userS, TaskService taskS, ProjectService projectS,
-			ResouceService resourceS, TimertrackerService timeS, TokenService tokenS) {
+			ResouceService resourceS, TimertrackerService timeS) {
 
 		this.userS = userS;
 		this.taskS = taskS;
 		this.projectS = projectS;
 		this.resourceS = resourceS;
 		this.timeS = timeS;
-		this.tokenS = tokenS;
 
 	}
 
 	@GetMapping
-	public ResponseEntity<String> getLogin(){
-
-		User u = new User();
-		u.setName("Jim");
-
-		Token t = tokenS.createToken(u.getId());
-		String i = String.valueOf(t.getUserID());
-		return new ResponseEntity<String>(i, HttpStatusCode.valueOf(200));
+	public ResponseEntity<String> getLogin() {
+		return new ResponseEntity<String>("login", HttpStatusCode.valueOf(200));
 	}
-
 
 	/**
 	 * 
 	 */
-	@RequestMapping(value = "/user/{token}")
-	public ResponseEntity<List<ProjectDTO>> getProjects (@PathVariable("token") String token){
-		
-		
+	@RequestMapping(value = "/user/{user_id}/{token}/project", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProjectDTO>> getProjects(@PathVariable("user_id") long user_id,
+			@PathVariable("token") String token) {
+
 		User u = userS.getUserWithToken(token);
 		List<ProjectDTO> projects = projectS.getProjectsForUser(u);
-		
+
 		List<ProjectDTO> collection = projects;
 		return new ResponseEntity<List<ProjectDTO>>(collection, HttpStatusCode.valueOf(200));
 	}

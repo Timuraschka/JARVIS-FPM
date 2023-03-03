@@ -5,16 +5,12 @@ import org.springframework.stereotype.Service;
 
 import edu.fra.uas.user.model.User;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 public class TokenService implements ITokenService {
 	@Autowired
 	TokenRepository tokenRepository = new TokenRepository();
-
-	
-	List<Token> tokenListS = tokenRepository.tokenList;
 
 	public Token getUserID(UUID usertoken) {
 		for (Token token : tokenRepository.tokenList) {
@@ -38,15 +34,12 @@ public class TokenService implements ITokenService {
 
 	@Override
 	public Token createToken(long userID) {
-		if (! tokenRepository.tokenList.isEmpty()){
-			for (Token token : tokenRepository.tokenList) {
-				if (token.getUserID() == userID) {
-					return token;
-				}
-	
+		for (Token token : tokenRepository.tokenList) {
+			if (token.getUserID() == userID) {
+				return token;
 			}
+
 		}
-		
 		Token token = new Token(userID);
 		System.out.println(token.getDateTime());
 		tokenRepository.tokenList.add(token);
