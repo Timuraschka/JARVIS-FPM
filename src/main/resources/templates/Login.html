@@ -5,20 +5,21 @@
     <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/All.css">
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Login.css">
-
     <style>
-
     </style>
     <nav class="site-nav">
         <div class="site-nav__inner">
             <header class="header">
                 <h1>JARVIS-FPM</h1>
+            </header>
         </div>
+    </nav>
 </head>
 
 <body>
     <div class="login-form">
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}" method="POST" th:object="${login-form}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <h2>Login - JARVIS</h2>
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -33,11 +34,10 @@
             <a href="/src/main/resources/templates/SignUp.html" class="register-link">Register here</a></p>
         </form>
     </div>
+    <footer>
+        <p class="copyright">&copy; Copyright</p>
+        <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
+    </footer>
+    <script src="/src/main/resources/static/js/Login.js"></script>
 
-</body>
-<footer>
-    <p class="copyright">&copy; Copyright</p>
-    <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
-  </footer>
-     <script src="/src/main/resources/static/js/Login.js"></script>
 </html>

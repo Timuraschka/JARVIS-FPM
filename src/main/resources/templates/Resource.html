@@ -23,6 +23,7 @@
     </style>
   </head>
   <body>
+    <form th:action="@{/user/{token}/project/{id}/resource/{id}}" method="POST">
     <button onclick="addTask()">Resource hinzufügen</button>
     <table>
       <thead>
@@ -31,9 +32,11 @@
           <th class="team">Team</th>
           <th class="hourlyRate">Hourly Rate</th>
           <th class="tasks">involved Tasks</th> 
+         </form>
         </tr>
       </thead>
       <tbody>
+        <form th:action="@{/user/{token}/project/{id}/resource}" method="GET">
         <tr th:each = "resource : ${listAllResources}">
           <td th:text = "${resourec.name}">empty</td>
           <td th:text = "${resourec.team}">empty</td>
@@ -41,6 +44,7 @@
     <!--       <td th:text = "${resoure.taskList}">empty</td>  <!-- taskList sollte ein String mit den Task ID's sein oder anzahl der Tasks hm -->
           
         </tr>
+      </form>
       </tbody>
     </table>
     <button onclick="saveTable()">Tabelle speichern</button>
