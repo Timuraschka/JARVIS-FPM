@@ -65,28 +65,33 @@ public class ProjectService implements IprojectService {
 		return null;
 	}
 
-	public Project addProject(Project p, User user) {
-		// projekt erstellen & die RootTask erstellen & Resource erstellen - User
-		// zuweisen, aber logik auch in dem Controller verbaubar
+	/**
+     * projekt erstellen & die RootTask erstellen & Resource erstellen - User zuweisen, aber logik auch in dem Controller verbaubar
+     * @param p
+     * @param user
+     * @return das Projekt mit der Root task und der Resource, die mit dem User, der das Projekt erstellt hat, verknüpft ist
+     */
+    public Project addProject(Project p, User user){
+        
 
-		// : Root Task erstellt und angehängt
-		Task root = new Task();
-		root.setName("Root");
-		Set<Task> tasks = new HashSet<>();
-		tasks.add(root);
-		p.setTasks(tasks);
+        // : Root Task erstellt und angehängt
+        Task root = new Task();
+        root.setName("Root");
+        Set<Task>tasks = new HashSet<>();
+        tasks.add(root);
+        p.setTasks(tasks);
 
-		// :
-		Resource r = new Resource();
-		r.setProjectMember(user);
-		r.setName(user.getName());
+        // : Resource erstellt und dem User zugewiesen
+        Resource r = new Resource();
+        r.setProjectMember(user);
+        r.setName(user.getName());
 
-		p.setProjectOwner(r);
+        p.setProjectOwner(r);
 
-		projectR.save(p);
-		return p;
+        projectR.save(p);
+        return p;
 
-	}
+    }
 
 	public void deleteProject(String ProjectId) {
 		Long l = Long.parseLong(ProjectId);
