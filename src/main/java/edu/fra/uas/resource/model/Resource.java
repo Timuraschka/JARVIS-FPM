@@ -40,34 +40,7 @@ public class Resource {
 <<<<<<< HEAD
 =======
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public static Logger getLog() {
-		return log;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
+	
 	private static final Logger log = LoggerFactory.getLogger(JarvisFpmApplication.class);
 
 >>>>>>> ae5515fa53e1c68f18941498dda8bf4998cc09a5
@@ -84,6 +57,7 @@ public class Resource {
 
 	// Foreign Keys
 
+
 	@ManyToOne
 	@JoinColumn(name = "SUPERVISOR")
 	private Resource supervisor; // usually the Project Manager
@@ -92,7 +66,7 @@ public class Resource {
 	@JoinColumn(name = "USER")
 	private User user; // The actual resource
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PROJECT_REFERENCE")
 	private Project project;
 
@@ -199,5 +173,34 @@ public class Resource {
 	public void setProjectMember(User projectMember) {
 		this.user = projectMember;
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public static Logger getLog() {
+		return log;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 
 }
