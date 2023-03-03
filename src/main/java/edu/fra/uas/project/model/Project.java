@@ -75,16 +75,15 @@ public class Project {
 	@Column(name = "TASKS")
 	private Set<Task> tasks;
 
-	// @OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
-	// @Column(name = "MANAGERS")
-	// private Set<Resource> projectManager;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+	private Set<Resource> projectManager;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Resource> members;
 
 	// Foreign Keys
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJECT_OWNER")
 	private Resource projectOwner;
 
@@ -95,7 +94,7 @@ public class Project {
 	public Project() {
 
 		this.members = new HashSet<>();
-		// this.projectManager = new HashSet<>();
+		this.projectManager = new HashSet<>();
 
 	}
 
@@ -123,13 +122,13 @@ public class Project {
 		this.members = members;
 	}
 
-	// public Set<Resource> getProjectManager() {
-	// 	return projectManager;
-	// }
+	public Set<Resource> getProjectManager() {
+		return projectManager;
+	}
 
-	// public void setProjectManager(Set<Resource> projectManager) {
-	// 	this.projectManager = projectManager;
-	// }
+	public void setProjectManager(Set<Resource> projectManager) {
+		this.projectManager = projectManager;
+	}
 
 	public Set<Task> getTasks() {
 		return tasks;
