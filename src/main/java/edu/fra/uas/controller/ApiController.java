@@ -1,7 +1,5 @@
 package edu.fra.uas.controller;
 
-import java.net.URI;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,12 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.fra.uas.controller.ApiController;
-import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.service.ProjectService;
 import edu.fra.uas.project.service.DTO.ProjectDTO;
 import edu.fra.uas.resource.service.ResouceService;
@@ -77,6 +72,12 @@ public class ApiController {
 		log.info("Home.html");
 		return null;
 	}
+
+
+	/*############################################################# */
+	// SESSION METHODS:
+
+
 
 
 	 /**
@@ -143,15 +144,19 @@ public class ApiController {
     }
 
 
+	/*############################################################################## */
+	// 
+
 	/**
 	 * This method gets called when the user has logged in.
 	 * It returns a List of all Projects, which the current user is any kind of member in.
+	 * @param token
+	 * @return  List of all Projects, which the current user is any kind of member in
 	 */
 	@RequestMapping(value = "/api/users/{token}/projects", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ProjectDTO>> getProjects(@PathVariable("user_id") long user_id,
-			@PathVariable("token") String token) {
+	public ResponseEntity<List<ProjectDTO>> getProjects(@PathVariable("token") String token) {
 
 		User u = userService.getUserWithToken(token);
 		List<ProjectDTO> projects = projectS.getProjectsForUser(u);
@@ -160,18 +165,88 @@ public class ApiController {
 		return new ResponseEntity<List<ProjectDTO>>(collection, HttpStatusCode.valueOf(200));
 	}
 
+
 	/**
-	 * This mehtod is called after the user chose one project.
-	 * It returns every Task in the project, so those can be displayed in the Kanban Board and the WBS.
-	 * Both use the same data.
+	 * This method should use the given JSON to create a Project Object and sets its project owner to the current user
+	 * It creates a Resource in this project and links it to the current User
+	 * It also adds the created Project to the User's list of projects
+	 * It returns a list of all projects, which the current user is any kind of member in
+	 * @param token
+	 * @returnlist of all projects, which the current user is any kind of member in
+	 */
+	@RequestMapping(value = "/api/users/{token}/projects", 
+					method = RequestMethod.POST, 
+					consumes = MediaType.APPLICATION_JSON_VALUE,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProjectDTO>> createProject(@PathVariable("token") String token) {
+
+		return null;
+	}
+
+	/**
+	 * This method should map the User who opend the Project with given project id to it's Resource in this project
+	 * and decide which view the User gets first
+	 * if the User is a project owner he gets the WBS view
+	 * if the User is a normal Teammember he gets the Kaban view
+	 * @param token
+	 * @param project_id
+	 * @return	String ("WBS" or "Kanban")
+	 */
+	@RequestMapping(value = "/api/users/{token}/projects/{project_id}", 
+					method = RequestMethod.GET, 
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProjectDTO>> openProjects(@PathVariable("token") String token, @PathVariable("project_id") long project_id) {
+
+		return null;
+	}
+
+	/**
+	 * This method changes the details of the given project (titel, description etc.)
+	 * But first it checks wether the current user is the owner of the project.
+	 * Afterwards it updates the project in the database
+	 * and returns a updatet list of projects, which the current user is any kind of member in
+	 * @param token
+	 * @param project_id
+	 * @return which the current user is any kind of member in
+	 */
+	@RequestMapping(value = "/api/users/{token}/projects/{project_id}", 
+					method = RequestMethod.PUT,
+					consumes = MediaType.APPLICATION_JSON_VALUE,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ProjectDTO>> changeProjectDetails(@PathVariable("token") String token, @PathVariable("project_id") long project_id) {
+
+		return null;
+	}
+
+	/**
+	 * If the User with given token is the porject owner of thr project with given project id,
+	 * then the method deletes the project from the database.
+	 * If the User is just a Project Member the Method removes this project from the User's list of projects
 	 * @param token
 	 * @param project_id
 	 * @return List<TaskDTO>
 	 */
 	@RequestMapping(value = "/api/user/{token}/project/{project_id}", 
-					method = RequestMethod.GET, 
+					method = RequestMethod.DELETE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TaskDTO>> getAllTasksOfOneProject(@PathVariable("token") String token,
+	public ResponseEntity<List<TaskDTO>> deleteProject(@PathVariable("token") String token,
+			@PathVariable("project_id") long project_id) 
+	{
+		return null;
+	}
+
+
+	/**
+	 * This method maps tasks to the project with the given Project Id
+	 * returns a list of Tasks
+	 * @param token
+	 * @param project_id
+	 * @return List<TaskDTO>
+	 */
+	@RequestMapping(value = "/api/user/{token}/project/{project_id}/tasks", 
+					method = RequestMethod.GET,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<TaskDTO>> getTasksInProject(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id) 
 	{
 		List<Task> kanbanWBS = taskService.getTasksInProject(projectS.getProject(project_id));
@@ -262,7 +337,7 @@ public class ApiController {
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List> postResource(@PathVariable("token") String token,
+	public ResponseEntity<List> addNewResource(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id) {
 		return null;
 	}
@@ -275,8 +350,30 @@ public class ApiController {
 	 * @param resource_id
 	 * @return updated list of ResourceDTO's
 	 */
-	@RequestMapping(value = "/api/user/{token}/project/{project_id}/resource/{resource_id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ResourceDTO>> putResource(@PathVariable("token") String token,
+	@RequestMapping(value = "/api/user/{token}/project/{project_id}/resource/{resource_id}", 
+					method = RequestMethod.PUT, 
+					consumes = MediaType.APPLICATION_JSON_VALUE, 
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ResourceDTO>> updateResource(@PathVariable("token") String token,
+			@PathVariable("project_id") long project_id, @PathVariable("resource_id") long resource_id) {
+		return null;
+	}
+
+	/**
+	 * This method should delete the given Resource.
+	 * To do this is also deletes the Resource in the User's Resource list(Set)
+	 * and in the Projects Resource list(Set).
+	 * It returns the updated lsit of ResourceDTO'S
+	 * @param token
+	 * @param project_id
+	 * @param resource_id
+	 * @return updated lsit of ResourceDTO'S
+	 */
+	@RequestMapping(value = "/api/user/{token}/project/{project_id}/resource/{resource_id}", 
+					method = RequestMethod.DELETE, 
+					consumes = MediaType.APPLICATION_JSON_VALUE, 
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ResourceDTO>> deleteResource(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id, @PathVariable("resource_id") long resource_id) {
 		return null;
 	}
