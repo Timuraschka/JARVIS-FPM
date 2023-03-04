@@ -1,5 +1,4 @@
-
-th{
+th {
     border: 1px solid black;
     border-radius: 10px;
 }
@@ -150,18 +149,24 @@ body {
     flex-direction: column;
     justify-content: left;
     height: 100%;
-    padding: 15px 103px;
+    padding: 15px 155px;
     border: 1px solid #ccc;
     border-radius: 10px;
 }
 
-#task-details h2 {
-    margin-top: 10px;
+#task-details p {
+    margin-bottom: 10px;
+
 }
 
-#task-details p {
-    margin-bottom: 0px;
+#task-details p2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: large;
+    font-style: italic;
+
 }
+
 #add-task-btn {
     background-color: #4CAF50;
     border: none;
@@ -173,17 +178,17 @@ body {
     font-size: 16px;
     margin-top: 65px;
     cursor: pointer;
-    }
-    
-    #add-task-btn:hover {
+}
+
+#add-task-btn:hover {
     background-color: #3e8e41;
-    }
-    
-    #add-task-btn:active {
+}
+
+#add-task-btn:active {
     background-color: #4CAF50;
-    }
-    
-    #add-task-btn::before {
+}
+
+#add-task-btn::before {
     content: "Add new Project";
     margin-right: 5px;
-    }
+}
