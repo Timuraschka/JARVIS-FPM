@@ -52,7 +52,7 @@ closeBtn.addEventListener("click", () => {
 addProjectForm.addEventListener("submit", (event) => {
 
     // Prevent the form from submitting and refreshing the page
-    //event.preventDefault();
+    event.preventDefault();
 
     // Get references to the input fields
     const projectLeaderInput = document.getElementById("project-leader");
@@ -67,8 +67,8 @@ addProjectForm.addEventListener("submit", (event) => {
 <td>${projectLeaderInput.value}</td> 
 <td>${projectTeamInput.value}</td>
 <td>
-<button class="edit-project-btn">Edit</button>
-<button class="delete-project-btn">Delete</button>
+<button class="edit-project-btn">Edit Project</button>
+<button class="delete-project-btn">Delete Project</button>
 </td>
 `;
 

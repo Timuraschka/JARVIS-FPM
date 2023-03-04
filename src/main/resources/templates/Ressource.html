@@ -1,0 +1,70 @@
+<html>
+
+<head>
+  <title>Aufgabenliste</title>
+  <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/all.css">
+  <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Ressource.css">
+<style>
+
+     </style>
+</head>
+
+<body>
+  <nav class="site-nav" role="navigation">
+    <div class="site-nav__inner">
+      <header class="header">
+        <h1>Jarvis-FPM</h1>
+      </header>
+      </ul>
+    </div>
+  </nav>
+
+  <h2>Ressource | Overview</h2>
+  <button id="add-ressource-btn">Add Ressource</button>
+
+  <div class="container">
+    <table id="ressource-list">
+      <thead>
+        <tr>
+          <th>Ressource Name</th>
+          <th>Team</th>
+          <th>Hourly Rate</th>
+          <th>involved Tasks</th>
+        </tr>
+      </thead>
+
+    </table>
+    <div class="overlay" id="add-ressource-overlay">
+      <div class="popup">
+        <form id="add-ressource-form" th:action="@{/user/{token}/project/{id}/resource}" method="POST">
+          <div class="form-group">
+            <div class="form-group">
+                <label for="ressource">Ressource Name:</label>
+                <input type="text" id="ressource" name="ressource" required>
+            </div>
+            <div class="form-group">
+                <label for="team">Team:</label>
+                <input type="text" id="team" name="team" required>
+            </div>
+            <div class="form-group">
+                <label for="hourlyRate">Hourly Rate:</label>
+                <input type="text" id="hourlyRate" name="hourlyRate" required>
+            </div>
+            <div class="form-group">
+              <label for="involvedTasks">involved Tasks:</label>
+              <input type="text" id="involvedTasks" name="involvedTasks" required>
+          </div>
+          </div>
+            <input type="submit" name="submit" value="Save">
+            <span class="close-btn">&times;</span>
+        </div>
+        </form>
+      </div>
+    </div>
+    <footer>
+        <p class="copyright">&copy; Copyright</p>
+        <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
+    </footer>
+</body>
+<script src="/src/main/resources/static/js/Ressource.js"></script>
+</html>
