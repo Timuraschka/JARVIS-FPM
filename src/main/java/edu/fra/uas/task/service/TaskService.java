@@ -31,12 +31,9 @@ public class TaskService implements ITaskService {
 	private ProjectRepository projectR;
 
 	/**
-	 * Die TreeMap repäsentiert die Bezeihung zwischen der "line"
-	 * und der Task.
+	 * This Method maps the tasks of the given project to a line number
 	 * 
-	 * Root Task -> line 0
-	 * 
-	 * 
+	 * @param Project
 	 */
 	@Override
 	public TreeMap<Integer, Task> getTaskHierarchy(Project p) {
@@ -63,12 +60,13 @@ public class TaskService implements ITaskService {
 		return null;
 	}
 
-	private TreeMap<Integer, Task> addTaskToMap(Task task, TreeMap<Integer, Task> tasksMap, int lineNumber) {
+	private TreeMap<Integer, Task> addTaskToMap(Task task, TreeMap<Integer, Task> tasksMap) {
+		int lineNumber = tasksMap.size() +1;
 		tasksMap.put(lineNumber, task);
 
 		if (task.getSubtasks() != null) {
 			for (Task subtask : task.getSubtasks()) {
-				addTaskToMap(subtask, tasksMap, lineNumber + 1);
+				addTaskToMap(subtask, tasksMap);
 			}
 		}
 
@@ -101,39 +99,41 @@ public class TaskService implements ITaskService {
 	}
 
 	/**
-	 * 
-	 * @param t - is the task which should be added to the database
-	 * 
-	 *          Die RootTask wird nicht über diese Methode laufen das passier in der
-	 *          createProject Methode im ProjectService
-	 * @return
-	 */
-	public boolean addTask(Task t) {
+	 * This method sets the parent of the task to the root task of the project the given task is linked to
+	 * then it sets the line number and saves the task in the database
+	 * @param task
 
-		if (t.getParent() == null) {
-			t.setParent(getRootTaskOfProject(t.getProject()));
+	 */
+	public void addTask(Task task) {
+
+		if (task.getParent() == null) {
+			task.setParent(getRootTaskOfProject(task.getProject()));
 		}
 
-		if (!t.getSubtasks().isEmpty()) {
-			for (Task i : t.getSubtasks()) {
-				i.setParent(t);
+		if (!task.getSubtasks().isEmpty()) {
+			for (Task t : task.getSubtasks()) {
+				t.setParent(task);
 			}
 		}
 
-		t.setLine(t.getProject().getTasks().size());
-		return true;
+		addTaskToMap(task,getTaskHierarchy(task.getProject()));
+
+		task.setLine(getTaskHierarchy(task.getProject()).size());
+
+		taskR.save(task);
 	}
 
 	public void changeTask(String TaskId, Task taskNeu) {
-		Task taskAlt = getTime(TaskId);
+		Long l = Long.parseLong(TaskId);
+		Task taskAlt = taskR.findById(l).get();
 		taskNeu.setId(taskAlt.getId());
 		taskR.save(taskNeu);
 
 	}
 
-	public Task getTime(String TaskId) {
+	public Timetracker getTime(String TaskId) {
 		Long l = Long.parseLong(TaskId);
-		return taskR.findById(l).get();
+		return taskR.findById(l).get().getTime();
 	}
 
 }

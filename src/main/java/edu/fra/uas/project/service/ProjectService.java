@@ -31,13 +31,15 @@ public class ProjectService implements IprojectService {
 		return projectR.findAll();
 	}
 
+	/**
+	 * 
+	 */
 	@Override
-
 	public List<ProjectDTO> getProjectsForUser(User u) {
 
 		Set<Project> projects = u.getProjects();
 
-		List<ProjectDTO> dtos = new ArrayList();
+		List<ProjectDTO> dtos = new ArrayList<>();
 
 		for (Project p : projects) {
 
@@ -54,7 +56,7 @@ public class ProjectService implements IprojectService {
 	}
 
 	@Override
-	public List<Resource> getResourcesInProject() {
+	public List<Resource> getResourcesInProject(Project p) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -71,6 +73,7 @@ public class ProjectService implements IprojectService {
      * @param user
      * @return das Projekt mit der Root task und der Resource, die mit dem User, der das Projekt erstellt hat, verknüpft ist
      */
+	@Override
     public Project addProject(Project p, User user){
         
 
@@ -93,18 +96,26 @@ public class ProjectService implements IprojectService {
 
     }
 
+	@Override
 	public void deleteProject(String ProjectId) {
 		Long l = Long.parseLong(ProjectId);
 		projectR.delete(getProject(l));
 
 	}
 
+	@Override
 	public void changeProject(String ProjectId, Project projectNeu) {
 		Long l = Long.parseLong(ProjectId);
 		Project projectAlt = getProject(l);
 		projectNeu.setId(projectAlt.getId());
 		projectR.save(projectNeu);
 
+	}
+
+	@Override
+	public List<ProjectDTO> convertToDTO(List<Project> projects) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'convertToDTO'");
 	}
 
 }
