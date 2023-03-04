@@ -4,9 +4,6 @@
   <title>Aufgabenliste</title>
   <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/all.css">
   <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/Ressource.css">
-<style>
-
-     </style>
 </head>
 
 <body>
@@ -20,7 +17,7 @@
   </nav>
 
   <h2>Ressource | Overview</h2>
-  <button id="add-ressource-btn"></button>
+  <button id="add-ressource-btn">Add Ressource</button>
 
   <div class="container">
     <table id="ressource-list">
@@ -40,19 +37,19 @@
           <div class="form-group">
             <div class="form-group">
                 <label for="ressource">Ressource Name:</label>
-                <input type="text" id="ressource" name="ressource" required>
+                <input type="text" id="ressource" name="ressource" required pattern="[a-zA-Z0-9\s]+">
             </div>
             <div class="form-group">
                 <label for="team">Team:</label>
-                <input type="text" id="team" name="team" required>
+                <input type="text" id="team" name="team" required pattern="[a-zA-Z0-9\s]+">
             </div>
             <div class="form-group">
                 <label for="hourlyRate">Hourly Rate:</label>
-                <input type="text" id="hourlyRate" name="hourlyRate" required>
+                <input type="number" id="hourlyRate" name="hourlyRate" min="0" step="0.01">
             </div>
             <div class="form-group">
               <label for="involvedTasks">involved Tasks:</label>
-              <input type="text" id="involvedTasks" name="involvedTasks" required>
+              <input type="text" id="involvedTasks" name="involvedTasks" required pattern="[a-zA-Z0-9\s]+">
           </div>
           </div>
             <input type="submit" name="submit" value="Save">

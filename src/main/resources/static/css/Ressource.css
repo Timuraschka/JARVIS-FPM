@@ -43,10 +43,6 @@
     background-color: #4CAF50;
 }
 
-#add-ressource-btn::before {
-    content: "Add new Ressource";
-    margin-right: 5px;
-}
 
 .overlay {
     position: fixed;
