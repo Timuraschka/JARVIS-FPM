@@ -1,6 +1,5 @@
 .container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     margin: auto;
     width: 90%;
@@ -21,13 +20,7 @@
     background-color: white;
 }
 
-.description {
-    width: 30%;
-}
 
-.progress {
-    width: 20%;
-}
 
 #add-ressource-btn {
     background-color: #4CAF50;
@@ -51,7 +44,7 @@
 }
 
 #add-ressource-btn::before {
-    content: "Add new Project";
+    content: "Add new Ressource";
     margin-right: 5px;
 }
 
@@ -87,24 +80,18 @@
 table {
     border-collapse: collapse;
     width: 100%;
-    margin-top: 20px;
-}
-
-th,
-td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    margin-top: 10px;
 }
 
 th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
     background-color: #4CAF50;
     color: white;
 }
 
-.form-group {
-    margin-bottom: 10px;
-}
+
 
 label {
     display: block;
