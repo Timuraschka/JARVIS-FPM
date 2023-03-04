@@ -1,8 +1,10 @@
-package edu.fra.uas.token;
+package edu.fra.uas.token.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import edu.fra.uas.token.model.Token;
+import edu.fra.uas.token.repository.TokenRepository;
 import edu.fra.uas.user.model.User;
 
 import java.util.UUID;

@@ -1,13 +1,8 @@
 package edu.fra.uas.user.service;
 
-import edu.fra.uas.token.TokenService;
+import edu.fra.uas.token.service.TokenService;
 import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.repository.UserRepository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
 
 import java.util.UUID;
 

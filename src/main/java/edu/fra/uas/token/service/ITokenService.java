@@ -1,6 +1,8 @@
-package edu.fra.uas.token;
+package edu.fra.uas.token.service;
 
 import java.util.UUID;
+
+import edu.fra.uas.token.model.Token;
 
 public interface ITokenService {
 

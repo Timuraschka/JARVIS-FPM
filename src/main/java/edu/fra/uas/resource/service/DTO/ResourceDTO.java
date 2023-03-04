@@ -1,4 +1,4 @@
-package edu.fra.uas.resource.service;
+package edu.fra.uas.resource.service.DTO;
 
 import org.springframework.hateoas.RepresentationModel;
 
