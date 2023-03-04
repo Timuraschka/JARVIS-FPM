@@ -1,3 +1,34 @@
+const columns = document.querySelectorAll('.column');
+    let draggedItem = null;
+    
+    for (const column of columns) {
+      column.addEventListener('dragstart', function(event) {
+        draggedItem = event.target;
+        event.target.style.opacity = .5;
+      });
+    
+      column.addEventListener('dragend', function(event) {
+        event.target.style.opacity = "";
+        draggedItem = null;
+      });
+    
+      column.addEventListener('dragover', function(event) {
+        event.preventDefault();
+      });
+    
+      column.addEventListener('dragenter', function(event) {
+        event.target.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+      });
+    
+      column.addEventListener('dragleave', function(event) {
+        event.target.style.backgroundColor = "";
+      });
+    
+      column.addEventListener('drop', function(event) {
+        event.target.style.backgroundColor = "";
+        event.target.appendChild(draggedItem);
+      });
+    }
 var createTicketBtn = document.getElementById("create-ticket-btn");
     var overlay = document.getElementById("create-ticket-overlay");
     var closeBtn = document.querySelector(".close-btn");
