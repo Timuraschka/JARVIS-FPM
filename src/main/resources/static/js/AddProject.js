@@ -3,7 +3,7 @@
 const editProjectBtn = document.querySelectorAll('.edit-project-btn');
 editProjectBtn.forEach(editProjectBtn => {
     editProjectBtn.addEventListener('click', () => {
-         window.location.href = '/src/main/resources/templates/Kanban.html';
+        window.location.href = '/src/main/resources/templates/Kanban.html';
     });
 });
 
@@ -24,13 +24,13 @@ var overlay = document.getElementById("add-project-overlay");
 var closeBtn = document.querySelector(".close-btn");
 
 // Event listener for the button to open the popup window
-addProjectBtn.onclick = function() {
-overlay.style.display = "block";
+addProjectBtn.onclick = function () {
+    overlay.style.display = "block";
 }
 
 // Event listener for the button to close the popup window
-closeBtn.onclick = function() {
-overlay.style.display = "none";
+closeBtn.onclick = function () {
+    overlay.style.display = "none";
 }
 
 // Get references to the DOM elements
@@ -40,32 +40,29 @@ const addProjectOverlay = document.getElementById("add-project-overlay");
 
 // Event listener for the button to open the popup window
 addProjectBtn.addEventListener("click", () => {
-addProjectOverlay.style.display = "block";
+    addProjectOverlay.style.display = "block";
 });
 
 // Event listener for the button to close the popup window
 closeBtn.addEventListener("click", () => {
-addProjectOverlay.style.display = "none";
+    addProjectOverlay.style.display = "none";
 });
 
 // Event listener for the form submit event
 addProjectForm.addEventListener("submit", (event) => {
-	
-// Prevent the form from submitting and refreshing the page
-//event.preventDefault();
 
-// Get references to the input fields
-const projectLeaderInput = document.getElementById("project-leader");
-const projectTeamInput = document.getElementById("project-team");
-const projectTitleInput = document.getElementById("project-title");
+    // Prevent the form from submitting and refreshing the page
+    //event.preventDefault();
 
-// Create a new table row with the input field data
-const newRow = projectTable.insertRow(0);
+    // Get references to the input fields
+    const projectLeaderInput = document.getElementById("project-leader");
+    const projectTeamInput = document.getElementById("project-team");
+    const projectTitleInput = document.getElementById("project-title");
 
+    // Create a new table row with the input field data
+    const newRow = projectTable.insertRow(0);
 
-
-
-newRow.innerHTML = `
+    newRow.innerHTML = `
 <td>${projectTitleInput.value}</td> 
 <td>${projectLeaderInput.value}</td> 
 <td>${projectTeamInput.value}</td>
@@ -73,20 +70,18 @@ newRow.innerHTML = `
 <button class="edit-project-btn">Edit</button>
 <button class="delete-project-btn">Delete</button>
 </td>
-
 `;
 
-// Add the new row at the beginning of the table
+    // Add the new row at the beginning of the table
 
-projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelector("tbody").firstChild);
+    projectTable.querySelector("tbody").insertBefore(newRow, projectTable.querySelector("tbody").firstChild);
 
+    // Clear the input fields
 
-// Clear the input fields
+    projectLeaderInput.value = "";
+    projectTeamInput.value = "";
+    projectTitleInput.value = "";
 
-	projectLeaderInput.value = "";
-	projectTeamInput.value = "";
-	projectTitleInput.value = "";
-
-// Close the popup window
-	addProjectOverlay.style.display = "none";
+    // Close the popup window
+    addProjectOverlay.style.display = "none";
 });

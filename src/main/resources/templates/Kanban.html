@@ -20,42 +20,26 @@
             <ul class="menu-primary">
                 <li><a class="menu-primary__item2" href="/src/main/resources/templates/Resource.html">Ressources</a></li>
             </ul>
-            <ul class="menu-primary">
-                <li><a class="menu-primary__item" href="/">Welcome, </a></li>
-                <!-- Link to the user's profile -->
-            </ul>
         </div>
     </nav>
-
 </head>
-
 <body>
-
     <head>
-
         <h2>Kanban-Board | Overview</h2>
     </head>
-
-    <!-- Button to open the popup window for creating a ticket -->
     <button id="create-ticket-btn">Create Ticket</button>
-    <!-- Popup window for creating a ticket -->
     <div class="overlay" id="create-ticket-overlay">
-
         <div class="popup">
             <h3>Create Ticket</h3>
-            <!-- Form for inputting ticket details -->
             <form id="create-ticket-form">
-
                 <div class="form-group">
                     <label for="assignee">Assignee:</label>
                     <input type="text" id="assignee" name="assignee" required>
                 </div>
-
                 <div class="form-group">
                     <label for="task">Task:</label>
                     <input type="text" id="task" name="task" required>
                 </div>
-
                 <div class="priority">
                     <label for="priority">Priority</label>
                     <select id="priority">
@@ -64,17 +48,11 @@
                         <option value="low">Low</option>
                     </select>
                 </div>
-
                 <input type="submit" value="Add Ticket">
-
                 <a class="close-btn">&times;</a>
-
             </form>
-
         </div>
-
     </div>
-
     <div class="board" th:action="@{/user/{id}/token/project/{id}}" method="GET">
         <div class="column" id="backlog">
             <h3>Backlog</h3>
@@ -90,11 +68,8 @@
         <div class="column" id="done">
             <h3>Done</h3>
         </div>
-
     </div>
 
-
-    <!-- Hier wird die Detailseite angezeigt -->
     <div id="detail-page" >
         <form id="detail-form" th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="GET">
             <div id="detail-content">

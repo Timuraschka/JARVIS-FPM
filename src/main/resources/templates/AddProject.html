@@ -17,13 +17,10 @@
             </header>
             <ul class="menu-primary">
                 <li><a class="menu-primary__item" href="/">Profile</a></li>
-                <!-- Link to the user's profile -->
             </ul>
         </div>
     </nav>
-    <!-- Button to open the popup window for adding projects -->
     <button id="add-project-btn"></button>
-    <!-- Table displaying all saved projects -->
     <table id="project-table">
         <thead>
             <tr>
@@ -34,23 +31,20 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Example project data -->
             <tr>
                 <td>Test</td>
                 <td>Tom,Jerry,Christina</td>
                 <td>Creating Website</td>
                 <td>
-                    <button class="edit-project-btn">Edit Project</button> <!-- Edit-Button -->
-                    <button class="delete-project-btn">Delete Project</button> <!-- Delete-Button -->
+                    <button class="edit-project-btn">Edit Project</button> 
+                    <button class="delete-project-btn">Delete Project</button> 
                   </td>
             </tr>
         </tbody>
     </table>
-    <!-- Popup window for adding projects -->
     <div class="overlay" id="add-project-overlay">
         <div class="popup">
             <h2>Add Project</h2>
-            <!-- Form for inputting project details -->
             <form id="add-project-form" th:action="@{user/{token}/projects}" method="post">
                 <div class="form-group">
                     <div class="form-group">
@@ -66,7 +60,6 @@
                         <input type="text" id="project-team" name="project-team" required>
                     </div>
 
-                    <!-- Fixed the name of the submit button -->
                     <input type="submit" name="submit" value="Save">
                     <span class="close-btn">&times;</span>
 

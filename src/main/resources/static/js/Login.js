@@ -6,7 +6,6 @@ form.addEventListener('submit', function(event) {
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
 
-  //Endpunkt mit Login/Check muss angepasst werden
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/login/check', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
