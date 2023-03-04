@@ -1,4 +1,4 @@
-package edu.fra.uas.token;
+package edu.fra.uas.token.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

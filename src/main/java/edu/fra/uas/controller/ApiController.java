@@ -26,12 +26,13 @@ import edu.fra.uas.project.model.Project;
 import edu.fra.uas.project.service.ProjectService;
 import edu.fra.uas.project.service.DTO.ProjectDTO;
 import edu.fra.uas.resource.service.ResouceService;
-import edu.fra.uas.resource.service.ResourceDTO;
+import edu.fra.uas.resource.service.DTO.ResourceDTO;
 import edu.fra.uas.task.model.Task;
 import edu.fra.uas.task.service.TaskService;
 import edu.fra.uas.task.service.DTO.TaskDTO;
 import edu.fra.uas.timetracker.service.TimertrackerService;
-import edu.fra.uas.token.TokenService;
+import edu.fra.uas.token.model.Token;
+import edu.fra.uas.token.service.TokenService;
 import edu.fra.uas.user.model.User;
 import edu.fra.uas.user.service.UserService;
 
@@ -45,49 +46,114 @@ public class ApiController {
 
 	private static final Logger log = LoggerFactory.getLogger(ApiController.class);
 
-	private UserService userS;
-	private TokenService tokenS;
-	private TaskService taskS;
+	private UserService userService;
+	private TokenService tokenService;
+	private TaskService taskService;
 	private ProjectService projectS;
-	private ResouceService resourceS;
-	private TimertrackerService timeS;
+	private ResouceService resourceService;
+	private TimertrackerService timeService;
 
 	@Autowired
 	public ApiController(UserService userS, TaskService taskS, ProjectService projectS,
 			ResouceService resourceS, TimertrackerService timeS) {
 
-		this.userS = userS;
-		this.taskS = taskS;
+		this.userService = userS;
+		this.taskService = taskS;
 		this.projectS = projectS;
-		this.resourceS = resourceS;
-		this.timeS = timeS;
+		this.resourceService = resourceS;
+		this.timeService = timeS;
 
 	}
 
 	/**
-	 * getLogin() gets acivated for the URI: "/api"
-	 * it should return the Login.html (at least in a usual Controller not a REST
-	 * Controller)
+	 * This mehtod gets acivated by the URI: "/api"
+	 * It should return the content to display at the home.html
+	 * The Home html is a introduction site to any visitor of the website, who is not logged in.
 	 * 
 	 * @return
 	 */
 	@GetMapping
-	public ResponseEntity<String> getLogin() {
-		log.info("LOGIN");
-		return new ResponseEntity<String>("login", HttpStatusCode.valueOf(200));
+	public ResponseEntity<String> openHome() {
+		log.info("Home.html");
+		return null;
 	}
+
+
+	 /**
+     * This method checks the input of the user 
+	 * if the input is correct it creates the token for the the session, with which the user can access
+	 * It returns a HTTP Status from which the AddProjects.html can be accessed
+     * @param user
+     * @return HTTP Status
+     */
+    @RequestMapping(value = "/api/login",
+					method = RequestMethod.POST,
+					consumes = MediaType.APPLICATION_JSON_VALUE,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
+
+        if (userService.loginUser(user.getEmail(), user.getPassword())){
+
+            Token token = tokenService.createToken(userService.getUserWithEmail(user.getEmail()).getId());
+            System.out.println(userService.getUserWithEmail(user.getEmail()).getId());
+            System.out.println(token.getToken().toString());
+            return ResponseEntity.status(HttpStatus.OK).body(token.getToken());
+
+        }
+
+
+        return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+    }
+
+
+	/**
+	 * This method retruns the UserID of the current User
+	 * @param token
+	 * @return
+	 */
+    @RequestMapping(value = "/api/users/{token}", method = RequestMethod.GET, 
+					produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUser(@PathVariable("token")  UUID token ) {
+
+        if (token!=null){
+
+            if (tokenService.checkIfTokenExistsAndIsValid(token)) {
+                return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(tokenService.getUserID(token).getUserID()));
+            }
+        }
+
+        return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+    }
+
+
+	/**
+	 * This Method logs the current user out. 
+	 * It deletes the token of the User and removes the access with this.
+	 * @param token
+	 * @return HTTP Staus
+	 */
+    @RequestMapping(value = "/api/users/{token}/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> logout(@PathVariable("token") UUID token) {
+
+        if (tokenService.checkIfTokenExistsAndIsValid(token)) {
+            tokenService.deleteToken(token);
+            return new ResponseEntity<String>(HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+    }
+
 
 	/**
 	 * This method gets called when the user has logged in.
 	 * It returns a List of all Projects, which the current user is any kind of member in.
 	 */
-	@RequestMapping(value = "/api/user/{token}/project", 
+	@RequestMapping(value = "/api/users/{token}/projects", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<ProjectDTO>> getProjects(@PathVariable("user_id") long user_id,
 			@PathVariable("token") String token) {
 
-		User u = userS.getUserWithToken(token);
+		User u = userService.getUserWithToken(token);
 		List<ProjectDTO> projects = projectS.getProjectsForUser(u);
 
 		List<ProjectDTO> collection = projects;
@@ -108,8 +174,8 @@ public class ApiController {
 	public ResponseEntity<List<TaskDTO>> getAllTasksOfOneProject(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id) 
 	{
-		List<Task> kanbanWBS = taskS.getTasksInProject(projectS.getProject(project_id));
-		List<TaskDTO> collection = taskS.convertToDTO(kanbanWBS);
+		List<Task> kanbanWBS = taskService.getTasksInProject(projectS.getProject(project_id));
+		List<TaskDTO> collection = taskService.convertToDTO(kanbanWBS);
 		return new ResponseEntity<List<TaskDTO>>(collection, HttpStatusCode.valueOf(200));
 	}
 

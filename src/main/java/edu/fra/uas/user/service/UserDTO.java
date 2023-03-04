@@ -5,7 +5,7 @@ import java.util.Set;
 import org.springframework.hateoas.RepresentationModel;
 
 import edu.fra.uas.project.service.DTO.ProjectDTO;
-import edu.fra.uas.resource.service.ResourceDTO;
+import edu.fra.uas.resource.service.DTO.ResourceDTO;
 
 public class UserDTO extends RepresentationModel<UserDTO> {
 

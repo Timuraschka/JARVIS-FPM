@@ -1,8 +1,10 @@
-package edu.fra.uas.token;
+package edu.fra.uas.token.repository;
 
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
+
+import edu.fra.uas.token.model.Token;
 
 import java.util.ArrayList;
 
