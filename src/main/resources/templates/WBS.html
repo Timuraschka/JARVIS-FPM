@@ -6,6 +6,11 @@
     <title>WBS</title>
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/WBS.css">
     <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/all.css">
+</head>
+
+
+
+<body>
     <nav class="site-nav" role="navigation">
         <div class="site-nav__inner">
             <header class="header">
@@ -17,13 +22,8 @@
             </ul>
         </div>
     </nav>
-</head>
-
-<body>
-    <head>
 
         <h2>WBS | Overview</h2>
-    </head>
 
    
     <div class="container">
@@ -32,13 +32,13 @@
             <table id="task-list">
                 <thead>
                     <tr>
-                        <th>Zeile</th>
+                        <th>Line</th>
                         <th>Titel</th>
                         <th>Start</th>
-                        <th>Ende</th>
-                        <th>Ressourcen</th>
+                        <th>End</th>
+                        <th>Ressources</th>
                         <th>Dependent on</th>
-                        <th>Kosten</th>
+                        <th>Costs</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,35 +46,21 @@
             </table>
         </div>
         <div class="section">
-            <h4>Timeline</h4>
-            <div id="date">Datum</div>
-            <div class="timeline">
-                <div class="label">
-                    <div id="timeline-end">Start</div>
-                    <div id="timeline-end">End</div>
-                </div>
-                <div class="bar" id="timeline-bar-1">
-                    <div class="label-bar"></div>
-                </div>
-            </div>
-        </div>
-        <div class="section">
             <div class="form">
-                <button type="button" onclick="openPopup()">Add</button>
+                <button type="button" onclick="openPopup()">Add Task</button>
                 <div id="popup" style="display: none;">
                     <div class="form">
                         <h4>Task hinzufügen</h4>
                         <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
 
                             <input type="text" id="task-name" placeholder="Titel">
-                            <label for="start-date">Startdatum:</label><input type="date" id="task-start-date"
-                                placeholder="Startdatum">
-                            <label for="end-date">Enddatum:</label><input type="date" id="task-end-date"
-                                placeholder="Enddatum">
+                            <label for="start-date">Startdatum:</label>
+                            <input type="date" id="task-start-date" placeholder="Startdatum">
+                            <label for="end-date">Enddatum:</label>
+                            <input type="date" id="task-end-date"placeholder="Enddatum">
                             <input type="text" id="task-resources" placeholder="Ressourcen">
                             <input type="checkbox" id="task-dependent" placeholder="Dependent">critical
                             <input type="number" id="task-costs" placeholder="Kosten">
-
                             <div class="form2">
                                 <input type="text" id="task-definition" placeholder="Beschreibung">
                             </div>
@@ -87,9 +73,23 @@
             </div>
         </div>
 
-        <div id="task-details">
+        <div class="section">
+            <h4>Timeline</h4>
+            <div id="date">Datum</div>
+            <div class="timeline">
+                <div class="label">
+                    <div id="timeline-end">Start-End</div>
+                </div>
+                <div class="bar" id="timeline-bar-1">
+                    <div class="label-bar"></div>
+                </div>
+            </div>
+        </div>
+       
+        <div id="task-details" style="">
             <form th:action="@{/user/{token}/project/{id}}" method="GET">
                 <h4>Task Details</h4>
+                <p> Titel:</p>
                 <h2 id="task-name-details"></h2>
                 <p>Start:</p>
                 <p id="task-start-date-details"></p>
@@ -104,6 +104,7 @@
                 <p>Beschreibung:</p>
                 <p id="task-definition-details"></p>
             </form>
+        </div>
         </div>
         <script src="/src/main/resources/static/js/WBS.js"></script>
 </body>

@@ -83,30 +83,6 @@ function showTaskDetails(index) {
     document.getElementById("task-details").style.display = "block";
 }
 
-function ShowTaskDetails() {
-    // verbergen des Task Details-Fensters
-    document.getElementById("task-details").style.display = "none";
-}
-
-
-
-function showTaskDetails(index) {
-    taskNameDetails.innerHTML = tasks[index].name;
-    taskStartDateDetails.innerHTML = tasks[index].startDate;
-    taskEndDateDetails.innerHTML = tasks[index].endDate;
-    taskResourcesDetails.innerHTML = tasks[index].resources;
-    taskDependentDetails.innerHTML = tasks[index].dependent;
-    taskCostsDetails.innerHTML = tasks[index].costs;
-    taskBeschreibungDetails.innerHTML = tasks[index].beschreibung;
-
-
-    let timelineBarOld = document.getElementById("timeline-bar-selected");
-    if (timelineBarOld) {
-        timelineBarOld.removeAttribute("id");
-    }
-    let timelineBars = document.getElementsByClassName("bar");
-    timelineBars[index].setAttribute("id", "timeline-bar-selected");
-}
 
 
 function getDayDifference(date1, date2) {
