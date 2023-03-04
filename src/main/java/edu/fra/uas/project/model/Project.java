@@ -20,6 +20,10 @@ import edu.fra.uas.task.model.Task;
 import edu.fra.uas.timetracker.model.Timetracker;
 import java.io.Serializable;
 
+/**
+ * This class represents the Project and maps the variables for the database
+ * 
+ */
 @Entity
 @Table(name = "Projects")
 public class Project {
@@ -73,7 +77,7 @@ public class Project {
 
 	@OneToMany(fetch = FetchType.EAGER)
 	@Column(name = "TASKS")
-	private Set<Task> tasks;
+	private Set<Task> tasks = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Resource> projectManager;

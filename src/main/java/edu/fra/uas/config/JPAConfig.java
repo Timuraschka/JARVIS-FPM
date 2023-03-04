@@ -20,9 +20,23 @@ import java.util.*;
 import java.time.LocalDate;
 import edu.fra.uas.resource.service.ResouceService;
 
+/**
+ * used mainly as an easy access test class
+ */
 @Configuration
 public class JPAConfig {
 
+	/**
+	 * We used this method to test the connection to the database.
+	 * The setup of the database was the main time consuming factor in the backend.
+	 * @param userR
+	 * @param taskR
+	 * @param projectR
+	 * @param resourceR
+	 * @param timeR
+	 * @param resourceS
+	 * @return
+	 */
 	@Bean
 	CommandLineRunner init(UserRepository userR, TaskRepository taskR, ProjectRepository projectR,
 			ResourceRepository resourceR, TimetrackerRepository timeR, ResouceService resourceS) {
