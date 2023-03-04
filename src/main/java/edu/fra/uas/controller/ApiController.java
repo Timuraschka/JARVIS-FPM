@@ -144,14 +144,23 @@ public class ApiController {
     }
 
 
+
+
+
+
+
+
+
 	/*############################################################################## */
-	// 
+	// PROJECT RELATED METHODS (all accessed from Projects.html)
+
+
 
 	/**
 	 * This method gets called when the user has logged in.
 	 * It returns a List of all Projects, which the current user is any kind of member in.
 	 * @param token
-	 * @return  List of all Projects, which the current user is any kind of member in
+	 * @return  List<ProjectDTO>
 	 */
 	@RequestMapping(value = "/api/users/{token}/projects", 
 					method = RequestMethod.GET, 
@@ -172,7 +181,7 @@ public class ApiController {
 	 * It also adds the created Project to the User's list of projects
 	 * It returns a list of all projects, which the current user is any kind of member in
 	 * @param token
-	 * @returnlist of all projects, which the current user is any kind of member in
+	 * @returnlist List<ProjectDTO>
 	 */
 	@RequestMapping(value = "/api/users/{token}/projects", 
 					method = RequestMethod.POST, 
@@ -207,7 +216,7 @@ public class ApiController {
 	 * and returns a updatet list of projects, which the current user is any kind of member in
 	 * @param token
 	 * @param project_id
-	 * @return which the current user is any kind of member in
+	 * @return updated List<ProjectDTO>
 	 */
 	@RequestMapping(value = "/api/users/{token}/projects/{project_id}", 
 					method = RequestMethod.PUT,
@@ -224,16 +233,25 @@ public class ApiController {
 	 * If the User is just a Project Member the Method removes this project from the User's list of projects
 	 * @param token
 	 * @param project_id
-	 * @return List<TaskDTO>
+	 * @return updated List<ProjectDTO>
 	 */
 	@RequestMapping(value = "/api/user/{token}/project/{project_id}", 
 					method = RequestMethod.DELETE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TaskDTO>> deleteProject(@PathVariable("token") String token,
+	public ResponseEntity<List<ProjectDTO>> deleteProject(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id) 
 	{
 		return null;
 	}
+
+
+
+
+
+
+
+	/*################################################################## */
+	// TASK METHODDS
 
 
 	/**
@@ -265,7 +283,7 @@ public class ApiController {
 	@RequestMapping(value = "/api/user/{token}/project/{project_id}/tasks/{task_id}", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List> getTask(@PathVariable("token") String token,
+	public ResponseEntity<List<TaskDTO>> getTask(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id, @PathVariable("task_id") long task_id) {
 
 		return null;
@@ -278,7 +296,7 @@ public class ApiController {
 	 * @param token
 	 * @param project_id
 	 * @param task_id
-	 * @return updated List of TaskDTO's.
+	 * @return updated List<TaskDTO>
 	 */
 	@RequestMapping(value = "/api/user/{token}/project/{project_id}/tasks/{task_id}", 
 					method = RequestMethod.PUT, 
@@ -299,16 +317,24 @@ public class ApiController {
 	 * @param token
 	 * @param project_id
 	 * @param task_id
-	 * @return updated list of TaskDTO's
+	 * @return updated List<TaskDTO>
 	 */
 	@RequestMapping(value = "/api/user/{token}/project/{project_id}/tasks/{task_id}", 
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TaskDTO>> postWBSTask(@PathVariable("token") String token,
+	public ResponseEntity<List<TaskDTO>> createTask(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id, @PathVariable("task_id") long task_id) {
 		return null;
 	}
+
+
+
+
+	/*############################################################################ */
+	// RESOURCE METHODS
+
+
 
 	/**
 	 * This method is called whenever the FrontEnd needs all resources assigned to the given project.
@@ -320,7 +346,7 @@ public class ApiController {
 	@RequestMapping(value = "/api/user/{token}/project/{project_id}/resource", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<ResourceDTO>> getResource(@PathVariable("token") String token,
+	public ResponseEntity<List<ResourceDTO>> getAllResources(@PathVariable("token") String token,
 			@PathVariable("project_id") long project_id) {
 		return null;
 	}
