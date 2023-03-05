@@ -1,138 +1,136 @@
-
-/* CSS styles for "Add Project" button */
 #add-project-btn {
-background-color: #4CAF50;
-border: none;
-color: white;
-padding: 10px 20px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-margin-top: 65px;
-cursor: pointer;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 65px;
+  cursor: pointer;
 }
 
 #add-project-btn:hover {
-background-color: #3e8e41;
+  background-color: #3e8e41;
 }
 
 #add-project-btn:active {
-background-color: #4CAF50;
+  background-color: #4CAF50;
 }
 
 #add-project-btn::before {
-content: "Add new Project";
-margin-right: 5px;
+  content: "Add new Project";
+  margin-right: 5px;
 }
 
-/* CSS styles for the overlay and popup window */
 .overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.5);
-display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 .popup {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: white;
-padding: 30px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-text-align: left;
-border-radius:5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  border-radius: 5px;
 }
 
 .close-btn {
-position: absolute;
-top: 5px;
-right: 10px;
-cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
 }
 
-/* CSS styles for the project table */
+
 table {
-border-collapse: collapse;
-width: 100%;
-margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
 }
 
 th,
 td {
-padding: 8px;
-text-align: left;
-border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
-background-color: #4CAF50;
-color: white;
+  background-color: #4CAF50;
+  color: white;
 }
 
 .form-group {
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 label {
-display: block;
-font-weight: bold;
-margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 input[type="text"] {
-width: 100%;
-padding: 5px;
-border-radius: 3px;
-border: 1px solid #ccc;
-box-sizing: border-box;
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 input[type="submit"] {
-display: block;
-margin-top: 10px;
-padding: 5px;
-border-radius:3px;
-border: none;
-background-color: #4CAF50;
-color: white;
-cursor: pointer;
+  display: block;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
 }
 
 footer {
-    background-color: #82b74b;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 15px;
-    padding: 10px;
-    position: fixed;
-    opacity: 0.7;
-  
-  }
-  
-  .copyright {
-    color: black;
-    font-size: 8pt;
-  
-  }
-  
-  .address {
-    color: black;
-    font-size: 8pt;
-  
-  }
-  h2 {
-    color: black;
-    font-size: 13pt;
-    position:static;
-    font-family: Calibri;
-    top: 30px;
+  background-color: #82b74b;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 15px;
+  padding: 10px;
+  position: fixed;
+  opacity: 0.7;
+
+}
+
+.copyright {
+  color: black;
+  font-size: 8pt;
+
+}
+
+.address {
+  color: black;
+  font-size: 8pt;
+
+}
+
+h2 {
+  color: black;
+  font-size: 13pt;
+  position: static;
+  font-family: Calibri;
+  top: 30px;
 }

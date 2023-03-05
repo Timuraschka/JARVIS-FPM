@@ -20,7 +20,7 @@
     <div class="login-form">
         <form th:action="@{/login}" method="POST" th:object="${login-form}">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <h2>Login - JARVIS</h2>
+            <h3>Login - JARVIS</h3>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>

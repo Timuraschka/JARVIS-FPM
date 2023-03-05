@@ -1,7 +1,7 @@
 const form = document.querySelector('.login-form');
 
 // add event listener to login form
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', function (event) {
   // prevent form from submitting
   event.preventDefault();
 
@@ -15,7 +15,7 @@ form.addEventListener('submit', function(event) {
   xhr.setRequestHeader('Content-Type', 'application/json');
 
   // handle server response
-  xhr.onload = function() {
+  xhr.onload = function () {
     // if login was successful, redirect to home page
     if (xhr.status === 200) {
       const response = JSON.parse(xhr.responseText);
@@ -33,11 +33,11 @@ form.addEventListener('submit', function(event) {
   };
 
   // handle network error
-  xhr.onerror = function() {
+  xhr.onerror = function () {
     // show error message
     alert('An error occurred. Please try again.');
   };
 
   // send credentials to server
-  xhr.send(JSON.stringify({username: username, password: password}));
+  xhr.send(JSON.stringify({ username: username, password: password }));
 });

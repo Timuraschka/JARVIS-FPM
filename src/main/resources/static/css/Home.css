@@ -19,16 +19,37 @@ h2 {
   font-family: Calibri;
 }
 
+h3 {
+  position: absolute;
+  top: 60px;
+  left: 650px;
 
+}
 
-/* quick & dirty reset css */
+p {
+  position: absolute;
+  top: 80px;
+  left: 520px;
+}
+
+h4 {
+  position: absolute;
+  top: 100px;
+  left: 620px;
+}
+
+p2 {
+  position: absolute;
+  top: 120px;
+  left: 520px;
+}
+
 * {
   padding: 0;
   margin: 0;
   outline: none;
 }
 
-/* default styles */
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -55,7 +76,7 @@ body {
   position: fixed;
   justify-content: center;
   margin-top: 8%;
-  margin-left: 5%;
+  margin-left: 8%;
 }
 
 .menu-primary__item {
@@ -100,6 +121,7 @@ body {
   font-size: 8pt;
 
 }
+
 footer {
   background-color: #82b74b;
   bottom: 0;
@@ -120,8 +142,8 @@ footer {
 
 }
 
-  .address {
-    color: black;
-    font-size: 8pt;
-   
-  }
+.address {
+  color: black;
+  font-size: 8pt;
+
+}

@@ -22,9 +22,65 @@
         </div>
     </nav>
 
-        <h2>WBS | Overview</h2>
+    <h2>WBS | Overview</h2>
+    <button id="add-task-btn">Add Task</button>
 
-   
+    <div class="overlay" id="add-task-overlay">
+        <div class="popup">
+            <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
+                <h4>Task hinzufügen</h4>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="task-name">Task Name:</label>
+                        <input type="text" id="task-name" placeholder="Titel">
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">Start-date:</label>
+                        <input type="date" id="start-date" placeholder="Startdatum">
+                    </div>
+                    <div class="form-group">
+                        <label for="end-date">Enddatum:</label>
+                        <input type="date" id="end-date" placeholder="Enddatum">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-ressources">Ressources:</label>
+                        <select id="task-ressources" name="task-ressources[]">
+                            <option value="Ressource 1">Micho, D1, 50, 0 </option>
+                            <option value="Ressource 2">Manu, M1, 50, 0</option>
+                            <option value="Ressource 3">Timur, D1, 70, 0</option>
+                            <option value="Ressource 4 ">Nikoleta, Z2, 90, 0</option>
+                            <option value="Ressource 5">Samuel, G7, 100, 0</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-dependet">Dependent on:</label>
+                        <select id="task-dependet" name="task-dependet[]">
+                            <option value="Task 1">Task1 </option>
+                            <option value="Task 2">Task 2</option>
+                            <option value="Task 3">Task 3</option>
+                            <option value="Task 4 ">Task 4</option>
+                            <option value="Task 5">Task 5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-costs">Costs:</label>
+                        <input type="number" id="task-costs" placeholder="Kosten">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-definition">Definition:</label>
+                        <input type="text" id="task-definition" placeholder="Beschreibung">
+                    </div>
+                </div>
+                <button type="button" onclick="addTask()">Hinzufügen</button>
+                <button type="button" onclick="closePopup()">Abbrechen</button>
+
+            </form>
+        </div>
+    </div>
+
     <div class="container">
         <div class="section">
             <h4>Tasks</h4>
@@ -44,48 +100,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="section">
-            <div class="form">
-                <button type="button" onclick="openPopup()">Add Task</button>
-                <div id="popup" style="display: none;">
-                    <div class="form">
-                        <h4>Task hinzufügen</h4>
-                        <form th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="POST">
 
-                            <input type="text" id="task-name" placeholder="Titel">
-                            <label for="start-date">Startdatum:</label>
-                            <input type="date" id="task-start-date" placeholder="Startdatum">
-                            <label for="end-date">Enddatum:</label>
-                            <input type="date" id="task-end-date"placeholder="Enddatum">
-                            <input type="text" id="task-resources" placeholder="Ressourcen">
-                            <input type="checkbox" id="task-dependent" placeholder="Dependent">critical
-                            <input type="number" id="task-costs" placeholder="Kosten">
-                            <div class="form2">
-                                <input type="text" id="task-definition" placeholder="Beschreibung">
-                            </div>
-                            <button type="button" onclick="addTask()">Hinzufügen</button>
-                            <button type="button" onclick="closePopup()">Abbrechen</button>
-                            <button type="button" onclick="closeTaskDetails()">Details</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="section">
-            <h4>Timeline</h4>
-            <div id="date">Datum</div>
-            <div class="timeline">
-                <div class="label">
-                    <div id="timeline-end">Start-End</div>
-                </div>
-                <div class="bar" id="timeline-bar-1">
-                    <div class="label-bar"></div>
-                </div>
-            </div>
-        </div>
-       
-        <div id="task-details">
+        <div id="task-details" style="display:none;">
             <form th:action="@{/user/{token}/project/{id}}" method="GET">
                 <h4>Task Details</h4>
                 <p> Titel:</p>
@@ -95,17 +112,38 @@
                 <p>End:</p>
                 <p2 id="task-end-date-details"></p2>
                 <p>Ressource:</p>
-                <p2 id="task-resources-details"></p2>
+                <p2 id="task-ressources-details"></p2>
                 <p>Dependent:</p>
-                <p2 id="task-dependent-details"></p2>
+                <p2 id="task-dependet-details"></p2>
                 <p>Kosten:</p>
                 <p2 id="task-costs-details"></p2>
                 <p>Beschreibung:</p>
                 <p2 id="task-definition-details"></p2>
             </form>
         </div>
+
+        <div class="section">
+            <h4>Timeline</h4>
+            <div id="date">Datum</div>
+            <div class="timeline">
+                <div class="label">
+                    <div id="timeline-start">Start</div>
+                    <div id="timeline-end">End</div>
+                </div>
+                <div class="bar" id="timeline-bar-1">
+                    <div class="label-bar"></div>
+                </div>
+            </div>
         </div>
-        <script src="/src/main/resources/static/js/WBS.js"></script>
+
+
+
+    </div>
+    <footer>
+        <p class="copyright">&copy; Copyright</p>
+        <p class="address">Fiktive Adresse Nr. 1, 12345 Frankfurt am Main</p>
+    </footer>
+    <script src="/src/main/resources/static/js/WBS.js"></script>
 </body>
 
 </html>

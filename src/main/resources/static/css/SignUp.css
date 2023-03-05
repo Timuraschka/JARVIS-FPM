@@ -1,10 +1,11 @@
-.signup-form{
+.signup-form {
     width: 400px;
     margin: auto;
     margin-top: 10%;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 form {
     margin-top: 50px;
 }
@@ -24,6 +25,7 @@ h2 {
 label {
     margin-bottom: 10px;
 }
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -48,6 +50,7 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: blue;
 }
+
 footer {
     background-color: #82b74b;
     bottom: 0;
@@ -59,17 +62,17 @@ footer {
     padding: 10px;
     position: fixed;
     opacity: 0.7;
-  
-  }
-  
-  .copyright {
+
+}
+
+.copyright {
     color: black;
     font-size: 8pt;
-  
-  }
-  
-    .address {
-      color: black;
-      font-size: 8pt;
-     
-    }
+
+}
+
+.address {
+    color: black;
+    font-size: 8pt;
+
+}

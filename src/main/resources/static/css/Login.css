@@ -59,6 +59,7 @@ button[type="submit"]:hover {
     color: blue;
     cursor: pointer;
 }
+
 footer {
     background-color: #82b74b;
     bottom: 0;
@@ -70,17 +71,17 @@ footer {
     padding: 10px;
     position: fixed;
     opacity: 0.7;
-  
-  }
-  
-  .copyright {
+
+}
+
+.copyright {
     color: black;
     font-size: 8pt;
-  
-  }
-  
-    .address {
-      color: black;
-      font-size: 8pt;
-     
-    }
+
+}
+
+.address {
+    color: black;
+    font-size: 8pt;
+
+}

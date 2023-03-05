@@ -18,12 +18,15 @@
                 <li><a class="menu-primary__item1" href="/src/main/resources/templates/WBS.html">WBS</a></li>
             </ul>
             <ul class="menu-primary">
-                <li><a class="menu-primary__item2" href="/src/main/resources/templates/Ressource.html">Ressources</a></li>
+                <li><a class="menu-primary__item2" href="/src/main/resources/templates/Ressource.html">Ressources</a>
+                </li>
             </ul>
         </div>
     </nav>
 </head>
+
 <body>
+
     <head>
         <h2>Kanban-Board | Overview</h2>
     </head>
@@ -70,7 +73,7 @@
         </div>
     </div>
 
-    <div id="detail-page" >
+    <div id="detail-page">
         <form id="detail-form" th:action="@{/user/{token}/project/{id}/tasks/{id}}" method="GET">
             <div id="detail-content">
                 <label for="ticket-title">Title:</label>
